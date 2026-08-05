@@ -1,0 +1,111 @@
+  @import "tailwindcss";
+
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  @theme {
+    /* M3 Color Tokens — Light Theme */
+    --color-primary: #4A3728;
+    --color-on-primary: #FFFFFF;
+    --color-on-primary-fixed: #2D1C0E;
+    --color-secondary: #7D6355;
+    --color-on-secondary: #FFFFFF;
+    --color-background: #FDF8F5;
+    --color-on-background: #1C1917;
+    --color-surface: #FEFCFB;
+    --color-on-surface: #1C1917;
+    --color-surface-variant: #F5EFEA;
+    --color-on-surface-variant: #6B5E57;
+    --color-surface-container: #F0EAE5;
+    --color-surface-container-low: #F7F2EE;
+    --color-surface-container-highest: #E2DCD8;
+    --color-surface-dim: #CFC5BF;
+    --color-outline: #9C8E88;
+    --color-outline-variant: #CFC5BF;
+    --color-error: #BA1A1A;
+    --color-on-error: #FFFFFF;
+
+    /* Layout Tokens */
+    --spacing-gutter: 1.5rem;
+    --spacing-margin-desktop: 4rem;
+    --max-width-container-max-width: 90rem;
+  }
+
+  @layer components {
+    /* M3 Display */
+    .font-display-lg {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.016em;
+    }
+    .text-display-lg {
+      font-size: 3.5625rem;
+      line-height: 4rem;
+    }
+
+    /* M3 Headline */
+    .font-headline-lg {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .text-headline-lg {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    /* M3 Title */
+    .font-title-lg {
+      font-family: system-ui, sans-serif;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .text-title-lg {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+
+    /* M3 Body */
+    .font-body-lg {
+      font-family: system-ui, sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.031em;
+    }
+    .text-body-lg {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .font-body-md {
+      font-family: system-ui, sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.016em;
+    }
+    .text-body-md {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    /* M3 Label */
+    .font-label-lg {
+      font-family: system-ui, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.006em;
+    }
+    .text-label-lg {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    .font-label-sm {
+      font-family: system-ui, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.031em;
+    }
+    .text-label-sm {
+      font-size: 0.6875rem;
+      line-height: 1rem;
+    }
+  }
+  .fill-1 {
+    font-variation-settings: 'FILL' 1;
+  }
