@@ -169,8 +169,8 @@ npm run preview
 
 ## Deployment & Links
 
-- **Live Demo:** 
-- **Repository:**https://github.com/KarimTbaileh/microfrontend-group5-Catalog-discovery
+- **Live Demo:** https://luxe-catalog-microfrontend.onrender.com
+- **Repository:** https://github.com/KarimTbaileh/microfrontend-group5-Catalog-discovery
 
 ---
 
