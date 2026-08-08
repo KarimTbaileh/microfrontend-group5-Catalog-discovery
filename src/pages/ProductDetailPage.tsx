@@ -134,26 +134,45 @@ export const ProductDetailPage: React.FC<Props> = ({
             <Container maxWidth="xl" sx={{ flexGrow: 1, py: { xs: 4, md: 6 } }}>
                 <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ mb: 3 }}>
                     <Typography
-                        component={Link}
-                        to="/"
-                        variant="caption"
-                        color="text.secondary"
+                        component="button"
                         onClick={goHome}
-                        sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+                        variant="caption"
+                        sx={{
+                            color: 'text.secondary',
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            cursor: 'pointer',
+                            fontFamily: 'inherit',
+                            fontSize: 'inherit',
+                            '&:hover': { color: 'primary.main' },
+                        }}
                     >
                         Home
                     </Typography>
+
                     <Typography
-                        component={Link}
-                        to="/living-room"
-                        variant="caption"
-                        color="text.secondary"
+                        component="button"
                         onClick={goList}
-                        sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+                        variant="caption"
+                        sx={{
+                            color: 'text.secondary',
+                            background: 'none',
+                            border: 'none',
+                            padding: 0,
+                            cursor: 'pointer',
+                            fontFamily: 'inherit',
+                            fontSize: 'inherit',
+                            '&:hover': { color: 'primary.main' },
+                        }}
                     >
                         {product.category}
                     </Typography>
-                    <Typography variant="caption" color="text.primary" sx={{ fontWeight: 500 }}>
+
+                    <Typography
+                        variant="caption"
+                        sx={{ color: 'primary.main', fontWeight: 500 }}
+                    >
                         {product.title}
                     </Typography>
                 </Breadcrumbs>
