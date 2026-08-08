@@ -24,51 +24,93 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { useProduct } from '../hooks/useProduct';
 import { RatingStars } from '../components/RatingStars';
+import { addToCart, buildCartPayload, navigateShell } from '../contract/luxe-contract';
 
-export const ProductDetailPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+type Props = {
+    forcedProductId?: string;
+    shellMode?: boolean;
+    hideChrome?: boolean;
+};
+
+export const ProductDetailPage: React.FC<Props> = ({
+                                                       forcedProductId,
+                                                       shellMode = false,
+                                                       hideChrome = false,
+                                                   }) => {
+    const { id: paramId } = useParams<{ id: string }>();
+    const id = forcedProductId || paramId;
+
     const { data: product, isLoading, error } = useProduct(id);
 
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState(0);
     const [selectedLeg, setSelectedLeg] = useState(0);
 
-    const colors = product?.colors ?? ['Charcoal Bouclé', 'Oat Bouclé', 'Espresso Velvet', 'Moss Green Velvet'];
+    const colors =
+        product?.colors ?? ['Charcoal Bouclé', 'Oat Bouclé', 'Espresso Velvet', 'Moss Green Velvet'];
     const colorHex = ['#3d3d3d', '#e6e2db', '#705e4e', '#4a5c53'];
     const legFinishes = product?.legFinishes ?? ['Matte Black', 'Brushed Brass'];
 
+    const handleAddToCart = () => {
+        if (!product) return;
+        addToCart(buildCartPayload(product, quantity));
+    };
+
+    const goHome = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            navigateShell('catalog');
+        }
+    };
+
     if (isLoading) {
         return (
-            <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-                <Header />
+            <Box sx={{ minHeight: hideChrome ? 240 : '100vh', display: 'flex', flexDirection: 'column' }}>
+                {!hideChrome && <Header shellMode={shellMode} />}
                 <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <CircularProgress sx={{ color: 'primary.main' }} />
                 </Box>
-                <Footer />
+                {!hideChrome && <Footer />}
             </Box>
         );
     }
 
     if (error || !product) {
         return (
-            <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-                <Header />
-                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+            <Box sx={{ minHeight: hideChrome ? 240 : '100vh', display: 'flex', flexDirection: 'column' }}>
+                {!hideChrome && <Header shellMode={shellMode} />}
+                <Box
+                    sx={{
+                        flexGrow: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 2,
+                    }}
+                >
                     <Typography color="error" sx={{ fontWeight: 700 }}>
                         Product not found
                     </Typography>
-                    <Button component={Link} to="/" variant="text">
+                    <Button component={Link} to="/" variant="text" onClick={goHome}>
                         Back to Home
                     </Button>
                 </Box>
-                <Footer />
+                {!hideChrome && <Footer />}
             </Box>
         );
     }
 
     return (
-        <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Header />
+        <Box
+            sx={{
+                bgcolor: 'background.default',
+                minHeight: hideChrome ? 'auto' : '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            {!hideChrome && <Header shellMode={shellMode} />}
 
             <Container maxWidth="xl" sx={{ flexGrow: 1, py: { xs: 4, md: 6 } }}>
                 <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ mb: 3 }}>
@@ -77,6 +119,7 @@ export const ProductDetailPage: React.FC = () => {
                         to="/"
                         variant="caption"
                         color="text.secondary"
+                        onClick={goHome}
                         sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
                     >
                         Home
@@ -102,7 +145,6 @@ export const ProductDetailPage: React.FC = () => {
                         gap: 4,
                     }}
                 >
-                    {/* Image */}
                     <Box
                         sx={{
                             position: 'relative',
@@ -141,7 +183,6 @@ export const ProductDetailPage: React.FC = () => {
                         )}
                     </Box>
 
-                    {/* Details */}
                     <Box sx={{ position: { md: 'sticky' }, top: 100, alignSelf: 'start' }}>
                         <Typography variant="h2" sx={{ fontSize: { xs: '1.75rem', md: '2rem' }, mb: 1 }}>
                             {product.title}
@@ -164,7 +205,6 @@ export const ProductDetailPage: React.FC = () => {
 
                         <Divider sx={{ mb: 3 }} />
 
-                        {/* Colors */}
                         <Typography variant="body2" sx={{ fontWeight: 500, mb: 1.5 }}>
                             Color:{' '}
                             <Box component="span" sx={{ color: 'primary.main', fontWeight: 600 }}>
@@ -197,7 +237,6 @@ export const ProductDetailPage: React.FC = () => {
                             ))}
                         </Box>
 
-                        {/* Leg Finish */}
                         <Typography variant="body2" sx={{ fontWeight: 500, mb: 1.5 }}>
                             Leg Finish
                         </Typography>
@@ -223,7 +262,6 @@ export const ProductDetailPage: React.FC = () => {
                             ))}
                         </Box>
 
-                        {/* Quantity + Add to Cart */}
                         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
                             <Box
                                 sx={{
@@ -252,14 +290,7 @@ export const ProductDetailPage: React.FC = () => {
                                 fullWidth
                                 size="large"
                                 startIcon={<ShoppingBagOutlinedIcon />}
-                                onClick={() => {
-                                    console.log('Add to cart:', {
-                                        productId: product.id,
-                                        quantity,
-                                        color: colors[selectedColor],
-                                        leg: legFinishes[selectedLeg],
-                                    });
-                                }}
+                                onClick={handleAddToCart}
                             >
                                 Add to Cart
                             </Button>
@@ -274,7 +305,6 @@ export const ProductDetailPage: React.FC = () => {
                             </Button>
                         </Box>
 
-                        {/* Trust badges */}
                         <Box
                             sx={{
                                 display: 'grid',
@@ -290,7 +320,10 @@ export const ProductDetailPage: React.FC = () => {
                             <Box sx={{ display: 'flex', gap: 1.5 }}>
                                 <LocalShippingOutlinedIcon color="secondary" />
                                 <Box>
-                                    <Typography variant="caption" sx={{ fontWeight: 600, textTransform: 'uppercase', display: 'block' }}>
+                                    <Typography
+                                        variant="caption"
+                                        sx={{ fontWeight: 600, textTransform: 'uppercase', display: 'block' }}
+                                    >
                                         Free White Glove Delivery
                                     </Typography>
                                     <Typography variant="caption" color="text.secondary">
@@ -301,7 +334,10 @@ export const ProductDetailPage: React.FC = () => {
                             <Box sx={{ display: 'flex', gap: 1.5 }}>
                                 <VerifiedOutlinedIcon color="secondary" />
                                 <Box>
-                                    <Typography variant="caption" sx={{ fontWeight: 600, textTransform: 'uppercase', display: 'block' }}>
+                                    <Typography
+                                        variant="caption"
+                                        sx={{ fontWeight: 600, textTransform: 'uppercase', display: 'block' }}
+                                    >
                                         5-Year Warranty
                                     </Typography>
                                     <Typography variant="caption" color="text.secondary">
@@ -314,9 +350,8 @@ export const ProductDetailPage: React.FC = () => {
                 </Box>
             </Container>
 
-            <Footer />
+            {!hideChrome && <Footer />}
 
-            {/* Mobile sticky bar */}
             <Box
                 sx={{
                     display: { xs: 'flex', md: 'none' },
@@ -342,7 +377,9 @@ export const ProductDetailPage: React.FC = () => {
                         ${product.price.toLocaleString()}
                     </Typography>
                 </Box>
-                <Button variant="contained">Add to Cart</Button>
+                <Button variant="contained" onClick={handleAddToCart}>
+                    Add to Cart
+                </Button>
             </Box>
         </Box>
     );

@@ -14,17 +14,31 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { ROOM_LIST } from '../constants/rooms';
+import { navigateShell } from '../contract/luxe-contract';
 
-export const Header: React.FC = () => {
+type Props = {
+    shellMode?: boolean;
+};
+
+export const Header: React.FC<Props> = ({ shellMode = false }) => {
     const navigate = useNavigate();
+
+    const go = (path: string, shellTo?: 'catalog' | 'product' | 'orders') => {
+        if (shellMode) {
+            navigateShell(shellTo ?? 'catalog');
+            return;
+        }
+        navigate(path);
+    };
 
     return (
         <AppBar position="sticky" elevation={0} sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between', py: 1 }}>
                     <Typography
-                        component={Link}
-                        to="/"
+                        component={shellMode ? 'button' : Link}
+                        to={shellMode ? undefined : '/'}
+                        onClick={shellMode ? () => navigateShell('catalog') : undefined}
                         variant="h3"
                         sx={{
                             textDecoration: 'none',
@@ -32,6 +46,10 @@ export const Header: React.FC = () => {
                             fontWeight: 700,
                             letterSpacing: '0.15em',
                             fontSize: '1.25rem',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontFamily: 'inherit',
                         }}
                     >
                         LUXE INTERIORS
@@ -39,8 +57,9 @@ export const Header: React.FC = () => {
 
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3, alignItems: 'center' }}>
                         <Button
-                            component={NavLink}
-                            to="/"
+                            component={shellMode ? 'button' : NavLink}
+                            to={shellMode ? undefined : '/'}
+                            onClick={shellMode ? () => navigateShell('catalog') : undefined}
                             sx={{
                                 color: 'text.secondary',
                                 '&.active': { color: 'primary.main', fontWeight: 700 },
@@ -53,8 +72,9 @@ export const Header: React.FC = () => {
                         {ROOM_LIST.map((room) => (
                             <Button
                                 key={room.key}
-                                component={NavLink}
-                                to={`/${room.key}`}
+                                component={shellMode ? 'button' : NavLink}
+                                to={shellMode ? undefined : `/${room.key}`}
+                                onClick={shellMode ? () => navigateShell('catalog') : undefined}
                                 sx={{
                                     color: 'text.secondary',
                                     '&.active': { color: 'primary.main', fontWeight: 700 },
@@ -67,13 +87,21 @@ export const Header: React.FC = () => {
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: 0.5 }}>
-                        <IconButton onClick={() => navigate('/search')} aria-label="Search">
+                        <IconButton
+                            onClick={() => go('/search', 'catalog')}
+                            aria-label="Search"
+                        >
                             <SearchIcon />
                         </IconButton>
                         <IconButton aria-label="Wishlist">
                             <FavoriteBorderIcon />
                         </IconButton>
-                        <IconButton aria-label="Account">
+                        <IconButton
+                            aria-label="Account"
+                            onClick={() => {
+                                if (shellMode) navigateShell('orders');
+                            }}
+                        >
                             <PersonOutlineOutlinedIcon />
                         </IconButton>
                         <IconButton aria-label="Cart">

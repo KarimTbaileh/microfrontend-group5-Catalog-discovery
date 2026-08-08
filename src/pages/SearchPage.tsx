@@ -19,7 +19,12 @@ import { CatalogProductCard } from '../components/CatalogProductCard';
 import { SidebarFilters, type FilterState } from '../components/SidebarFilters';
 import { useAllProducts, filterProducts } from '../hooks/useSearchProducts';
 
-export const SearchPage: React.FC = () => {
+type Props = {
+    shellMode?: boolean;
+    hideChrome?: boolean;
+};
+
+export const SearchPage: React.FC<Props> = ({ shellMode = false, hideChrome = false }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryFromUrl = searchParams.get('q') || '';
     const [searchInput, setSearchInput] = useState(queryFromUrl);
@@ -71,8 +76,8 @@ export const SearchPage: React.FC = () => {
         !!queryFromUrl;
 
     return (
-        <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Header />
+        <Box sx={{ bgcolor: 'background.default', minHeight: hideChrome ? 'auto' : '100vh', display: 'flex', flexDirection: 'column' }}>
+            {!hideChrome && <Header shellMode={shellMode} />}
 
             <Container maxWidth="xl" sx={{ flexGrow: 1, py: 4 }}>
                 <Box sx={{ display: 'flex', gap: 4 }}>
@@ -251,7 +256,7 @@ export const SearchPage: React.FC = () => {
                 </Box>
             </Container>
 
-            <Footer />
+            {!hideChrome && <Footer />}
         </Box>
     );
 };

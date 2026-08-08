@@ -15,10 +15,22 @@ import { SidebarFilters, type FilterState } from '../components/SidebarFilters';
 import { CatalogProductCard } from '../components/CatalogProductCard';
 import { useRoomProducts } from '../hooks/useRoomProducts';
 import { ROOMS, type RoomKey } from '../constants/rooms';
+import { navigateShell } from '../contract/luxe-contract';
 
-export const RoomPage: React.FC = () => {
+type Props = {
+    forcedRoomKey?: string;
+    shellMode?: boolean;
+    hideChrome?: boolean;
+};
+
+export const RoomPage: React.FC<Props> = ({
+                                              forcedRoomKey,
+                                              shellMode = false,
+                                              hideChrome = false,
+                                          }) => {
     const { roomKey } = useParams<{ roomKey: string }>();
-    const validRoomKey = (roomKey && roomKey in ROOMS ? roomKey : 'living-room') as RoomKey;
+    const key = forcedRoomKey || roomKey;
+    const validRoomKey = (key && key in ROOMS ? key : 'living-room') as RoomKey;
     const room = ROOMS[validRoomKey];
 
     const { data: products, isLoading, error } = useRoomProducts(validRoomKey);
@@ -45,9 +57,23 @@ export const RoomPage: React.FC = () => {
         });
     }, [products, filters]);
 
+    const goHome = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            navigateShell('catalog');
+        }
+    };
+
     return (
-        <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Header />
+        <Box
+            sx={{
+                bgcolor: 'background.default',
+                minHeight: hideChrome ? 'auto' : '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            {!hideChrome && <Header shellMode={shellMode} />}
 
             <Container maxWidth="xl" sx={{ flexGrow: 1, py: 6 }}>
                 <Box sx={{ display: 'flex', gap: 4 }}>
@@ -65,6 +91,7 @@ export const RoomPage: React.FC = () => {
                                 to="/"
                                 variant="caption"
                                 color="text.secondary"
+                                onClick={goHome}
                                 sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
                             >
                                 Home
@@ -112,7 +139,9 @@ export const RoomPage: React.FC = () => {
 
                         {!isLoading && !error && filteredProducts.length === 0 && (
                             <Box sx={{ py: 10, textAlign: 'center' }}>
-                                <Typography sx={{ fontWeight: 700, mb: 1 }}>No products match your filter settings.</Typography>
+                                <Typography sx={{ fontWeight: 700, mb: 1 }}>
+                                    No products match your filter settings.
+                                </Typography>
                                 <Button variant="contained" onClick={handleResetFilters} sx={{ mt: 2 }}>
                                     Clear All Filters
                                 </Button>
@@ -140,7 +169,7 @@ export const RoomPage: React.FC = () => {
                 </Box>
             </Container>
 
-            <Footer />
+            {!hideChrome && <Footer />}
         </Box>
     );
 };

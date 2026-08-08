@@ -6,24 +6,32 @@ import { CategoriesSection } from '../components/CategoriesSection';
 import { TrendingSection } from '../components/TrendingSection';
 import { Footer } from '../components/Footer';
 
-export const HomePage: React.FC = () => {
+type Props = {
+    shellMode?: boolean;
+    hideChrome?: boolean;
+};
+
+export const HomePage: React.FC<Props> = ({
+                                              shellMode = false,
+                                              hideChrome = false,
+                                          }) => {
     return (
         <Box
             sx={{
                 bgcolor: 'background.default',
                 color: 'text.primary',
-                minHeight: '100vh',
+                minHeight: hideChrome ? 'auto' : '100vh',
                 display: 'flex',
                 flexDirection: 'column',
             }}
         >
-            <Header />
+            {!hideChrome && <Header shellMode={shellMode} />}
             <Box component="main" sx={{ flexGrow: 1 }}>
                 <HeroSection />
                 <CategoriesSection />
                 <TrendingSection />
             </Box>
-            <Footer />
+            {!hideChrome && <Footer />}
         </Box>
     );
 };

@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "vite build && vite build --mode mfe && node --experimental-strip-types src/scripts/collect-dist.mts",
+    "build:mfe": "vite build --mode mfe",
+    "preview": "vite preview --port 4173"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -15,6 +15,7 @@
     "@mui/icons-material": "^9.3.0",
     "@mui/material": "^9.3.0",
     "@mui/x-data-grid": "^9.10.1",
+    "@r2wc/react-to-web-component": "^2.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-query": "^5.101.4",
     "axios": "^1.19.0",
@@ -36,6 +37,7 @@
     "globals": "^17.7.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.65.0",
-    "vite": "^8.2.0"
+    "vite": "^8.2.0",
+    "vite-plugin-css-injected-by-js": "^5.0.2"
   }
 }
