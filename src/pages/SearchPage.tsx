@@ -245,7 +245,11 @@ export const SearchPage: React.FC<Props> = ({ shellMode = false, hideChrome = fa
                                 }}
                             >
                                 {filteredProducts.map((product) => (
-                                    <CatalogProductCard key={product.id} product={product} />
+                                    <CatalogProductCard
+                                        key={product.id}
+                                        product={product}
+                                        shellMode={shellMode}
+                                    />
                                 ))}
                             </Box>
                         )}

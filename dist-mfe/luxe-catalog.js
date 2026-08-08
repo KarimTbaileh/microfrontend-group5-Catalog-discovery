@@ -26684,8 +26684,8 @@ var vw = _w.create({
 			})
 		]
 	});
-}, Uw = ({ product: e }) => {
-	let [t, n] = (0, v.useState)(!1);
+}, Uw = ({ product: e, shellMode: t = !1 }) => {
+	let [n, r] = (0, v.useState)(!1);
 	return /* @__PURE__ */ (0, H.jsx)(xd, {
 		elevation: 0,
 		sx: {
@@ -26696,13 +26696,17 @@ var vw = _w.create({
 			"&:hover .product-image": { transform: "scale(1.05)" }
 		},
 		children: /* @__PURE__ */ (0, H.jsxs)(Dd, {
-			component: ab,
-			to: `/product/${e.id}`,
+			component: t ? "div" : ab,
+			to: t ? void 0 : `/product/${e.id}`,
+			onClick: (n) => {
+				t && (n.preventDefault(), Db("product", e.id));
+			},
 			sx: {
 				flexGrow: 1,
 				display: "flex",
 				flexDirection: "column",
-				alignItems: "stretch"
+				alignItems: "stretch",
+				cursor: "pointer"
 			},
 			children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
 				sx: {
@@ -26727,7 +26731,7 @@ var vw = _w.create({
 					}),
 					/* @__PURE__ */ (0, H.jsx)(hu, {
 						onClick: (e) => {
-							e.preventDefault(), e.stopPropagation(), n(!t);
+							e.preventDefault(), e.stopPropagation(), r(!n);
 						},
 						sx: {
 							position: "absolute",
@@ -26735,11 +26739,10 @@ var vw = _w.create({
 							right: 12,
 							bgcolor: "background.paper",
 							boxShadow: 1,
-							"&:hover": { bgcolor: "background.paper" },
-							color: t ? "error.main" : "text.primary"
+							color: n ? "error.main" : "text.primary"
 						},
 						size: "small",
-						children: t ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
+						children: n ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
 					}),
 					(e.isBestseller || e.isTrending) && /* @__PURE__ */ (0, H.jsx)(Ru, {
 						label: e.isBestseller ? "Bestseller" : "Trending",
@@ -26750,8 +26753,7 @@ var vw = _w.create({
 							left: 12,
 							bgcolor: "background.paper",
 							fontSize: "0.65rem",
-							textTransform: "uppercase",
-							letterSpacing: "0.05em"
+							textTransform: "uppercase"
 						}
 					})
 				]
@@ -26783,8 +26785,7 @@ var vw = _w.create({
 						sx: {
 							fontSize: "1.25rem",
 							fontWeight: 500,
-							whiteSpace: "nowrap",
-							color: "text.primary"
+							whiteSpace: "nowrap"
 						},
 						children: ["$", e.price.toLocaleString()]
 					})]
@@ -26961,7 +26962,10 @@ var vw = _w.create({
 									},
 									gap: 3
 								},
-								children: p.map((e) => /* @__PURE__ */ (0, H.jsx)(Uw, { product: e }, e.id))
+								children: p.map((e) => /* @__PURE__ */ (0, H.jsx)(Uw, {
+									product: e,
+									shellMode: t
+								}, e.id))
 							})
 						]
 					})]
@@ -27216,7 +27220,10 @@ var vw = _w.create({
 									},
 									gap: 3
 								},
-								children: h.map((e) => /* @__PURE__ */ (0, H.jsx)(Uw, { product: e }, e.id))
+								children: h.map((t) => /* @__PURE__ */ (0, H.jsx)(Uw, {
+									product: t,
+									shellMode: e
+								}, t.id))
 							})
 						]
 					})]
