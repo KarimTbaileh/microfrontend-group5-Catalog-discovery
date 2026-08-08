@@ -1,22 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-    Box,
-    Container,
-    Typography,
-    Card,
-    CardMedia,
-    CardContent,
-    IconButton,
-    Button,
-} from '@mui/material';
+import { Box, Container, Typography, Card, CardMedia, CardContent, IconButton, Button } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import type { Product } from '../types/catalog';
 import { useTrendingProducts } from '../hooks/useCatalog';
-import { navigateShell, addToCart, buildCartPayload } from '../contract/luxe-contract';
+import { navigateShellPath, addToCart, buildCartPayload } from '../contract/luxe-contract';
 
 type Props = {
     shellMode?: boolean;
@@ -28,18 +19,14 @@ const ProductCard: React.FC<{ product: Product; shellMode?: boolean }> = ({ prod
     const openProduct = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('product', product.id);
+            navigateShellPath(`/product/${product.id}`);
         }
     };
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        if (shellMode) {
-            addToCart(buildCartPayload(product, 1));
-        } else {
-            console.log('Add to cart:', product.id);
-        }
+        addToCart(buildCartPayload(product, 1));
     };
 
     return (
@@ -63,64 +50,23 @@ const ProductCard: React.FC<{ product: Product; shellMode?: boolean }> = ({ prod
             }}
         >
             <Box sx={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden', bgcolor: 'grey.100' }}>
-                <CardMedia
-                    component="img"
-                    image={product.imageUrl}
-                    alt={product.title}
-                    sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
-                />
+                <CardMedia component="img" image={product.imageUrl} alt={product.title} sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} />
                 <IconButton
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setIsFavorite(!isFavorite);
-                    }}
-                    sx={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 12,
-                        bgcolor: 'rgba(255,255,255,0.9)',
-                        color: isFavorite ? 'error.main' : 'text.primary',
-                        '&:hover': { bgcolor: 'background.paper' },
-                    }}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsFavorite(!isFavorite); }}
+                    sx={{ position: 'absolute', top: 12, right: 12, bgcolor: 'rgba(255,255,255,0.9)', color: isFavorite ? 'error.main' : 'text.primary' }}
                     size="small"
                 >
                     {isFavorite ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />}
                 </IconButton>
             </Box>
-
             <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <Box>
-                    <Typography variant="h3" color="primary" sx={{ fontSize: '1.25rem', fontWeight: 500 }}>
-                        {product.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5, mb: 2 }}>
-                        {product.subtitle}
-                    </Typography>
+                    <Typography variant="h3" color="primary" sx={{ fontSize: '1.25rem', fontWeight: 500 }}>{product.title}</Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5, mb: 2 }}>{product.subtitle}</Typography>
                 </Box>
-
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        pt: 1,
-                        borderTop: '1px solid',
-                        borderColor: 'divider',
-                    }}
-                >
-                    <Typography sx={{ fontWeight: 700, fontSize: '1.1rem', color: 'primary.main' }}>
-                        ${product.price.toLocaleString()}
-                    </Typography>
-                    <IconButton
-                        onClick={handleAddToCart}
-                        sx={{
-                            bgcolor: 'primary.main',
-                            color: 'primary.contrastText',
-                            '&:hover': { bgcolor: 'secondary.main' },
-                        }}
-                        size="small"
-                    >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 1, borderTop: '1px solid', borderColor: 'divider' }}>
+                    <Typography sx={{ fontWeight: 700, fontSize: '1.1rem', color: 'primary.main' }}>${product.price.toLocaleString()}</Typography>
+                    <IconButton onClick={handleAddToCart} sx={{ bgcolor: 'primary.main', color: 'primary.contrastText', '&:hover': { bgcolor: 'secondary.main' } }} size="small">
                         <AddShoppingCartIcon fontSize="small" />
                     </IconButton>
                 </Box>
@@ -135,7 +81,7 @@ export const TrendingSection: React.FC<Props> = ({ shellMode = false }) => {
     const handleViewAll = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('catalog');
+            navigateShellPath('/products');
         }
     };
 
@@ -147,16 +93,12 @@ export const TrendingSection: React.FC<Props> = ({ shellMode = false }) => {
             <Container maxWidth="xl">
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', mb: 5 }}>
                     <Box>
-                        <Typography variant="h2" color="primary" sx={{ fontWeight: 600 }}>
-                            Trending Now
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                            Our most coveted pieces this season
-                        </Typography>
+                        <Typography variant="h2" color="primary" sx={{ fontWeight: 600 }}>Trending Now</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>Our most coveted pieces this season</Typography>
                     </Box>
                     <Button
                         component={shellMode ? 'button' : Link}
-                        to={shellMode ? undefined : '/living-room'}
+                        to={shellMode ? undefined : '/products'}
                         onClick={handleViewAll}
                         endIcon={<ArrowForwardIcon />}
                         sx={{ color: 'secondary.main' }}
@@ -164,14 +106,7 @@ export const TrendingSection: React.FC<Props> = ({ shellMode = false }) => {
                         View All
                     </Button>
                 </Box>
-
-                <Box
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-                        gap: 3,
-                    }}
-                >
+                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 3 }}>
                     {products?.map((prod) => (
                         <ProductCard key={prod.id} product={prod} shellMode={shellMode} />
                     ))}

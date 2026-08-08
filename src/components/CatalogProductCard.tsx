@@ -14,7 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import type { Product } from '../types/catalog';
 import { RatingStars } from './RatingStars';
-import { navigateShell } from '../contract/luxe-contract';
+import { navigateShellPath } from '../contract/luxe-contract';
 
 type Props = {
     product: Product;
@@ -30,7 +30,7 @@ export const CatalogProductCard: React.FC<Props> = ({
     const openProduct = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('product', product.id);
+            navigateShellPath(`/product/${product.id}`);
         }
     };
 
@@ -78,7 +78,6 @@ export const CatalogProductCard: React.FC<Props> = ({
                             transition: 'transform 0.7s ease',
                         }}
                     />
-
                     <IconButton
                         onClick={(e) => {
                             e.preventDefault();
@@ -95,13 +94,8 @@ export const CatalogProductCard: React.FC<Props> = ({
                         }}
                         size="small"
                     >
-                        {isFavorite ? (
-                            <FavoriteIcon fontSize="small" />
-                        ) : (
-                            <FavoriteBorderIcon fontSize="small" />
-                        )}
+                        {isFavorite ? <FavoriteIcon fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />}
                     </IconButton>
-
                     {(product.isBestseller || product.isTrending) && (
                         <Chip
                             label={product.isBestseller ? 'Bestseller' : 'Trending'}
@@ -117,28 +111,13 @@ export const CatalogProductCard: React.FC<Props> = ({
                         />
                     )}
                 </Box>
-
                 <CardContent sx={{ px: 0, pt: 2, pb: 0, flexGrow: 1 }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                            gap: 1,
-                        }}
-                    >
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1 }}>
                         <Box>
-                            <Typography variant="body2" color="text.primary" sx={{ fontWeight: 500 }}>
-                                {product.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {product.subtitle}
-                            </Typography>
+                            <Typography variant="body2" color="text.primary" sx={{ fontWeight: 500 }}>{product.title}</Typography>
+                            <Typography variant="body2" color="text.secondary">{product.subtitle}</Typography>
                         </Box>
-                        <Typography
-                            component="span"
-                            sx={{ fontSize: '1.25rem', fontWeight: 500, whiteSpace: 'nowrap' }}
-                        >
+                        <Typography component="span" sx={{ fontSize: '1.25rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
                             ${product.price.toLocaleString()}
                         </Typography>
                     </Box>

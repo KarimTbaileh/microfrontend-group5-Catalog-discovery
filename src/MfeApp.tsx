@@ -21,7 +21,8 @@ export const MfeApp: React.FC<MfeProps> = ({
                                                hideChrome,
                                            }) => {
     const shellMode = routing === 'none';
-    const hide = hideChrome || shellMode;
+    void hideChrome;
+    const hide = false;
 
     const content = (() => {
         if (route === 'detail') {
@@ -33,11 +34,9 @@ export const MfeApp: React.FC<MfeProps> = ({
                 />
             );
         }
-
         if (route === 'search') {
             return <SearchPage shellMode={shellMode} hideChrome={hide} />;
         }
-
         if (ROOM_ROUTES.has(route)) {
             const roomKey = route === 'list' ? 'living-room' : route;
             return (
@@ -48,7 +47,6 @@ export const MfeApp: React.FC<MfeProps> = ({
                 />
             );
         }
-
         return <HomePage shellMode={shellMode} hideChrome={hide} />;
     })();
 

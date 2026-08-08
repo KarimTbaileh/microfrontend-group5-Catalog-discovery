@@ -26,13 +26,11 @@ export const HomePage: React.FC<Props> = ({
             }}
         >
             {!hideChrome && <Header shellMode={shellMode} />}
-
             <Box component="main" sx={{ flexGrow: 1 }}>
                 <HeroSection shellMode={shellMode} />
                 <CategoriesSection shellMode={shellMode} />
                 <TrendingSection shellMode={shellMode} />
             </Box>
-
             {!hideChrome && <Footer />}
         </Box>
     );

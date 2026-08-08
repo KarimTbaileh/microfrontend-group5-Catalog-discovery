@@ -3,35 +3,28 @@ import { Link } from 'react-router-dom';
 import { Box, Container, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import type { Category } from '../types/catalog';
 import { useCategories } from '../hooks/useCatalog';
+import { navigateShellPath } from '../contract/luxe-contract';
 
 type Props = {
     shellMode?: boolean;
 };
 
-const getCategoryRoute = (name: string): string => {
+const getCategoryPath = (name: string): string => {
     const lower = name.toLowerCase();
-    if (lower.includes('living')) return 'living-room';
-    if (lower.includes('bedroom')) return 'bedroom';
-    if (lower.includes('kitchen') || lower.includes('dining')) return 'kitchen';
-    if (lower.includes('decor') || lower.includes('office')) return 'decor';
-    return 'catalog';
+    if (lower.includes('living')) return '/living-room';
+    if (lower.includes('bedroom')) return '/bedroom';
+    if (lower.includes('kitchen') || lower.includes('dining')) return '/kitchen';
+    if (lower.includes('decor') || lower.includes('office')) return '/decor';
+    return '/products';
 };
 
 const CategoryCard: React.FC<{ category: Category; shellMode?: boolean }> = ({ category, shellMode }) => {
-    const routeKey = getCategoryRoute(category.name);
-    const targetPath = `/${routeKey}`;
+    const targetPath = getCategoryPath(category.name);
 
     const handleClick = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            // إرسال حدث للـ Shell للتنقل للقسم المناسب
-            window.dispatchEvent(
-                new CustomEvent('luxe:navigate', {
-                    detail: { path: targetPath },
-                    bubbles: true,
-                    composed: true,
-                })
-            );
+            navigateShellPath(targetPath);
         }
     };
 

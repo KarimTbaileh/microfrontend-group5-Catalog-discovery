@@ -36,21 +36,11 @@ export function addToCart(detail: CartAddDetail) {
     );
 }
 
-export function navigateShell(
-    to:
-        | 'catalog'
-        | 'product'
-        | 'orders'
-        | 'living-room'
-        | 'bedroom'
-        | 'kitchen'
-        | 'decor'
-        | 'search',
-    productId?: string
-) {
+// دالة مساعدة للتنقل داخل الـ Shell عبر إرسال المسار مباشرة
+export function navigateShellPath(path: string) {
     window.dispatchEvent(
         new CustomEvent(LUXE_EVENTS.NAVIGATE, {
-            detail: { to, productId },
+            detail: { path },
             bubbles: true,
             composed: true,
         })
@@ -70,11 +60,9 @@ export function buildCartPayload(
     if (KNOWN_CART_IDS.has(product.id)) {
         return { productId: product.id, quantity };
     }
-
     const image = product.imageUrl.startsWith('http')
         ? product.imageUrl
         : new URL(product.imageUrl, window.location.origin).href;
-
     return {
         item: {
             id: product.id,
