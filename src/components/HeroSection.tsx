@@ -12,7 +12,7 @@ export const HeroSection: React.FC<Props> = ({ shellMode = false }) => {
     const handleShopClick = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('catalog'); // يوجه لقائمة المنتجات العامة
+            navigateShell('living-room');
         }
     };
 
@@ -32,7 +32,11 @@ export const HeroSection: React.FC<Props> = ({ shellMode = false }) => {
                     position: 'absolute',
                     inset: 0,
                     zIndex: 0,
-                    '& img': { width: '100%', height: '100%', objectFit: 'cover' },
+                    '& img': {
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                    },
                 }}
             >
                 <img
@@ -47,7 +51,6 @@ export const HeroSection: React.FC<Props> = ({ shellMode = false }) => {
                     }}
                 />
             </Box>
-
             <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1, textAlign: 'center', pt: 10 }}>
                 <Typography
                     variant="h1"

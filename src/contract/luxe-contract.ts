@@ -36,11 +36,21 @@ export function addToCart(detail: CartAddDetail) {
     );
 }
 
-// دالة مساعدة للتنقل داخل الـ Shell عبر إرسال المسار مباشرة
-export function navigateShellPath(path: string) {
+export type ShellDest =
+    | 'catalog'
+    | 'product'
+    | 'orders'
+    | 'living-room'
+    | 'bedroom'
+    | 'kitchen'
+    | 'decor'
+    | 'search';
+
+// هذه هي الدالة التي كان يشتكي منها الـ Build
+export function navigateShell(to: ShellDest, productId?: string) {
     window.dispatchEvent(
         new CustomEvent(LUXE_EVENTS.NAVIGATE, {
-            detail: { path },
+            detail: { to, productId },
             bubbles: true,
             composed: true,
         })
