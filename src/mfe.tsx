@@ -1,58 +1,68 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import { HomePage } from './pages/HomePage';
-import { ProductDetailPage } from './pages/ProductDetailPage';
-import { RoomPage } from './pages/RoomPage';
-import { SearchPage } from './pages/SearchPage';
+import r2wc from '@r2wc/react-to-web-component';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MemoryRouter } from 'react-router-dom';
+import { theme } from './theme';
+import { MfeApp } from './MfeApp';
 
-export type MfeProps = {
-    route: string;
-    productId: string;
-    routing: string;
-    hideChrome: boolean;
-};
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+        },
+    },
+});
 
-const ROOM_ROUTES = new Set(['living-room', 'bedroom', 'kitchen', 'decor', 'list']);
+function MfeRoot(props: {
+    route?: string;
+    productId?: string;
+    routing?: string;
+    hideChrome?: boolean;
+}) {
+    const route = props.route ?? 'home';
+    const productId = props.productId ?? '';
 
-export const MfeApp: React.FC<MfeProps> = ({
-                                               route,
-                                               productId,
-                                               routing,
-                                               hideChrome,
-                                           }) => {
-    const shellMode = routing === 'none';
-    // جوا الـ shell: اخفِ chrome دائماً حتى لو الـ attribute ما وصل صح
-    const hide = hideChrome || shellMode;
+    const initialPath =
+        route === 'detail' && productId
+            ? `/product/${productId}`
+            : route === 'list'
+                ? '/products'
+                : route === 'search'
+                    ? '/search'
+                    : route === 'living-room' ||
+                    route === 'bedroom' ||
+                    route === 'kitchen' ||
+                    route === 'decor'
+                        ? `/${route}`
+                        : '/';
 
-    const content = (() => {
-        if (route === 'detail') {
-            return (
-                <ProductDetailPage
-                    forcedProductId={productId}
-                    shellMode={shellMode}
-                    hideChrome={hide}
-                />
-            );
-        }
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <MemoryRouter initialEntries={[initialPath]}>
+                    <MfeApp
+                        route={route}
+                        productId={productId}
+                        routing={props.routing ?? 'hash'}
+                        hideChrome={Boolean(props.hideChrome)}
+                    />
+                </MemoryRouter>
+            </ThemeProvider>
+        </QueryClientProvider>
+    );
+}
 
-        if (route === 'search') {
-            return <SearchPage shellMode={shellMode} hideChrome={hide} />;
-        }
+const LuxeCatalog = r2wc(MfeRoot, {
+    props: {
+        route: 'string',
+        productId: 'string',
+        routing: 'string',
+        hideChrome: 'boolean',
+    },
+});
 
-        if (ROOM_ROUTES.has(route)) {
-            const roomKey = route === 'list' ? 'living-room' : route;
-            return (
-                <RoomPage
-                    forcedRoomKey={roomKey}
-                    shellMode={shellMode}
-                    hideChrome={hide}
-                />
-            );
-        }
+customElements.define('luxe-catalog', LuxeCatalog);
 
-        return <HomePage shellMode={shellMode} hideChrome={hide} />;
-    })();
-
-    // لا تضع Header/Footer هنا أبداً جوا الـ shell
-    return <Box sx={{ minHeight: '100%' }}>{content}</Box>;
-};
+export default LuxeCatalog;
