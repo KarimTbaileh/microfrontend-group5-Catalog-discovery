@@ -23494,16 +23494,19 @@ function kb(e, t) {
 //#endregion
 //#region src/components/Header.tsx
 var Ab = ({ shellMode: e = !1 }) => {
-	let t = Xv(), n = (n) => {
-		e ? Ob(n) : t(n);
+	let t = Xv(), n = (n, r) => {
+		if (e) {
+			Db(r);
+			return;
+		}
+		t(n);
 	};
 	return /* @__PURE__ */ (0, H.jsx)(wu, {
 		position: "sticky",
 		elevation: 0,
 		sx: {
 			borderBottom: "1px solid",
-			borderColor: "divider",
-			bgcolor: "background.paper"
+			borderColor: "divider"
 		},
 		children: /* @__PURE__ */ (0, H.jsx)(Qd, {
 			maxWidth: "xl",
@@ -23515,22 +23518,14 @@ var Ab = ({ shellMode: e = !1 }) => {
 				},
 				children: [
 					/* @__PURE__ */ (0, H.jsx)(X, {
-						component: e ? "button" : ab,
-						to: e ? void 0 : "/",
-						onClick: e ? (e) => {
-							e.preventDefault(), n("/");
-						} : void 0,
 						variant: "h3",
 						sx: {
-							textDecoration: "none",
 							color: "primary.main",
 							fontWeight: 700,
 							letterSpacing: "0.15em",
 							fontSize: "1.25rem",
-							background: "none",
-							border: "none",
-							cursor: "pointer",
-							fontFamily: "inherit"
+							fontFamily: "inherit",
+							userSelect: "none"
 						},
 						children: "LUXE INTERIORS"
 					}),
@@ -23545,9 +23540,13 @@ var Ab = ({ shellMode: e = !1 }) => {
 						},
 						children: [/* @__PURE__ */ (0, H.jsx)(_d, {
 							component: e ? "button" : ob,
-							to: e ? void 0 : "/products",
+							to: e ? void 0 : "/",
 							onClick: e ? (e) => {
-								e.preventDefault(), n("/products");
+								e.preventDefault(), window.dispatchEvent(new CustomEvent("luxe:navigate", {
+									detail: { path: "/" },
+									bubbles: !0,
+									composed: !0
+								}));
 							} : void 0,
 							sx: {
 								color: "text.secondary",
@@ -23561,9 +23560,7 @@ var Ab = ({ shellMode: e = !1 }) => {
 						}), Cb.map((t) => /* @__PURE__ */ (0, H.jsx)(_d, {
 							component: e ? "button" : ob,
 							to: e ? void 0 : `/${t.key}`,
-							onClick: e ? (e) => {
-								e.preventDefault(), n(`/${t.key}`);
-							} : void 0,
+							onClick: e ? () => Db(t.key) : void 0,
 							sx: {
 								color: "text.secondary",
 								"&.active": {
@@ -23582,7 +23579,7 @@ var Ab = ({ shellMode: e = !1 }) => {
 						},
 						children: [
 							/* @__PURE__ */ (0, H.jsx)(hu, {
-								onClick: () => n("/search"),
+								onClick: () => n("/search", "search"),
 								"aria-label": "Search",
 								children: /* @__PURE__ */ (0, H.jsx)(vb, {})
 							}),
@@ -23592,12 +23589,20 @@ var Ab = ({ shellMode: e = !1 }) => {
 							}),
 							/* @__PURE__ */ (0, H.jsx)(hu, {
 								"aria-label": "Account",
-								onClick: () => n("/account/orders"),
+								onClick: () => {
+									e && Db("orders");
+								},
 								children: /* @__PURE__ */ (0, H.jsx)(bb, {})
 							}),
 							/* @__PURE__ */ (0, H.jsx)(hu, {
 								"aria-label": "Cart",
-								onClick: () => n("/cart"),
+								onClick: () => {
+									e && window.dispatchEvent(new CustomEvent("luxe:navigate", {
+										detail: { path: "/cart" },
+										bubbles: !0,
+										composed: !0
+									}));
+								},
 								children: /* @__PURE__ */ (0, H.jsx)(xb, {})
 							})
 						]

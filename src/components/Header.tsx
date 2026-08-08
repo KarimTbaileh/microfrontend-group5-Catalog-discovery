@@ -14,7 +14,17 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { ROOM_LIST } from '../constants/rooms';
-import { navigateShellPath } from '../contract/luxe-contract';
+import { navigateShell } from '../contract/luxe-contract';
+
+type ShellDest =
+    | 'catalog'
+    | 'product'
+    | 'orders'
+    | 'living-room'
+    | 'bedroom'
+    | 'kitchen'
+    | 'decor'
+    | 'search';
 
 type Props = {
     shellMode?: boolean;
@@ -22,48 +32,56 @@ type Props = {
 
 export const Header: React.FC<Props> = ({ shellMode = false }) => {
     const navigate = useNavigate();
-
-    const handleNavigate = (path: string) => {
+    const go = (path: string, shellTo: ShellDest) => {
         if (shellMode) {
-            navigateShellPath(path);
-        } else {
-            navigate(path);
+            navigateShell(shellTo);
+            return;
         }
+        navigate(path);
     };
 
     return (
         <AppBar
             position="sticky"
             elevation={0}
-            sx={{ borderBottom: '1px solid', borderColor: 'divider', bgcolor: 'background.paper' }}
+            sx={{ borderBottom: '1px solid', borderColor: 'divider' }}
         >
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between', py: 1 }}>
+                    {/* 1. اللوجو ثابت تماماً (بدون Link أو onClick) */}
                     <Typography
-                        component={shellMode ? 'button' : Link}
-                        to={shellMode ? undefined : '/'}
-                        onClick={shellMode ? (e) => { e.preventDefault(); handleNavigate('/'); } : undefined}
                         variant="h3"
                         sx={{
-                            textDecoration: 'none',
                             color: 'primary.main',
                             fontWeight: 700,
                             letterSpacing: '0.15em',
                             fontSize: '1.25rem',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
                             fontFamily: 'inherit',
+                            userSelect: 'none', // لمنع تحديد النص عند النقر المتكرر
                         }}
                     >
                         LUXE INTERIORS
                     </Typography>
 
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3, alignItems: 'center' }}>
+                        {/* 2. Shop All يوجه للـ Home Page (/) */}
                         <Button
                             component={shellMode ? 'button' : NavLink}
-                            to={shellMode ? undefined : '/products'}
-                            onClick={shellMode ? (e) => { e.preventDefault(); handleNavigate('/products'); } : undefined}
+                            to={shellMode ? undefined : '/'}
+                            onClick={
+                                shellMode
+                                    ? (e) => {
+                                        e.preventDefault();
+                                        window.dispatchEvent(
+                                            new CustomEvent('luxe:navigate', {
+                                                detail: { path: '/' },
+                                                bubbles: true,
+                                                composed: true,
+                                            })
+                                        );
+                                    }
+                                    : undefined
+                            }
                             sx={{
                                 color: 'text.secondary',
                                 '&.active': { color: 'primary.main', fontWeight: 700 },
@@ -72,12 +90,20 @@ export const Header: React.FC<Props> = ({ shellMode = false }) => {
                         >
                             Shop All
                         </Button>
+
                         {ROOM_LIST.map((room) => (
                             <Button
                                 key={room.key}
                                 component={shellMode ? 'button' : NavLink}
                                 to={shellMode ? undefined : `/${room.key}`}
-                                onClick={shellMode ? (e) => { e.preventDefault(); handleNavigate(`/${room.key}`); } : undefined}
+                                onClick={
+                                    shellMode
+                                        ? () =>
+                                            navigateShell(
+                                                room.key as 'living-room' | 'bedroom' | 'kitchen' | 'decor'
+                                            )
+                                        : undefined
+                                }
                                 sx={{
                                     color: 'text.secondary',
                                     '&.active': { color: 'primary.main', fontWeight: 700 },
@@ -90,16 +116,37 @@ export const Header: React.FC<Props> = ({ shellMode = false }) => {
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: 0.5 }}>
-                        <IconButton onClick={() => handleNavigate('/search')} aria-label="Search">
+                        <IconButton
+                            onClick={() => go('/search', 'search')}
+                            aria-label="Search"
+                        >
                             <SearchIcon />
                         </IconButton>
                         <IconButton aria-label="Wishlist">
                             <FavoriteBorderIcon />
                         </IconButton>
-                        <IconButton aria-label="Account" onClick={() => handleNavigate('/account/orders')}>
+                        <IconButton
+                            aria-label="Account"
+                            onClick={() => {
+                                if (shellMode) navigateShell('orders');
+                            }}
+                        >
                             <PersonOutlineOutlinedIcon />
                         </IconButton>
-                        <IconButton aria-label="Cart" onClick={() => handleNavigate('/cart')}>
+                        <IconButton
+                            aria-label="Cart"
+                            onClick={() => {
+                                if (shellMode) {
+                                    window.dispatchEvent(
+                                        new CustomEvent('luxe:navigate', {
+                                            detail: { path: '/cart' },
+                                            bubbles: true,
+                                            composed: true,
+                                        })
+                                    );
+                                }
+                            }}
+                        >
                             <ShoppingCartOutlinedIcon />
                         </IconButton>
                     </Box>
