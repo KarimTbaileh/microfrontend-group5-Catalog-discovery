@@ -16,14 +16,37 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import type { Product } from '../types/catalog';
 import { useTrendingProducts } from '../hooks/useCatalog';
+import { navigateShell, addToCart, buildCartPayload } from '../contract/luxe-contract';
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+type Props = {
+    shellMode?: boolean;
+};
+
+const ProductCard: React.FC<{ product: Product; shellMode?: boolean }> = ({ product, shellMode }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+
+    const openProduct = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            navigateShell('product', product.id);
+        }
+    };
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (shellMode) {
+            addToCart(buildCartPayload(product, 1));
+        } else {
+            console.log('Add to cart:', product.id);
+        }
+    };
 
     return (
         <Card
-            component={Link}
-            to={`/product/${product.id}`}
+            component={shellMode ? 'div' : Link}
+            to={shellMode ? undefined : `/product/${product.id}`}
+            onClick={openProduct}
             elevation={0}
             sx={{
                 textDecoration: 'none',
@@ -36,6 +59,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                 transition: 'box-shadow 0.3s',
                 '&:hover': { boxShadow: 3 },
                 '&:hover img': { transform: 'scale(1.05)' },
+                cursor: 'pointer',
             }}
         >
             <Box sx={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden', bgcolor: 'grey.100' }}>
@@ -89,11 +113,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                         ${product.price.toLocaleString()}
                     </Typography>
                     <IconButton
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            console.log('Add to cart:', product.id);
-                        }}
+                        onClick={handleAddToCart}
                         sx={{
                             bgcolor: 'primary.main',
                             color: 'primary.contrastText',
@@ -109,24 +129,18 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     );
 };
 
-export const TrendingSection: React.FC = () => {
+export const TrendingSection: React.FC<Props> = ({ shellMode = false }) => {
     const { data: products, isLoading, error } = useTrendingProducts();
 
-    if (isLoading) {
-        return (
-            <Box sx={{ py: 10, textAlign: 'center' }}>
-                <Typography>Loading Trending Products...</Typography>
-            </Box>
-        );
-    }
+    const handleViewAll = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            navigateShell('catalog');
+        }
+    };
 
-    if (error) {
-        return (
-            <Box sx={{ py: 10, textAlign: 'center' }}>
-                <Typography color="error">Failed to load products</Typography>
-            </Box>
-        );
-    }
+    if (isLoading) return <Box sx={{ py: 10, textAlign: 'center' }}><Typography>Loading Trending Products...</Typography></Box>;
+    if (error) return <Box sx={{ py: 10, textAlign: 'center' }}><Typography color="error">Failed to load products</Typography></Box>;
 
     return (
         <Box component="section" sx={{ py: 8, bgcolor: 'grey.50' }}>
@@ -141,8 +155,9 @@ export const TrendingSection: React.FC = () => {
                         </Typography>
                     </Box>
                     <Button
-                        component={Link}
-                        to="/living-room"
+                        component={shellMode ? 'button' : Link}
+                        to={shellMode ? undefined : '/living-room'}
+                        onClick={handleViewAll}
                         endIcon={<ArrowForwardIcon />}
                         sx={{ color: 'secondary.main' }}
                     >
@@ -153,16 +168,12 @@ export const TrendingSection: React.FC = () => {
                 <Box
                     sx={{
                         display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            sm: 'repeat(2, 1fr)',
-                            md: 'repeat(3, 1fr)',
-                        },
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
                         gap: 3,
                     }}
                 >
                     {products?.map((prod) => (
-                        <ProductCard key={prod.id} product={prod} />
+                        <ProductCard key={prod.id} product={prod} shellMode={shellMode} />
                     ))}
                 </Box>
             </Container>

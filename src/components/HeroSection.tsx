@@ -1,9 +1,21 @@
 import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
+import { Box, Container, Typography, Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { navigateShell } from '../contract/luxe-contract';
 
-export const HeroSection: React.FC = () => {
+type Props = {
+    shellMode?: boolean;
+};
+
+export const HeroSection: React.FC<Props> = ({ shellMode = false }) => {
+    const handleShopClick = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            navigateShell('catalog'); // يوجه لقائمة المنتجات العامة
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -20,11 +32,7 @@ export const HeroSection: React.FC = () => {
                     position: 'absolute',
                     inset: 0,
                     zIndex: 0,
-                    '& img': {
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                    },
+                    '& img': { width: '100%', height: '100%', objectFit: 'cover' },
                 }}
             >
                 <img
@@ -53,8 +61,9 @@ export const HeroSection: React.FC = () => {
                     featuring sustainable materials and timeless craftsmanship.
                 </Typography>
                 <Button
-                    component={Link}
-                    to="/living-room"
+                    component={shellMode ? 'button' : Link}
+                    to={shellMode ? undefined : '/living-room'}
+                    onClick={handleShopClick}
                     variant="contained"
                     size="large"
                     endIcon={<ArrowForwardIcon />}

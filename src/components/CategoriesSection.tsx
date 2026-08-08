@@ -4,24 +4,47 @@ import { Box, Container, Typography, Card, CardMedia, CardContent } from '@mui/m
 import type { Category } from '../types/catalog';
 import { useCategories } from '../hooks/useCatalog';
 
-const getCategoryPath = (name: string): string => {
-    const lower = name.toLowerCase();
-    if (lower.includes('living')) return '/living-room';
-    if (lower.includes('bedroom')) return '/bedroom';
-    if (lower.includes('kitchen') || lower.includes('dining')) return '/kitchen';
-    if (lower.includes('decor') || lower.includes('light') || lower.includes('office')) return '/decor';
-    return '/search';
+type Props = {
+    shellMode?: boolean;
 };
 
-const CategoryCard: React.FC<{ category: Category }> = ({ category }) => {
+const getCategoryRoute = (name: string): string => {
+    const lower = name.toLowerCase();
+    if (lower.includes('living')) return 'living-room';
+    if (lower.includes('bedroom')) return 'bedroom';
+    if (lower.includes('kitchen') || lower.includes('dining')) return 'kitchen';
+    if (lower.includes('decor') || lower.includes('office')) return 'decor';
+    return 'catalog';
+};
+
+const CategoryCard: React.FC<{ category: Category; shellMode?: boolean }> = ({ category, shellMode }) => {
+    const routeKey = getCategoryRoute(category.name);
+    const targetPath = `/${routeKey}`;
+
+    const handleClick = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            // إرسال حدث للـ Shell للتنقل للقسم المناسب
+            window.dispatchEvent(
+                new CustomEvent('luxe:navigate', {
+                    detail: { path: targetPath },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
+        }
+    };
+
     return (
         <Card
-            component={Link}
-            to={getCategoryPath(category.name)}
+            component={shellMode ? 'div' : Link}
+            to={shellMode ? undefined : targetPath}
+            onClick={handleClick}
             elevation={0}
             sx={{
                 textDecoration: 'none',
                 bgcolor: 'transparent',
+                cursor: 'pointer',
                 '&:hover img': { transform: 'scale(1.05)' },
             }}
         >
@@ -45,24 +68,11 @@ const CategoryCard: React.FC<{ category: Category }> = ({ category }) => {
     );
 };
 
-export const CategoriesSection: React.FC = () => {
+export const CategoriesSection: React.FC<Props> = ({ shellMode = false }) => {
     const { data: categories, isLoading, error } = useCategories();
 
-    if (isLoading) {
-        return (
-            <Box sx={{ py: 8, textAlign: 'center' }}>
-                <Typography>Loading Categories...</Typography>
-            </Box>
-        );
-    }
-
-    if (error) {
-        return (
-            <Box sx={{ py: 8, textAlign: 'center' }}>
-                <Typography color="error">Failed to load categories</Typography>
-            </Box>
-        );
-    }
+    if (isLoading) return <Box sx={{ py: 8, textAlign: 'center' }}><Typography>Loading Categories...</Typography></Box>;
+    if (error) return <Box sx={{ py: 8, textAlign: 'center' }}><Typography color="error">Failed to load categories</Typography></Box>;
 
     return (
         <Box component="section" sx={{ py: 10 }}>
@@ -70,20 +80,15 @@ export const CategoriesSection: React.FC = () => {
                 <Typography variant="h2" color="primary" align="center" sx={{ mb: 6 }}>
                     Curated Spaces
                 </Typography>
-
                 <Box
                     sx={{
                         display: 'grid',
-                        gridTemplateColumns: {
-                            xs: '1fr',
-                            sm: 'repeat(2, 1fr)',
-                            md: 'repeat(4, 1fr)',
-                        },
+                        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
                         gap: 3,
                     }}
                 >
                     {categories?.slice(0, 4).map((cat) => (
-                        <CategoryCard key={cat.id} category={cat} />
+                        <CategoryCard key={cat.id} category={cat} shellMode={shellMode} />
                     ))}
                 </Box>
             </Container>

@@ -23604,7 +23604,7 @@ var kb = ({ shellMode: e = !1 }) => {
 			})
 		})
 	});
-}, Ab = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" }), "ArrowForward"), jb = () => /* @__PURE__ */ (0, H.jsxs)(Z, {
+}, Ab = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" }), "ArrowForward"), jb = ({ shellMode: e = !1 }) => /* @__PURE__ */ (0, H.jsxs)(Z, {
 	sx: {
 		position: "relative",
 		height: {
@@ -23667,8 +23667,11 @@ var kb = ({ shellMode: e = !1 }) => {
 				children: "Curated pieces designed to elevate your everyday living. Discover our new arrivals featuring sustainable materials and timeless craftsmanship."
 			}),
 			/* @__PURE__ */ (0, H.jsx)(_d, {
-				component: ab,
-				to: "/living-room",
+				component: e ? "button" : ab,
+				to: e ? void 0 : "/living-room",
+				onClick: (t) => {
+					e && (t.preventDefault(), Db("catalog"));
+				},
 				variant: "contained",
 				size: "large",
 				endIcon: /* @__PURE__ */ (0, H.jsx)(Ab, {}),
@@ -25684,60 +25687,71 @@ var vw = _w.create({
 	queryFn: yw.getTrendingProducts
 }), Sw = (e) => {
 	let t = e.toLowerCase();
-	return t.includes("living") ? "/living-room" : t.includes("bedroom") ? "/bedroom" : t.includes("kitchen") || t.includes("dining") ? "/kitchen" : t.includes("decor") || t.includes("light") || t.includes("office") ? "/decor" : "/search";
-}, Cw = ({ category: e }) => /* @__PURE__ */ (0, H.jsxs)(xd, {
-	component: ab,
-	to: Sw(e.name),
-	elevation: 0,
-	sx: {
-		textDecoration: "none",
-		bgcolor: "transparent",
-		"&:hover img": { transform: "scale(1.05)" }
-	},
-	children: [/* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			aspectRatio: "4/5",
-			overflow: "hidden",
-			borderRadius: 3,
-			bgcolor: "grey.100"
+	return t.includes("living") ? "living-room" : t.includes("bedroom") ? "bedroom" : t.includes("kitchen") || t.includes("dining") ? "kitchen" : t.includes("decor") || t.includes("office") ? "decor" : "catalog";
+}, Cw = ({ category: e, shellMode: t }) => {
+	let n = `/${Sw(e.name)}`;
+	return /* @__PURE__ */ (0, H.jsxs)(xd, {
+		component: t ? "div" : ab,
+		to: t ? void 0 : n,
+		onClick: (e) => {
+			t && (e.preventDefault(), window.dispatchEvent(new CustomEvent("luxe:navigate", {
+				detail: { path: n },
+				bubbles: !0,
+				composed: !0
+			})));
 		},
-		children: /* @__PURE__ */ (0, H.jsx)(Ld, {
-			component: "img",
-			image: e.imageUrl,
-			alt: e.name,
+		elevation: 0,
+		sx: {
+			textDecoration: "none",
+			bgcolor: "transparent",
+			cursor: "pointer",
+			"&:hover img": { transform: "scale(1.05)" }
+		},
+		children: [/* @__PURE__ */ (0, H.jsx)(Z, {
 			sx: {
-				width: "100%",
-				height: "100%",
-				objectFit: "cover",
-				transition: "transform 0.7s ease"
-			}
-		})
-	}), /* @__PURE__ */ (0, H.jsxs)(jd, {
-		sx: {
-			px: 0,
-			pt: 2
-		},
-		children: [/* @__PURE__ */ (0, H.jsx)(X, {
-			variant: "h3",
-			color: "primary",
-			sx: { fontSize: "1.25rem" },
-			children: e.name
-		}), /* @__PURE__ */ (0, H.jsx)(X, {
-			variant: "body2",
-			color: "text.secondary",
-			sx: { mt: .5 },
-			children: e.subtitle
+				aspectRatio: "4/5",
+				overflow: "hidden",
+				borderRadius: 3,
+				bgcolor: "grey.100"
+			},
+			children: /* @__PURE__ */ (0, H.jsx)(Ld, {
+				component: "img",
+				image: e.imageUrl,
+				alt: e.name,
+				sx: {
+					width: "100%",
+					height: "100%",
+					objectFit: "cover",
+					transition: "transform 0.7s ease"
+				}
+			})
+		}), /* @__PURE__ */ (0, H.jsxs)(jd, {
+			sx: {
+				px: 0,
+				pt: 2
+			},
+			children: [/* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "h3",
+				color: "primary",
+				sx: { fontSize: "1.25rem" },
+				children: e.name
+			}), /* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "body2",
+				color: "text.secondary",
+				sx: { mt: .5 },
+				children: e.subtitle
+			})]
 		})]
-	})]
-}), ww = () => {
-	let { data: e, isLoading: t, error: n } = bw();
-	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
+	});
+}, ww = ({ shellMode: e = !1 }) => {
+	let { data: t, isLoading: n, error: r } = bw();
+	return n ? /* @__PURE__ */ (0, H.jsx)(Z, {
 		sx: {
 			py: 8,
 			textAlign: "center"
 		},
 		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Categories..." })
-	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
+	}) : r ? /* @__PURE__ */ (0, H.jsx)(Z, {
 		sx: {
 			py: 8,
 			textAlign: "center"
@@ -25767,15 +25781,21 @@ var vw = _w.create({
 					},
 					gap: 3
 				},
-				children: e?.slice(0, 4).map((e) => /* @__PURE__ */ (0, H.jsx)(Cw, { category: e }, e.id))
+				children: t?.slice(0, 4).map((t) => /* @__PURE__ */ (0, H.jsx)(Cw, {
+					category: t,
+					shellMode: e
+				}, t.id))
 			})]
 		})
 	});
-}, Tw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z" }), "Favorite"), Ew = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M11 9h2V6h3V4h-3V1h-2v3H8v2h3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2m10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2m-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25" }), "AddShoppingCart"), Dw = ({ product: e }) => {
-	let [t, n] = (0, v.useState)(!1);
+}, Tw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z" }), "Favorite"), Ew = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M11 9h2V6h3V4h-3V1h-2v3H8v2h3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2m10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2m-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25" }), "AddShoppingCart"), Dw = ({ product: e, shellMode: t }) => {
+	let [n, r] = (0, v.useState)(!1);
 	return /* @__PURE__ */ (0, H.jsxs)(xd, {
-		component: ab,
-		to: `/product/${e.id}`,
+		component: t ? "div" : ab,
+		to: t ? void 0 : `/product/${e.id}`,
+		onClick: (n) => {
+			t && (n.preventDefault(), Db("product", e.id));
+		},
 		elevation: 0,
 		sx: {
 			textDecoration: "none",
@@ -25787,7 +25807,8 @@ var vw = _w.create({
 			overflow: "hidden",
 			transition: "box-shadow 0.3s",
 			"&:hover": { boxShadow: 3 },
-			"&:hover img": { transform: "scale(1.05)" }
+			"&:hover img": { transform: "scale(1.05)" },
+			cursor: "pointer"
 		},
 		children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
 			sx: {
@@ -25808,18 +25829,18 @@ var vw = _w.create({
 				}
 			}), /* @__PURE__ */ (0, H.jsx)(hu, {
 				onClick: (e) => {
-					e.preventDefault(), e.stopPropagation(), n(!t);
+					e.preventDefault(), e.stopPropagation(), r(!n);
 				},
 				sx: {
 					position: "absolute",
 					top: 12,
 					right: 12,
 					bgcolor: "rgba(255,255,255,0.9)",
-					color: t ? "error.main" : "text.primary",
+					color: n ? "error.main" : "text.primary",
 					"&:hover": { bgcolor: "background.paper" }
 				},
 				size: "small",
-				children: t ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
+				children: n ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
 			})]
 		}), /* @__PURE__ */ (0, H.jsxs)(jd, {
 			sx: {
@@ -25861,8 +25882,8 @@ var vw = _w.create({
 					},
 					children: ["$", e.price.toLocaleString()]
 				}), /* @__PURE__ */ (0, H.jsx)(hu, {
-					onClick: (t) => {
-						t.preventDefault(), t.stopPropagation(), console.log("Add to cart:", e.id);
+					onClick: (n) => {
+						n.preventDefault(), n.stopPropagation(), t ? Eb(Ob(e, 1)) : console.log("Add to cart:", e.id);
 					},
 					sx: {
 						bgcolor: "primary.main",
@@ -25875,15 +25896,15 @@ var vw = _w.create({
 			})]
 		})]
 	});
-}, Ow = () => {
-	let { data: e, isLoading: t, error: n } = xw();
-	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
+}, Ow = ({ shellMode: e = !1 }) => {
+	let { data: t, isLoading: n, error: r } = xw();
+	return n ? /* @__PURE__ */ (0, H.jsx)(Z, {
 		sx: {
 			py: 10,
 			textAlign: "center"
 		},
 		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Trending Products..." })
-	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
+	}) : r ? /* @__PURE__ */ (0, H.jsx)(Z, {
 		sx: {
 			py: 10,
 			textAlign: "center"
@@ -25918,8 +25939,11 @@ var vw = _w.create({
 					sx: { mt: .5 },
 					children: "Our most coveted pieces this season"
 				})] }), /* @__PURE__ */ (0, H.jsx)(_d, {
-					component: ab,
-					to: "/living-room",
+					component: e ? "button" : ab,
+					to: e ? void 0 : "/living-room",
+					onClick: (t) => {
+						e && (t.preventDefault(), Db("catalog"));
+					},
 					endIcon: /* @__PURE__ */ (0, H.jsx)(Ab, {}),
 					sx: { color: "secondary.main" },
 					children: "View All"
@@ -25934,7 +25958,10 @@ var vw = _w.create({
 					},
 					gap: 3
 				},
-				children: e?.map((e) => /* @__PURE__ */ (0, H.jsx)(Dw, { product: e }, e.id))
+				children: t?.map((t) => /* @__PURE__ */ (0, H.jsx)(Dw, {
+					product: t,
+					shellMode: e
+				}, t.id))
 			})]
 		})
 	});
@@ -26041,9 +26068,9 @@ var vw = _w.create({
 			component: "main",
 			sx: { flexGrow: 1 },
 			children: [
-				/* @__PURE__ */ (0, H.jsx)(jb, {}),
-				/* @__PURE__ */ (0, H.jsx)(ww, {}),
-				/* @__PURE__ */ (0, H.jsx)(Ow, {})
+				/* @__PURE__ */ (0, H.jsx)(jb, { shellMode: e }),
+				/* @__PURE__ */ (0, H.jsx)(ww, { shellMode: e }),
+				/* @__PURE__ */ (0, H.jsx)(Ow, { shellMode: e })
 			]
 		}),
 		!t && /* @__PURE__ */ (0, H.jsx)(kw, {})
