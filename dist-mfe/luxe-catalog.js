@@ -9194,8 +9194,8 @@ cn.forEach(function(e) {
 //#endregion
 //#region node_modules/react/cjs/react-jsx-runtime.production.js
 var un = /* @__PURE__ */ o(((e) => {
-	var t = Symbol.for("react.transitional.element"), n = Symbol.for("react.fragment");
-	function r(e, n, r) {
+	var t = Symbol.for("react.transitional.element");
+	function n(e, n, r) {
 		var i = null;
 		if (r !== void 0 && (i = "" + r), n.key !== void 0 && (i = "" + n.key), "key" in n) for (var a in r = {}, n) a !== "key" && (r[a] = n[a]);
 		else r = n;
@@ -9207,7 +9207,7 @@ var un = /* @__PURE__ */ o(((e) => {
 			props: r
 		};
 	}
-	e.Fragment = n, e.jsx = r, e.jsxs = r;
+	e.jsx = n, e.jsxs = n;
 })), H = (/* @__PURE__ */ o(((e, t) => {
 	t.exports = un();
 })))();
@@ -23489,7 +23489,7 @@ function Ob(e, t) {
 var kb = ({ shellMode: e = !1 }) => {
 	let t = Xv(), n = (n, r) => {
 		if (e) {
-			Db(r ?? "catalog");
+			Db(r);
 			return;
 		}
 		t(n);
@@ -23553,7 +23553,7 @@ var kb = ({ shellMode: e = !1 }) => {
 						}), Cb.map((t) => /* @__PURE__ */ (0, H.jsx)(_d, {
 							component: e ? "button" : ob,
 							to: e ? void 0 : `/${t.key}`,
-							onClick: e ? () => Db("catalog") : void 0,
+							onClick: e ? () => Db(t.key) : void 0,
 							sx: {
 								color: "text.secondary",
 								"&.active": {
@@ -23572,7 +23572,7 @@ var kb = ({ shellMode: e = !1 }) => {
 						},
 						children: [
 							/* @__PURE__ */ (0, H.jsx)(hu, {
-								onClick: () => n("/search", "catalog"),
+								onClick: () => n("/search", "search"),
 								"aria-label": "Search",
 								children: /* @__PURE__ */ (0, H.jsx)(vb, {})
 							}),
@@ -23589,6 +23589,13 @@ var kb = ({ shellMode: e = !1 }) => {
 							}),
 							/* @__PURE__ */ (0, H.jsx)(hu, {
 								"aria-label": "Cart",
+								onClick: () => {
+									e && window.dispatchEvent(new CustomEvent("luxe:navigate", {
+										detail: { path: "/cart" },
+										bubbles: !0,
+										composed: !0
+									}));
+								},
 								children: /* @__PURE__ */ (0, H.jsx)(xb, {})
 							})
 						]
@@ -23597,2341 +23604,7 @@ var kb = ({ shellMode: e = !1 }) => {
 			})
 		})
 	});
-}, Ab = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" }), "ArrowForward"), jb = () => /* @__PURE__ */ (0, H.jsxs)(Z, {
-	sx: {
-		position: "relative",
-		height: {
-			xs: "70vh",
-			md: "80vh"
-		},
-		minHeight: 560,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center"
-	},
-	children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
-		sx: {
-			position: "absolute",
-			inset: 0,
-			zIndex: 0,
-			"& img": {
-				width: "100%",
-				height: "100%",
-				objectFit: "cover"
-			}
-		},
-		children: [/* @__PURE__ */ (0, H.jsx)("img", {
-			src: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1600&q=80",
-			alt: "Modern Living Room"
-		}), /* @__PURE__ */ (0, H.jsx)(Z, { sx: {
-			position: "absolute",
-			inset: 0,
-			background: "linear-gradient(to top, rgba(253,248,245,0.85), transparent)"
-		} })]
-	}), /* @__PURE__ */ (0, H.jsxs)(Qd, {
-		maxWidth: "md",
-		sx: {
-			position: "relative",
-			zIndex: 1,
-			textAlign: "center",
-			pt: 10
-		},
-		children: [
-			/* @__PURE__ */ (0, H.jsx)(X, {
-				variant: "h1",
-				color: "primary",
-				sx: {
-					mb: 2,
-					fontSize: {
-						xs: "2.5rem",
-						md: "3.5rem"
-					}
-				},
-				children: "Modern Living Room Collections"
-			}),
-			/* @__PURE__ */ (0, H.jsx)(X, {
-				variant: "body1",
-				color: "text.secondary",
-				sx: {
-					maxWidth: 560,
-					mx: "auto",
-					mb: 4
-				},
-				children: "Curated pieces designed to elevate your everyday living. Discover our new arrivals featuring sustainable materials and timeless craftsmanship."
-			}),
-			/* @__PURE__ */ (0, H.jsx)(_d, {
-				component: ab,
-				to: "/living-room",
-				variant: "contained",
-				size: "large",
-				endIcon: /* @__PURE__ */ (0, H.jsx)(Ab, {}),
-				sx: {
-					px: 4,
-					py: 1.5
-				},
-				children: "Shop the Collection"
-			})
-		]
-	})]
-});
-//#endregion
-//#region node_modules/axios/lib/helpers/bind.js
-function Mb(e, t) {
-	return function() {
-		return e.apply(t, arguments);
-	};
-}
-//#endregion
-//#region node_modules/axios/lib/utils.js
-var { toString: Nb } = Object.prototype, { getPrototypeOf: Pb } = Object, { iterator: Fb, toStringTag: Ib } = Symbol, Lb = (({ hasOwnProperty: e }) => (t, n) => e.call(t, n))(Object.prototype), Rb = (e, t) => {
-	let n = e, r = [];
-	for (; n != null && n !== Object.prototype;) {
-		if (r.indexOf(n) !== -1) return !1;
-		if (r.push(n), Lb(n, t)) return !0;
-		n = Pb(n);
-	}
-	return !1;
-}, zb = (e, t) => e != null && Rb(e, t) ? e[t] : void 0, Bb = ((e) => (t) => {
-	let n = Nb.call(t);
-	return e[n] || (e[n] = n.slice(8, -1).toLowerCase());
-})(Object.create(null)), Vb = (e) => (e = e.toLowerCase(), (t) => Bb(t) === e), Hb = (e) => (t) => typeof t === e, { isArray: Ub } = Array, Wb = Hb("undefined");
-function Gb(e) {
-	return e !== null && !Wb(e) && e.constructor !== null && !Wb(e.constructor) && Yb(e.constructor.isBuffer) && e.constructor.isBuffer(e);
-}
-var Kb = Vb("ArrayBuffer");
-function qb(e) {
-	let t;
-	return t = typeof ArrayBuffer < "u" && ArrayBuffer.isView ? ArrayBuffer.isView(e) : e && e.buffer && Kb(e.buffer), t;
-}
-var Jb = Hb("string"), Yb = Hb("function"), Xb = Hb("number"), Zb = (e) => typeof e == "object" && !!e, Qb = (e) => e === !0 || e === !1, $b = (e) => {
-	if (!Zb(e)) return !1;
-	let t = Pb(e);
-	return (t === null || t === Object.prototype || Pb(t) === null) && !Rb(e, Ib) && !Rb(e, Fb);
-}, ex = (e) => {
-	if (!Zb(e) || Gb(e)) return !1;
-	try {
-		return Object.keys(e).length === 0 && Object.getPrototypeOf(e) === Object.prototype;
-	} catch {
-		return !1;
-	}
-}, tx = Vb("Date"), nx = Vb("File"), rx = (e) => !!(e && e.uri !== void 0), ix = (e) => e && e.getParts !== void 0, ax = Vb("Blob"), ox = Vb("FileList"), sx = Vb("Set"), cx = (e) => Zb(e) && Yb(e.pipe);
-function lx() {
-	return typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : typeof global < "u" ? global : {};
-}
-var ux = lx(), dx = ux.FormData === void 0 ? void 0 : ux.FormData, fx = (e) => {
-	if (!e) return !1;
-	if (dx && e instanceof dx) return !0;
-	let t = Pb(e);
-	if (!t || t === Object.prototype || !Yb(e.append)) return !1;
-	let n = Bb(e);
-	return n === "formdata" || n === "object" && Yb(e.toString) && e.toString() === "[object FormData]";
-}, px = Vb("URLSearchParams"), [mx, hx, gx, _x] = [
-	"ReadableStream",
-	"Request",
-	"Response",
-	"Headers"
-].map(Vb), vx = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
-function yx(e, t, { allOwnKeys: n = !1 } = {}) {
-	if (e == null) return;
-	let r, i;
-	if (typeof e != "object" && (e = [e]), Ub(e)) for (r = 0, i = e.length; r < i; r++) t.call(null, e[r], r, e);
-	else {
-		if (Gb(e)) return;
-		let i = n ? Object.getOwnPropertyNames(e) : Object.keys(e), a = i.length, o;
-		for (r = 0; r < a; r++) o = i[r], t.call(null, e[o], o, e);
-	}
-}
-function bx(e, t) {
-	if (Gb(e)) return null;
-	t = t.toLowerCase();
-	let n = Object.keys(e), r = n.length, i;
-	for (; r-- > 0;) if (i = n[r], t === i.toLowerCase()) return i;
-	return null;
-}
-var xx = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : global, Sx = (e) => !Wb(e) && e !== xx;
-function Cx(...e) {
-	let { caseless: t, skipUndefined: n } = Sx(this) && this || {}, r = {}, i = (e, i) => {
-		if (i === "__proto__" || i === "constructor" || i === "prototype") return;
-		let a = t && typeof i == "string" && bx(r, i) || i, o = Lb(r, a) ? r[a] : void 0;
-		$b(o) && $b(e) ? r[a] = Cx(o, e) : $b(e) ? r[a] = Cx({}, e) : Ub(e) ? r[a] = e.slice() : (!n || !Wb(e)) && (r[a] = e);
-	};
-	for (let t = 0, n = e.length; t < n; t++) {
-		let n = e[t];
-		if (!n || Gb(n) || (yx(n, i), typeof n != "object" || Ub(n))) continue;
-		let r = Object.getOwnPropertySymbols(n);
-		for (let e = 0; e < r.length; e++) {
-			let t = r[e];
-			Fx.call(n, t) && i(n[t], t);
-		}
-	}
-	return r;
-}
-var wx = (e, t, n, { allOwnKeys: r } = {}) => (yx(t, (t, r) => {
-	n && Yb(t) ? Object.defineProperty(e, r, {
-		__proto__: null,
-		value: Mb(t, n),
-		writable: !0,
-		enumerable: !0,
-		configurable: !0
-	}) : Object.defineProperty(e, r, {
-		__proto__: null,
-		value: t,
-		writable: !0,
-		enumerable: !0,
-		configurable: !0
-	});
-}, { allOwnKeys: r }), e), Tx = (e) => (e.charCodeAt(0) === 65279 && (e = e.slice(1)), e), Ex = (e, t, n, r) => {
-	e.prototype = Object.create(t.prototype, r), Object.defineProperty(e.prototype, "constructor", {
-		__proto__: null,
-		value: e,
-		writable: !0,
-		enumerable: !1,
-		configurable: !0
-	}), Object.defineProperty(e, "super", {
-		__proto__: null,
-		value: t.prototype
-	}), n && Object.assign(e.prototype, n);
-}, Dx = (e, t, n, r) => {
-	let i, a, o, s = {};
-	if (t ||= {}, e == null) return t;
-	do {
-		for (i = Object.getOwnPropertyNames(e), a = i.length; a-- > 0;) o = i[a], (!r || r(o, e, t)) && !s[o] && (t[o] = e[o], s[o] = !0);
-		e = n !== !1 && Pb(e);
-	} while (e && (!n || n(e, t)) && e !== Object.prototype);
-	return t;
-}, Ox = (e, t, n) => {
-	e = String(e), (n === void 0 || n > e.length) && (n = e.length), n -= t.length;
-	let r = e.indexOf(t, n);
-	return r !== -1 && r === n;
-}, kx = (e) => {
-	if (!e) return null;
-	if (Ub(e)) return e;
-	let t = e.length;
-	if (!Xb(t)) return null;
-	let n = Array(t);
-	for (; t-- > 0;) n[t] = e[t];
-	return n;
-}, Ax = ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && Pb(Uint8Array)), jx = (e, t) => {
-	let n = (e && e[Fb]).call(e), r;
-	for (; (r = n.next()) && !r.done;) {
-		let n = r.value;
-		t.call(e, n[0], n[1]);
-	}
-}, Mx = (e, t) => {
-	let n, r = [];
-	for (; (n = e.exec(t)) !== null;) r.push(n);
-	return r;
-}, Nx = Vb("HTMLFormElement"), Px = (e) => e.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function(e, t, n) {
-	return t.toUpperCase() + n;
-}), { propertyIsEnumerable: Fx } = Object.prototype, Ix = Vb("RegExp"), Lx = (e, t) => {
-	let n = Object.getOwnPropertyDescriptors(e), r = {};
-	yx(n, (n, i) => {
-		let a;
-		(a = t(n, i, e)) !== !1 && (r[i] = a || n);
-	}), Object.defineProperties(e, r);
-}, Rx = (e) => {
-	Lx(e, (t, n) => {
-		if (Yb(e) && [
-			"arguments",
-			"caller",
-			"callee"
-		].includes(n)) return !1;
-		let r = e[n];
-		if (Yb(r)) {
-			if (t.enumerable = !1, "writable" in t) {
-				t.writable = !1;
-				return;
-			}
-			t.set ||= () => {
-				throw Error("Can not rewrite read-only method '" + n + "'");
-			};
-		}
-	});
-}, zx = (e, t) => {
-	let n = {}, r = (e) => {
-		e.forEach((e) => {
-			n[e] = !0;
-		});
-	};
-	return Ub(e) ? r(e) : r(String(e).split(t)), n;
-}, Bx = () => {}, Vx = (e, t) => e != null && Number.isFinite(e = +e) ? e : t;
-function Hx(e) {
-	return !!(e && Yb(e.append) && e[Ib] === "FormData" && e[Fb]);
-}
-var Ux = (e) => {
-	let t = /* @__PURE__ */ new WeakSet(), n = (e) => {
-		if (Zb(e)) {
-			if (t.has(e)) return;
-			if (Gb(e)) return e;
-			if (!("toJSON" in e)) {
-				t.add(e);
-				let r;
-				if (sx(e)) {
-					r = [];
-					for (let t of e) {
-						let e = n(t);
-						!Wb(e) && r.push(e);
-					}
-				} else r = Ub(e) ? [] : {}, yx(e, (e, t) => {
-					let i = n(e);
-					!Wb(i) && (r[t] = i);
-				});
-				return t.delete(e), r;
-			}
-		}
-		return e;
-	};
-	return n(e);
-}, Wx = Vb("AsyncFunction"), Gx = (e) => e && (Zb(e) || Yb(e)) && Yb(e.then) && Yb(e.catch), Kx = ((e, t) => e ? setImmediate : t ? ((e, t) => (xx.addEventListener("message", ({ source: n, data: r }) => {
-	n === xx && r === e && t.length && t.shift()();
-}, !1), (n) => {
-	t.push(n), xx.postMessage(e, "*");
-}))(`axios@${Math.random()}`, []) : (e) => setTimeout(e))(typeof setImmediate == "function", Yb(xx.postMessage)), qx = typeof queueMicrotask < "u" ? queueMicrotask.bind(xx) : typeof process < "u" && process.nextTick || Kx, Jx = (e) => e != null && Yb(e[Fb]), Q = {
-	isArray: Ub,
-	isArrayBuffer: Kb,
-	isBuffer: Gb,
-	isFormData: fx,
-	isArrayBufferView: qb,
-	isString: Jb,
-	isNumber: Xb,
-	isBoolean: Qb,
-	isObject: Zb,
-	isPlainObject: $b,
-	isEmptyObject: ex,
-	isReadableStream: mx,
-	isRequest: hx,
-	isResponse: gx,
-	isHeaders: _x,
-	isUndefined: Wb,
-	isDate: tx,
-	isFile: nx,
-	isReactNativeBlob: rx,
-	isReactNative: ix,
-	isBlob: ax,
-	isRegExp: Ix,
-	isFunction: Yb,
-	isStream: cx,
-	isURLSearchParams: px,
-	isTypedArray: Ax,
-	isFileList: ox,
-	forEach: yx,
-	merge: Cx,
-	extend: wx,
-	trim: vx,
-	stripBOM: Tx,
-	inherits: Ex,
-	toFlatObject: Dx,
-	kindOf: Bb,
-	kindOfTest: Vb,
-	endsWith: Ox,
-	toArray: kx,
-	forEachEntry: jx,
-	matchAll: Mx,
-	isHTMLForm: Nx,
-	hasOwnProperty: Lb,
-	hasOwnProp: Lb,
-	hasOwnInPrototypeChain: Rb,
-	getSafeProp: zb,
-	reduceDescriptors: Lx,
-	freezeMethods: Rx,
-	toObjectSet: zx,
-	toCamelCase: Px,
-	noop: Bx,
-	toFiniteNumber: Vx,
-	findKey: bx,
-	global: xx,
-	isContextDefined: Sx,
-	isSpecCompliantForm: Hx,
-	toJSONObject: Ux,
-	isAsyncFn: Wx,
-	isThenable: Gx,
-	setImmediate: Kx,
-	asap: qx,
-	isIterable: Jx,
-	isSafeIterable: (e) => e != null && Rb(e, Fb) && Jx(e)
-}, Yx = Q.toObjectSet([
-	"age",
-	"authorization",
-	"content-length",
-	"content-type",
-	"etag",
-	"expires",
-	"from",
-	"host",
-	"if-modified-since",
-	"if-unmodified-since",
-	"last-modified",
-	"location",
-	"max-forwards",
-	"proxy-authorization",
-	"referer",
-	"retry-after",
-	"user-agent"
-]), Xx = (e) => {
-	let t = {}, n, r, i;
-	return e && e.split("\n").forEach(function(e) {
-		i = e.indexOf(":"), n = e.substring(0, i).trim().toLowerCase(), r = e.substring(i + 1).trim();
-		let a = Q.hasOwnProp(t, n);
-		!n || a && Q.hasOwnProp(Yx, n) || (n === "set-cookie" ? a ? t[n].push(r) : t[n] = [r] : t[n] = a ? t[n] + ", " + r : r);
-	}), t;
-};
-//#endregion
-//#region node_modules/axios/lib/helpers/sanitizeHeaderValue.js
-function Zx(e) {
-	let t = 0, n = e.length;
-	for (; t < n;) {
-		let n = e.charCodeAt(t);
-		if (n !== 9 && n !== 32) break;
-		t += 1;
-	}
-	for (; n > t;) {
-		let t = e.charCodeAt(n - 1);
-		if (t !== 9 && t !== 32) break;
-		--n;
-	}
-	return t === 0 && n === e.length ? e : e.slice(t, n);
-}
-var Qx = /* @__PURE__ */ RegExp("[\\u0000-\\u0008\\u000a-\\u001f\\u007f]+", "g"), $x = /* @__PURE__ */ RegExp("[^\\u0009\\u0020-\\u007e\\u0080-\\u00ff]+", "g");
-function eS(e, t) {
-	return Q.isArray(e) ? e.map((e) => eS(e, t)) : Zx(String(e).replace(t, ""));
-}
-var tS = (e) => eS(e, Qx), nS = (e) => eS(e, $x);
-function rS(e) {
-	let t = Object.create(null);
-	return Q.forEach(e.toJSON(), (e, n) => {
-		t[n] = nS(e);
-	}), t;
-}
-//#endregion
-//#region node_modules/axios/lib/core/AxiosHeaders.js
-var iS = Symbol("internals");
-function aS(e) {
-	return e && String(e).trim().toLowerCase();
-}
-function oS(e) {
-	return e === !1 || e == null ? e : Q.isArray(e) ? e.map(oS) : tS(String(e));
-}
-function sS(e) {
-	let t = Object.create(null), n = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g, r;
-	for (; r = n.exec(e);) t[r[1]] = r[2];
-	return t;
-}
-var cS = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
-function lS(e) {
-	let t = 0, n = e.length;
-	for (; t < n;) {
-		let n = e.charCodeAt(t);
-		if (n !== 9 && n !== 32) break;
-		t += 1;
-	}
-	for (; n > t;) {
-		let t = e.charCodeAt(n - 1);
-		if (t !== 9 && t !== 32) break;
-		--n;
-	}
-	return t === 0 && n === e.length ? e : e.slice(t, n);
-}
-function uS(e) {
-	let t = e.length - 1;
-	if (t < 1 || e.charCodeAt(0) !== 34 || e.charCodeAt(t) !== 34) return e;
-	let n = "";
-	for (let r = 1; r < t; r++) {
-		let i = e.charCodeAt(r);
-		if (i === 34 || i === 92 && (r += 1, r >= t)) return e;
-		n += e[r];
-	}
-	return n;
-}
-function dS(e) {
-	let t = Object.create(null), n = String(e), r = 0, i = !1, a = !1;
-	function o(e) {
-		let i = lS(n.slice(r, e)), a = i.indexOf("=");
-		if (a < 1) return;
-		let o = lS(i.slice(0, a));
-		if (!cS.test(o)) return;
-		let s = o.toLowerCase();
-		if (s === "__proto__" || s === "constructor" || s === "prototype") return;
-		let c = lS(i.slice(a + 1));
-		t[s] = uS(c);
-	}
-	for (let e = 0; e < n.length; e++) {
-		let t = n.charCodeAt(e);
-		i ? a ? a = !1 : t === 92 ? a = !0 : t === 34 && (i = !1) : t === 34 ? i = !0 : (t === 44 || t === 59) && (o(e), r = e + 1);
-	}
-	return o(n.length), t;
-}
-var fS = (e) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(e.trim());
-function pS(e, t, n, r, i) {
-	if (Q.isFunction(r)) return r.call(this, t, n);
-	if (i && (t = n), Q.isString(t)) {
-		if (Q.isString(r)) return t.indexOf(r) !== -1;
-		if (Q.isRegExp(r)) return r.test(t);
-	}
-}
-function mS(e) {
-	return e.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (e, t, n) => t.toUpperCase() + n);
-}
-function hS(e, t) {
-	let n = Q.toCamelCase(" " + t);
-	[
-		"get",
-		"set",
-		"has"
-	].forEach((r) => {
-		Object.defineProperty(e, r + n, {
-			__proto__: null,
-			value: function(e, n, i) {
-				return this[r].call(this, t, e, n, i);
-			},
-			configurable: !0
-		});
-	});
-}
-var gS = class {
-	constructor(e) {
-		e && this.set(e);
-	}
-	set(e, t, n) {
-		let r = this;
-		function i(e, t, n) {
-			let i = aS(t);
-			if (!i) return;
-			let a = Q.findKey(r, i);
-			(!a || r[a] === void 0 || n === !0 || n === void 0 && r[a] !== !1) && (r[a || t] = oS(e));
-		}
-		let a = (e, t) => Q.forEach(e, (e, n) => i(e, n, t));
-		if (Q.isPlainObject(e) || e instanceof this.constructor) a(e, t);
-		else if (Q.isString(e) && (e = e.trim()) && !fS(e)) a(Xx(e), t);
-		else if (Q.isObject(e) && Q.isSafeIterable(e)) {
-			let n = Object.create(null), r, i;
-			for (let t of e) {
-				if (!Q.isArray(t)) throw TypeError("Object iterator must return a key-value pair");
-				i = t[0], Q.hasOwnProp(n, i) ? (r = n[i], n[i] = Q.isArray(r) ? [...r, t[1]] : [r, t[1]]) : n[i] = t[1];
-			}
-			a(n, t);
-		} else e != null && i(t, e, n);
-		return this;
-	}
-	get(e, t) {
-		if (e = aS(e), e) {
-			let n = Q.findKey(this, e);
-			if (n) {
-				let e = this[n];
-				if (!t) return e;
-				if (t === !0) return sS(e);
-				if (Q.isFunction(t)) return t.call(this, e, n);
-				if (Q.isRegExp(t)) return t.exec(e);
-				throw TypeError("parser must be boolean|regexp|function");
-			}
-		}
-	}
-	has(e, t) {
-		if (e = aS(e), e) {
-			let n = Q.findKey(this, e);
-			return !!(n && this[n] !== void 0 && (!t || pS(this, this[n], n, t)));
-		}
-		return !1;
-	}
-	delete(e, t) {
-		let n = this, r = !1;
-		function i(e) {
-			if (e = aS(e), e) {
-				let i = Q.findKey(n, e);
-				i && (!t || pS(n, n[i], i, t)) && (delete n[i], r = !0);
-			}
-		}
-		return Q.isArray(e) ? e.forEach(i) : i(e), r;
-	}
-	clear(e) {
-		let t = Object.keys(this), n = t.length, r = !1;
-		for (; n--;) {
-			let i = t[n];
-			(!e || pS(this, this[i], i, e, !0)) && (delete this[i], r = !0);
-		}
-		return r;
-	}
-	normalize(e) {
-		let t = this, n = {};
-		return Q.forEach(this, (r, i) => {
-			let a = Q.findKey(n, i);
-			if (a) {
-				t[a] = oS(r), delete t[i];
-				return;
-			}
-			let o = e ? mS(i) : String(i).trim();
-			o !== i && delete t[i], t[o] = oS(r), n[o] = !0;
-		}), this;
-	}
-	concat(...e) {
-		return this.constructor.concat(this, ...e);
-	}
-	toJSON(e) {
-		let t = Object.create(null);
-		return Q.forEach(this, (n, r) => {
-			n != null && n !== !1 && (t[r] = e && Q.isArray(n) ? n.join(", ") : n);
-		}), t;
-	}
-	[Symbol.iterator]() {
-		return Object.entries(this.toJSON())[Symbol.iterator]();
-	}
-	toString() {
-		return Object.entries(this.toJSON()).map(([e, t]) => e + ": " + t).join("\n");
-	}
-	getSetCookie() {
-		let e = this.get("set-cookie");
-		return Q.isArray(e) ? e : e == null || e === !1 ? [] : [e];
-	}
-	get [Symbol.toStringTag]() {
-		return "AxiosHeaders";
-	}
-	static from(e) {
-		return e instanceof this ? e : new this(e);
-	}
-	static parseParameters(e) {
-		return dS(e);
-	}
-	static concat(e, ...t) {
-		let n = new this(e);
-		return t.forEach((e) => n.set(e)), n;
-	}
-	static accessor(e) {
-		let t = (this[iS] = this[iS] = { accessors: {} }).accessors, n = this.prototype;
-		function r(e) {
-			let r = aS(e);
-			t[r] || (hS(n, e), t[r] = !0);
-		}
-		return Q.isArray(e) ? e.forEach(r) : r(e), this;
-	}
-};
-gS.accessor([
-	"Content-Type",
-	"Content-Length",
-	"Accept",
-	"Accept-Encoding",
-	"User-Agent",
-	"Authorization"
-]), Q.reduceDescriptors(gS.prototype, ({ value: e }, t) => {
-	let n = t[0].toUpperCase() + t.slice(1);
-	return {
-		get: () => e,
-		set(e) {
-			this[n] = e;
-		}
-	};
-}), Q.freezeMethods(gS);
-//#endregion
-//#region node_modules/axios/lib/core/AxiosError.js
-var _S = "[REDACTED ****]";
-function vS(e) {
-	if (Q.hasOwnProp(e, "toJSON")) return !0;
-	let t = Object.getPrototypeOf(e);
-	for (; t && t !== Object.prototype;) {
-		if (Q.hasOwnProp(t, "toJSON")) return !0;
-		t = Object.getPrototypeOf(t);
-	}
-	return !1;
-}
-function yS(e, t) {
-	let n = new Set(t.map((e) => String(e).toLowerCase())), r = [], i = (e) => {
-		if (typeof e != "object" || !e || Q.isBuffer(e)) return e;
-		if (r.indexOf(e) !== -1) return;
-		e instanceof gS && (e = e.toJSON()), r.push(e);
-		let t;
-		if (Q.isArray(e)) t = [], e.forEach((e, n) => {
-			let r = i(e);
-			Q.isUndefined(r) || (t[n] = r);
-		});
-		else {
-			if (!Q.isPlainObject(e) && vS(e)) return r.pop(), e;
-			t = Object.create(null);
-			for (let [r, a] of Object.entries(e)) {
-				let e = n.has(r.toLowerCase()) ? _S : i(a);
-				Q.isUndefined(e) || (t[r] = e);
-			}
-		}
-		return r.pop(), t;
-	};
-	return i(e);
-}
-function bS(e) {
-	try {
-		return String(e);
-	} catch {
-		return "";
-	}
-}
-function xS(e) {
-	return e.errors.map((e) => {
-		try {
-			return e && e.message ? bS(e.message) : bS(e);
-		} catch {
-			return "";
-		}
-	}).filter(Boolean).join("; ") || e.name || "AggregateError";
-}
-var $ = class e extends Error {
-	static from(t, n, r, i, a, o) {
-		let s = t.message;
-		!s && Q.isArray(t.errors) && t.errors.length && (s = xS(t));
-		let c = new e(s, n || t.code, r, i, a);
-		return Object.defineProperty(c, "cause", {
-			__proto__: null,
-			value: t,
-			writable: !0,
-			enumerable: !1,
-			configurable: !0
-		}), c.name = t.name, t.status != null && c.status == null && (c.status = t.status), o && Object.assign(c, o), c;
-	}
-	constructor(e, t, n, r, i) {
-		super(e), Object.defineProperty(this, "message", {
-			__proto__: null,
-			value: e,
-			enumerable: !0,
-			writable: !0,
-			configurable: !0
-		}), this.name = "AxiosError", this.isAxiosError = !0, t && (this.code = t), n && (this.config = n), r && (this.request = r), i && (this.response = i, this.status = i.status);
-	}
-	toJSON() {
-		let e = this.config, t = e && Q.hasOwnProp(e, "redact") ? e.redact : void 0, n = Q.isArray(t) && t.length > 0 ? yS(e, t) : Q.toJSONObject(e);
-		return {
-			message: this.message,
-			name: this.name,
-			description: this.description,
-			number: this.number,
-			fileName: this.fileName,
-			lineNumber: this.lineNumber,
-			columnNumber: this.columnNumber,
-			stack: this.stack,
-			config: n,
-			code: this.code,
-			status: this.status
-		};
-	}
-};
-$.ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE", $.ERR_BAD_OPTION = "ERR_BAD_OPTION", $.ECONNABORTED = "ECONNABORTED", $.ETIMEDOUT = "ETIMEDOUT", $.ECONNREFUSED = "ECONNREFUSED", $.ERR_NETWORK = "ERR_NETWORK", $.ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS", $.ERR_DEPRECATED = "ERR_DEPRECATED", $.ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE", $.ERR_BAD_REQUEST = "ERR_BAD_REQUEST", $.ERR_CANCELED = "ERR_CANCELED", $.ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT", $.ERR_INVALID_URL = "ERR_INVALID_URL", $.ERR_FORM_DATA_DEPTH_EXCEEDED = "ERR_FORM_DATA_DEPTH_EXCEEDED";
-function SS(e) {
-	return Q.isPlainObject(e) || Q.isArray(e);
-}
-function CS(e) {
-	return Q.endsWith(e, "[]") ? e.slice(0, -2) : e;
-}
-function wS(e, t, n) {
-	return e ? e.concat(t).map(function(e, t) {
-		return e = CS(e), !n && t ? "[" + e + "]" : e;
-	}).join(n ? "." : "") : t;
-}
-function TS(e) {
-	return Q.isArray(e) && !e.some(SS);
-}
-var ES = Q.toFlatObject(Q, {}, null, function(e) {
-	return /^is[A-Z]/.test(e);
-});
-function DS(e, t, n) {
-	if (!Q.isObject(e)) throw TypeError("target must be an object");
-	t ||= new FormData(), n = Q.toFlatObject(n, {
-		metaTokens: !0,
-		dots: !1,
-		indexes: !1
-	}, !1, function(e, t) {
-		return !Q.isUndefined(t[e]);
-	});
-	let r = n.metaTokens, i = n.visitor || m, a = n.dots, o = n.indexes, s = n.Blob || typeof Blob < "u" && Blob, c = n.maxDepth === void 0 ? 100 : n.maxDepth, l = s && Q.isSpecCompliantForm(t), u = [];
-	if (!Q.isFunction(i)) throw TypeError("visitor must be a function");
-	function d(e) {
-		if (e === null) return "";
-		if (Q.isDate(e)) return e.toISOString();
-		if (Q.isBoolean(e)) return e.toString();
-		if (!l && Q.isBlob(e)) throw new $("Blob is not supported. Use a Buffer instead.");
-		if (Q.isArrayBuffer(e) || Q.isTypedArray(e)) {
-			if (l && typeof s == "function") return new s([e]);
-			throw new $("Blob is not supported. Use a Buffer instead.", $.ERR_NOT_SUPPORT);
-		}
-		return e;
-	}
-	function f(e) {
-		if (e > c) throw new $("Object is too deeply nested (" + e + " levels). Max depth: " + c, $.ERR_FORM_DATA_DEPTH_EXCEEDED);
-	}
-	function p(e, t) {
-		if (c === Infinity) return JSON.stringify(e);
-		let n = [];
-		return JSON.stringify(e, function(e, r) {
-			if (!Q.isObject(r)) return r;
-			for (; n.length && n[n.length - 1] !== this;) n.pop();
-			return n.push(r), f(t + n.length - 1), r;
-		});
-	}
-	function m(e, n, i) {
-		let s = e;
-		if (Q.isReactNative(t) && Q.isReactNativeBlob(e)) return t.append(wS(i, n, a), d(e)), !1;
-		if (e && !i && typeof e == "object") {
-			if (Q.endsWith(n, "{}")) n = r ? n : n.slice(0, -2), e = p(e, 1);
-			else if (Q.isArray(e) && TS(e) || (Q.isFileList(e) || Q.endsWith(n, "[]")) && (s = Q.toArray(e))) return n = CS(n), s.forEach(function(e, r) {
-				!(Q.isUndefined(e) || e === null) && t.append(o === !0 ? wS([n], r, a) : o === null ? n : n + "[]", d(e));
-			}), !1;
-		}
-		return SS(e) ? !0 : (t.append(wS(i, n, a), d(e)), !1);
-	}
-	let h = Object.assign(ES, {
-		defaultVisitor: m,
-		convertValue: d,
-		isVisitable: SS
-	});
-	function g(e, n, r = 0) {
-		if (!Q.isUndefined(e)) {
-			if (f(r), u.indexOf(e) !== -1) throw Error("Circular reference detected in " + n.join("."));
-			u.push(e), Q.forEach(e, function(e, a) {
-				(!(Q.isUndefined(e) || e === null) && i.call(t, e, Q.isString(a) ? a.trim() : a, n, h)) === !0 && g(e, n ? n.concat(a) : [a], r + 1);
-			}), u.pop();
-		}
-	}
-	if (!Q.isObject(e)) throw TypeError("data must be an object");
-	return g(e), t;
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/AxiosURLSearchParams.js
-function OS(e) {
-	let t = {
-		"!": "%21",
-		"'": "%27",
-		"(": "%28",
-		")": "%29",
-		"~": "%7E",
-		"%20": "+"
-	};
-	return encodeURIComponent(e).replace(/[!'()~]|%20/g, function(e) {
-		return t[e];
-	});
-}
-function kS(e, t) {
-	this._pairs = [], e && DS(e, this, t);
-}
-var AS = kS.prototype;
-AS.append = function(e, t) {
-	this._pairs.push([e, t]);
-}, AS.toString = function(e) {
-	let t = e ? (t) => e.call(this, t, OS) : OS;
-	return this._pairs.map(function(e) {
-		return t(e[0]) + "=" + t(e[1]);
-	}, "").join("&");
-};
-//#endregion
-//#region node_modules/axios/lib/helpers/buildURL.js
-function jS(e) {
-	return encodeURIComponent(e).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+");
-}
-function MS(e, t, n) {
-	if (!t) return e;
-	e ||= "";
-	let r = Q.isFunction(n) ? { serialize: n } : n, i = Q.getSafeProp(r, "encode") || jS, a = Q.getSafeProp(r, "serialize"), o;
-	if (o = a ? a(t, r) : Q.isURLSearchParams(t) ? t.toString() : new kS(t, r).toString(i), o) {
-		let t = e.indexOf("#");
-		t !== -1 && (e = e.slice(0, t)), e += (e.indexOf("?") === -1 ? "?" : "&") + o;
-	}
-	return e;
-}
-//#endregion
-//#region node_modules/axios/lib/core/InterceptorManager.js
-var NS = class {
-	constructor() {
-		this.handlers = [];
-	}
-	use(e, t, n) {
-		return this.handlers.push({
-			fulfilled: e,
-			rejected: t,
-			synchronous: n ? n.synchronous : !1,
-			runWhen: n ? n.runWhen : null
-		}), this.handlers.length - 1;
-	}
-	eject(e) {
-		this.handlers[e] && (this.handlers[e] = null);
-	}
-	clear() {
-		this.handlers &&= [];
-	}
-	forEach(e) {
-		Q.forEach(this.handlers, function(t) {
-			t !== null && e(t);
-		});
-	}
-}, PS = {
-	silentJSONParsing: !0,
-	forcedJSONParsing: !0,
-	clarifyTimeoutError: !1,
-	legacyInterceptorReqResOrdering: !0,
-	advertiseZstdAcceptEncoding: !1,
-	validateStatusUndefinedResolves: !0
-}, FS = {
-	isBrowser: !0,
-	classes: {
-		URLSearchParams: typeof URLSearchParams < "u" ? URLSearchParams : kS,
-		FormData: typeof FormData < "u" ? FormData : null,
-		Blob: typeof Blob < "u" ? Blob : null
-	},
-	protocols: [
-		"http",
-		"https",
-		"file",
-		"blob",
-		"url",
-		"data"
-	]
-}, IS = /* @__PURE__ */ s({
-	hasBrowserEnv: () => LS,
-	hasStandardBrowserEnv: () => zS,
-	hasStandardBrowserWebWorkerEnv: () => BS,
-	navigator: () => RS,
-	origin: () => VS
-}), LS = typeof window < "u" && typeof document < "u", RS = typeof navigator == "object" && navigator || void 0, zS = LS && (!RS || [
-	"ReactNative",
-	"NativeScript",
-	"NS"
-].indexOf(RS.product) < 0), BS = typeof WorkerGlobalScope < "u" && self instanceof WorkerGlobalScope && typeof self.importScripts == "function", VS = LS && window.location.href || "http://localhost", HS = {
-	...IS,
-	...FS
-};
-//#endregion
-//#region node_modules/axios/lib/helpers/toURLEncodedForm.js
-function US(e, t) {
-	return DS(e, new HS.classes.URLSearchParams(), {
-		visitor: function(e, t, n, r) {
-			return HS.isNode && Q.isBuffer(e) ? (this.append(t, e.toString("base64")), !1) : r.defaultVisitor.apply(this, arguments);
-		},
-		...t
-	});
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/formDataToJSON.js
-var WS = 100;
-function GS(e) {
-	if (e > WS) throw new $("FormData field is too deeply nested (" + e + " levels). Max depth: " + WS, $.ERR_FORM_DATA_DEPTH_EXCEEDED);
-}
-function KS(e) {
-	let t = [], n = /[^.[\]]+|\[([^.[\]]*)]/g, r;
-	for (; (r = n.exec(e)) !== null;) GS(t.length), t.push(r[0] === "[]" ? "" : r[1] || r[0]);
-	return t;
-}
-function qS(e) {
-	let t = {}, n = Object.keys(e), r, i = n.length, a;
-	for (r = 0; r < i; r++) a = n[r], t[a] = e[a];
-	return t;
-}
-function JS(e) {
-	function t(e, n, r, i) {
-		GS(i);
-		let a = e[i++];
-		if (a === "__proto__") return !0;
-		let o = Number.isFinite(+a), s = i >= e.length;
-		return a = !a && Q.isArray(r) ? r.length : a, s ? (Q.hasOwnProp(r, a) ? r[a] = Q.isArray(r[a]) ? r[a].concat(n) : [r[a], n] : r[a] = n, !o) : ((!Q.hasOwnProp(r, a) || !Q.isObject(r[a])) && (r[a] = []), t(e, n, r[a], i) && Q.isArray(r[a]) && (r[a] = qS(r[a])), !o);
-	}
-	if (Q.isFormData(e) && Q.isFunction(e.entries)) {
-		let n = {};
-		return Q.forEachEntry(e, (e, r) => {
-			t(KS(e), r, n, 0);
-		}), n;
-	}
-	return null;
-}
-//#endregion
-//#region node_modules/axios/lib/defaults/index.js
-var YS = (e, t) => e != null && Q.hasOwnProp(e, t) ? e[t] : void 0;
-function XS(e, t, n) {
-	if (Q.isString(e)) try {
-		return (t || JSON.parse)(e), Q.trim(e);
-	} catch (e) {
-		if (e.name !== "SyntaxError") throw e;
-	}
-	return (n || JSON.stringify)(e);
-}
-var ZS = {
-	transitional: PS,
-	adapter: [
-		"xhr",
-		"http",
-		"fetch"
-	],
-	transformRequest: [function(e, t) {
-		let n = t.getContentType() || "", r = n.indexOf("application/json") > -1, i = Q.isObject(e);
-		if (i && Q.isHTMLForm(e) && (e = new FormData(e)), Q.isFormData(e)) return r ? JSON.stringify(JS(e)) : e;
-		if (Q.isArrayBuffer(e) || Q.isBuffer(e) || Q.isStream(e) || Q.isFile(e) || Q.isBlob(e) || Q.isReadableStream(e)) return e;
-		if (Q.isArrayBufferView(e)) return e.buffer;
-		if (Q.isURLSearchParams(e)) return t.setContentType("application/x-www-form-urlencoded;charset=utf-8", !1), e.toString();
-		let a;
-		if (i) {
-			let t = YS(this, "formSerializer");
-			if (n.indexOf("application/x-www-form-urlencoded") > -1) return US(e, t).toString();
-			if ((a = Q.isFileList(e)) || n.indexOf("multipart/form-data") > -1) {
-				let n = YS(this, "env"), r = n && n.FormData;
-				return DS(a ? { "files[]": e } : e, r && new r(), t);
-			}
-		}
-		return i || r ? (t.setContentType("application/json", !1), XS(e)) : e;
-	}],
-	transformResponse: [function(e) {
-		let t = YS(this, "transitional") || ZS.transitional, n = t && t.forcedJSONParsing, r = YS(this, "responseType"), i = r === "json";
-		if (Q.isResponse(e) || Q.isReadableStream(e)) return e;
-		if (e && Q.isString(e) && (n && !r || i)) {
-			let n = !(t && t.silentJSONParsing) && i;
-			try {
-				return JSON.parse(e, YS(this, "parseReviver"));
-			} catch (e) {
-				if (n) throw e.name === "SyntaxError" ? $.from(e, $.ERR_BAD_RESPONSE, this, null, YS(this, "response")) : e;
-			}
-		}
-		return e;
-	}],
-	timeout: 0,
-	xsrfCookieName: "XSRF-TOKEN",
-	xsrfHeaderName: "X-XSRF-TOKEN",
-	maxContentLength: -1,
-	maxBodyLength: -1,
-	env: {
-		FormData: HS.classes.FormData,
-		Blob: HS.classes.Blob
-	},
-	validateStatus: function(e) {
-		return e >= 200 && e < 300;
-	},
-	headers: { common: {
-		Accept: "application/json, text/plain, */*",
-		"Content-Type": void 0
-	} }
-};
-Q.forEach([
-	"delete",
-	"get",
-	"head",
-	"post",
-	"put",
-	"patch",
-	"query"
-], (e) => {
-	ZS.headers[e] = {};
-});
-//#endregion
-//#region node_modules/axios/lib/core/transformData.js
-function QS(e, t) {
-	let n = this || ZS, r = t || n, i = gS.from(r.headers), a = r.data;
-	return Q.forEach(e, function(e) {
-		a = e.call(n, a, i.normalize(), t ? t.status : void 0);
-	}), i.normalize(), a;
-}
-//#endregion
-//#region node_modules/axios/lib/cancel/isCancel.js
-function $S(e) {
-	return !!(e && e.__CANCEL__);
-}
-//#endregion
-//#region node_modules/axios/lib/cancel/CanceledError.js
-var eC = class extends $ {
-	constructor(e, t, n) {
-		super(e ?? "canceled", $.ERR_CANCELED, t, n), this.name = "CanceledError", this.__CANCEL__ = !0;
-	}
-};
-//#endregion
-//#region node_modules/axios/lib/core/settle.js
-function tC(e, t, n) {
-	let r = n.config.validateStatus;
-	!n.status || !r || r(n.status) ? e(n) : t(new $("Request failed with status code " + n.status, n.status >= 400 && n.status < 500 ? $.ERR_BAD_REQUEST : $.ERR_BAD_RESPONSE, n.config, n.request, n));
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/parseProtocol.js
-function nC(e) {
-	let t = /^([-+\w]{1,25}):(?:\/\/)?/.exec(e);
-	return t && t[1] || "";
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/speedometer.js
-function rC(e, t) {
-	e ||= 10;
-	let n = Array(e), r = Array(e), i = 0, a = 0, o;
-	return t = t === void 0 ? 1e3 : t, function(s) {
-		let c = Date.now(), l = r[a];
-		o ||= c, n[i] = s, r[i] = c;
-		let u = a, d = 0;
-		for (; u !== i;) d += n[u++], u %= e;
-		if (i = (i + 1) % e, i === a && (a = (a + 1) % e), c - o < t) return;
-		let f = l && c - l;
-		return f ? Math.round(d * 1e3 / f) : void 0;
-	};
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/throttle.js
-function iC(e, t) {
-	let n = 0, r = 1e3 / t, i, a, o = (t, r = Date.now()) => {
-		n = r, i = null, a &&= (clearTimeout(a), null), e(...t);
-	};
-	return [(...e) => {
-		let t = Date.now(), s = t - n;
-		s >= r ? o(e, t) : (i = e, a ||= setTimeout(() => {
-			a = null, o(i);
-		}, r - s));
-	}, () => i && o(i)];
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/progressEventReducer.js
-var aC = (e, t, n = 3) => {
-	let r = 0, i = rC(50, 250);
-	return iC((n) => {
-		if (!n || typeof n.loaded != "number") return;
-		let a = n.loaded, o = n.lengthComputable ? n.total : void 0, s = Math.max(0, o == null ? a : Math.min(a, o)), c = Math.max(0, s - r), l = i(c);
-		r = Math.max(r, s), e({
-			loaded: s,
-			total: o,
-			progress: o ? s / o : void 0,
-			bytes: c,
-			rate: l || void 0,
-			estimated: l && o ? (o - s) / l : void 0,
-			event: n,
-			lengthComputable: o != null,
-			[t ? "download" : "upload"]: !0
-		});
-	}, n);
-}, oC = (e, t) => {
-	let n = e != null;
-	return [(r) => t[0]({
-		lengthComputable: n,
-		total: e,
-		loaded: r
-	}), t[1]];
-}, sC = (e, t = Q.asap) => (...n) => t(() => e(...n)), cC = HS.hasStandardBrowserEnv ? ((e, t) => (n) => (n = new URL(n, HS.origin), e.protocol === n.protocol && e.host === n.host && (t || e.port === n.port)))(new URL(HS.origin), HS.navigator && /(msie|trident)/i.test(HS.navigator.userAgent)) : () => !0, lC = HS.hasStandardBrowserEnv ? {
-	write(e, t, n, r, i, a, o) {
-		if (typeof document > "u") return;
-		let s = [`${e}=${encodeURIComponent(t)}`];
-		Q.isNumber(n) && s.push(`expires=${new Date(n).toUTCString()}`), Q.isString(r) && s.push(`path=${r}`), Q.isString(i) && s.push(`domain=${i}`), a === !0 && s.push("secure"), Q.isString(o) && s.push(`SameSite=${o}`), document.cookie = s.join("; ");
-	},
-	read(e) {
-		if (typeof document > "u") return null;
-		let t = document.cookie.split(";");
-		for (let n = 0; n < t.length; n++) {
-			let r = t[n].replace(/^\s+/, ""), i = r.indexOf("=");
-			if (i !== -1 && r.slice(0, i) === e) try {
-				return decodeURIComponent(r.slice(i + 1));
-			} catch {
-				return r.slice(i + 1);
-			}
-		}
-		return null;
-	},
-	remove(e) {
-		this.write(e, "", Date.now() - 864e5, "/");
-	}
-} : {
-	write() {},
-	read() {
-		return null;
-	},
-	remove() {}
-};
-//#endregion
-//#region node_modules/axios/lib/helpers/isAbsoluteURL.js
-function uC(e) {
-	return typeof e == "string" && /^([a-z][a-z\d+\-.]*:)?\/\//i.test(e);
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/combineURLs.js
-function dC(e, t) {
-	if (!t) return e;
-	let n = e.length;
-	for (; n > 0 && e.charCodeAt(n - 1) === 47;) n--;
-	return e.slice(0, n) + "/" + t.replace(/^\/+/, "");
-}
-//#endregion
-//#region node_modules/axios/lib/core/buildFullPath.js
-var fC = /^https?:(?!\/\/)/i, pC = /[\t\n\r]/g;
-function mC(e) {
-	let t = 0;
-	for (; t < e.length && e.charCodeAt(t) <= 32;) t++;
-	return e.slice(t);
-}
-function hC(e) {
-	return mC(e).replace(pC, "");
-}
-function gC(e) {
-	return e && e.replace(/(^|&)([^=&]*=)?[^&]+/g, (e, t, n = "") => `${t}${n}${_S}`);
-}
-function _C(e) {
-	let t = e.replace(/^(https?:\/{0,2})[^/?#]*@/i, `$1${_S}@`), n = t.indexOf("#"), r = (n === -1 ? t : t.slice(0, n)).replace(/([?&][^=&#]*=)[^&#]*/g, `$1${_S}`);
-	return n === -1 ? r : `${r}#${gC(t.slice(n + 1))}`;
-}
-function vC(e, t) {
-	if (typeof e == "string") {
-		let n = hC(e);
-		if (fC.test(n)) throw new $(`Invalid URL ${JSON.stringify(_C(n))}: missing "//" after protocol`, $.ERR_INVALID_URL, t);
-	}
-}
-function yC(e, t, n, r) {
-	vC(t, r);
-	let i = !uC(t);
-	return e && (i || n === !1) ? (vC(e, r), dC(e, t)) : t;
-}
-//#endregion
-//#region node_modules/axios/lib/core/mergeConfig.js
-var bC = (e) => e instanceof gS ? { ...e } : e, xC = (e) => Object.getOwnPropertySymbols && Object.getOwnPropertyDescriptor ? Object.keys(e).concat(Object.getOwnPropertySymbols(e).filter((t) => Object.getOwnPropertyDescriptor(e, t).enumerable)) : Object.keys(e);
-function SC(e, t) {
-	e ||= {}, t ||= {};
-	let n = Object.create(null);
-	Object.defineProperty(n, "hasOwnProperty", {
-		__proto__: null,
-		value: Object.prototype.hasOwnProperty,
-		enumerable: !1,
-		writable: !0,
-		configurable: !0
-	});
-	function r(e, t, n, r) {
-		return Q.isPlainObject(e) && Q.isPlainObject(t) ? Q.merge.call({ caseless: r }, e, t) : Q.isPlainObject(t) ? Q.merge({}, t) : Q.isArray(t) ? t.slice() : t;
-	}
-	function i(e, t, n, i) {
-		if (!Q.isUndefined(t)) return r(e, t, n, i);
-		if (!Q.isUndefined(e)) return r(void 0, e, n, i);
-	}
-	function a(e, t) {
-		if (!Q.isUndefined(t)) return r(void 0, t);
-	}
-	function o(e, t) {
-		if (!Q.isUndefined(t)) return r(void 0, t);
-		if (!Q.isUndefined(e)) return r(void 0, e);
-	}
-	function s(n) {
-		let r = Q.hasOwnProp(t, "transitional") ? t.transitional : void 0;
-		if (!Q.isUndefined(r)) if (Q.isPlainObject(r)) {
-			if (Q.hasOwnProp(r, n)) return r[n];
-		} else return;
-		let i = Q.hasOwnProp(e, "transitional") ? e.transitional : void 0;
-		if (Q.isPlainObject(i) && Q.hasOwnProp(i, n)) return i[n];
-	}
-	function c(n, i, a) {
-		if (Q.hasOwnProp(t, a)) return r(n, i);
-		if (Q.hasOwnProp(e, a)) return r(void 0, n);
-	}
-	let l = {
-		url: a,
-		method: a,
-		data: a,
-		baseURL: o,
-		transformRequest: o,
-		transformResponse: o,
-		paramsSerializer: o,
-		timeout: o,
-		timeoutMessage: o,
-		withCredentials: o,
-		withXSRFToken: o,
-		adapter: o,
-		responseType: o,
-		xsrfCookieName: o,
-		xsrfHeaderName: o,
-		onUploadProgress: o,
-		onDownloadProgress: o,
-		decompress: o,
-		maxContentLength: o,
-		maxBodyLength: o,
-		beforeRedirect: o,
-		transport: o,
-		httpAgent: o,
-		httpsAgent: o,
-		cancelToken: o,
-		socketPath: o,
-		allowedSocketPaths: o,
-		responseEncoding: o,
-		validateStatus: c,
-		headers: (e, t, n) => i(bC(e), bC(t), n, !0)
-	};
-	return Q.forEach(xC({
-		...e,
-		...t
-	}), function(r) {
-		if (r === "__proto__" || r === "constructor" || r === "prototype") return;
-		let a = Q.hasOwnProp(l, r) ? l[r] : i, o = a(Q.hasOwnProp(e, r) ? e[r] : void 0, Q.hasOwnProp(t, r) ? t[r] : void 0, r);
-		Q.isUndefined(o) && a !== c || (n[r] = o);
-	}), Q.hasOwnProp(t, "validateStatus") && Q.isUndefined(t.validateStatus) && s("validateStatusUndefinedResolves") === !1 && (Q.hasOwnProp(e, "validateStatus") ? n.validateStatus = r(void 0, e.validateStatus) : delete n.validateStatus), n;
-}
-//#endregion
-//#region node_modules/axios/lib/core/setFormDataHeaders.js
-var CC = ["content-type", "content-length"];
-function wC(e, t, n) {
-	if (n !== "content-only") {
-		e.set(t);
-		return;
-	}
-	Object.entries(t || {}).forEach(([t, n]) => {
-		CC.includes(t.toLowerCase()) && e.set(t, n);
-	});
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/resolveConfig.js
-var TC = (e) => encodeURIComponent(e).replace(/%([0-9A-F]{2})/gi, (e, t) => String.fromCharCode(parseInt(t, 16)));
-function EC(e) {
-	let t = SC({}, e), n = (e) => Q.hasOwnProp(t, e) ? t[e] : void 0, r = n("data"), i = n("withXSRFToken"), a = n("xsrfHeaderName"), o = n("xsrfCookieName"), s = n("headers"), c = n("auth"), l = n("baseURL"), u = n("allowAbsoluteUrls"), d = n("url");
-	if (t.headers = s = gS.from(s), t.url = MS(yC(l, d, u, t), n("params"), n("paramsSerializer")), c) {
-		let t = Q.getSafeProp(c, "username") || "", n = Q.getSafeProp(c, "password") || "";
-		try {
-			s.set("Authorization", "Basic " + btoa(t + ":" + (n ? TC(n) : "")));
-		} catch (t) {
-			throw $.from(t, $.ERR_BAD_OPTION_VALUE, e);
-		}
-	}
-	if (Q.isFormData(r) && (HS.hasStandardBrowserEnv || HS.hasStandardBrowserWebWorkerEnv || Q.isReactNative(r) ? s.setContentType(void 0) : Q.isFunction(r.getHeaders) && wC(s, r.getHeaders(), n("formDataHeaderPolicy"))), HS.hasStandardBrowserEnv && (Q.isFunction(i) && (i = i(t)), i === !0 || i == null && cC(t.url))) {
-		let e = a && o && lC.read(o);
-		e && s.set(a, e);
-	}
-	return t;
-}
-var DC = typeof XMLHttpRequest < "u" && function(e) {
-	return new Promise(function(t, n) {
-		let r = EC(e), i = r.data, a = gS.from(r.headers).normalize(), { responseType: o, onUploadProgress: s, onDownloadProgress: c } = r, l, u, d, f, p;
-		function m() {
-			f && f(), p && p(), r.cancelToken && r.cancelToken.unsubscribe(l), r.signal && r.signal.removeEventListener("abort", l);
-		}
-		let h = new XMLHttpRequest();
-		h.open(r.method.toUpperCase(), r.url, !0), h.timeout = r.timeout;
-		function g() {
-			if (!h) return;
-			let r = gS.from("getAllResponseHeaders" in h && h.getAllResponseHeaders());
-			tC(function(e) {
-				t(e), m();
-			}, function(e) {
-				n(e), m();
-			}, {
-				data: !o || o === "text" || o === "json" ? h.responseText : h.response,
-				status: h.status,
-				statusText: h.statusText,
-				headers: r,
-				config: e,
-				request: h
-			}), h = null;
-		}
-		"onloadend" in h ? h.onloadend = g : h.onreadystatechange = function() {
-			!h || h.readyState !== 4 || h.status === 0 && !(h.responseURL && h.responseURL.startsWith("file:")) || setTimeout(g);
-		}, h.onabort = function() {
-			h &&= (n(new $("Request aborted", $.ECONNABORTED, e, h)), m(), null);
-		}, h.onerror = function(t) {
-			let r = new $(t && t.message ? t.message : "Network Error", $.ERR_NETWORK, e, h);
-			r.event = t || null, n(r), m(), h = null;
-		}, h.ontimeout = function() {
-			let t = r.timeout ? "timeout of " + r.timeout + "ms exceeded" : "timeout exceeded", i = r.transitional || PS;
-			r.timeoutErrorMessage && (t = r.timeoutErrorMessage), n(new $(t, i.clarifyTimeoutError ? $.ETIMEDOUT : $.ECONNABORTED, e, h)), m(), h = null;
-		}, i === void 0 && a.setContentType(null), "setRequestHeader" in h && Q.forEach(rS(a), function(e, t) {
-			h.setRequestHeader(t, e);
-		}), Q.isUndefined(r.withCredentials) || (h.withCredentials = !!r.withCredentials), o && o !== "json" && (h.responseType = r.responseType), c && ([d, p] = aC(c, !0), h.addEventListener("progress", d)), s && h.upload && ([u, f] = aC(s), h.upload.addEventListener("progress", u), h.upload.addEventListener("loadend", f)), (r.cancelToken || r.signal) && (l = (t) => {
-			h &&= (n(!t || t.type ? new eC(null, e, h) : t), h.abort(), m(), null);
-		}, r.cancelToken && r.cancelToken.subscribe(l), r.signal && (r.signal.aborted ? l() : r.signal.addEventListener("abort", l)));
-		let _ = nC(r.url);
-		if (_ && !HS.protocols.includes(_)) {
-			n(new $("Unsupported protocol " + _ + ":", $.ERR_BAD_REQUEST, e)), m();
-			return;
-		}
-		h.send(i || null);
-	});
-}, OC = (e, t) => {
-	if (e = e ? e.filter(Boolean) : [], !t && !e.length) return;
-	let n = new AbortController(), r = !1, i = function(e) {
-		if (!r) {
-			r = !0, o();
-			let t = e instanceof Error ? e : this.reason;
-			n.abort(t instanceof $ ? t : new eC(t instanceof Error ? t.message : t));
-		}
-	}, a = t && setTimeout(() => {
-		a = null, i(new $(`timeout of ${t}ms exceeded`, $.ETIMEDOUT));
-	}, t), o = () => {
-		e &&= (a && clearTimeout(a), a = null, e.forEach((e) => {
-			e.unsubscribe ? e.unsubscribe(i) : e.removeEventListener("abort", i);
-		}), null);
-	};
-	e.forEach((e) => {
-		if (!r) {
-			if (e.aborted) {
-				i.call(e);
-				return;
-			}
-			e.addEventListener("abort", i, { once: !0 });
-		}
-	});
-	let { signal: s } = n;
-	return s.unsubscribe = () => Q.asap(o), s;
-}, kC = function* (e, t) {
-	let n = e.byteLength;
-	if (!t || n < t) {
-		yield e;
-		return;
-	}
-	let r = 0, i;
-	for (; r < n;) i = r + t, yield e.slice(r, i), r = i;
-}, AC = async function* (e, t) {
-	for await (let n of jC(e)) yield* kC(n, t);
-}, jC = async function* (e) {
-	if (e[Symbol.asyncIterator]) {
-		yield* e;
-		return;
-	}
-	let t = e.getReader();
-	try {
-		for (;;) {
-			let { done: e, value: n } = await t.read();
-			if (e) break;
-			yield n;
-		}
-	} finally {
-		await t.cancel();
-	}
-}, MC = (e, t, n, r) => {
-	let i = AC(e, t), a = 0, o, s = (e) => {
-		o || (o = !0, r && r(e));
-	};
-	return new ReadableStream({
-		async pull(e) {
-			try {
-				let { done: t, value: r } = await i.next();
-				if (t) {
-					s(), e.close();
-					return;
-				}
-				let o = r.byteLength;
-				n && n(a += o), e.enqueue(new Uint8Array(r));
-			} catch (e) {
-				throw s(e), e;
-			}
-		},
-		cancel(e) {
-			return s(e), i.return();
-		}
-	}, { highWaterMark: 2 });
-}, NC = (e) => e >= 48 && e <= 57 || e >= 65 && e <= 70 || e >= 97 && e <= 102, PC = (e, t, n) => t + 2 < n && NC(e.charCodeAt(t + 1)) && NC(e.charCodeAt(t + 2)), FC = (e) => e <= 57 ? e - 48 : (e & 223) - 55, IC = (e) => e >= 65 && e <= 90 || e >= 97 && e <= 122 || e >= 48 && e <= 57 || e === 43 || e === 47 || e === 45 || e === 95, LC = (e) => e === 9 || e === 10 || e === 12 || e === 13 || e === 32, RC = (e) => {
-	let t = Math.floor(e / 4), n = e % 4;
-	return t * 3 + (n === 2 ? 1 : n === 3 ? 2 : 0);
-}, zC = (e) => {
-	let t = e.length, n = 0;
-	return t > 0 && e.charCodeAt(t - 1) === 61 && (n++, t > 1 && e.charCodeAt(t - 2) === 61 && n++), Math.floor((t - n) * 3 / 4);
-}, BC = (e) => {
-	let t = e.length, n = 0, r = 0, i = !1;
-	for (let a = 0; a < t; a++) {
-		let o = e.charCodeAt(a);
-		if (o === 37 && PC(e, a, t) && (o = FC(e.charCodeAt(a + 1)) * 16 + FC(e.charCodeAt(a + 2)), a += 2), !LC(o)) {
-			if (o === 61) {
-				r++;
-				continue;
-			}
-			if (!IC(o) || r > 0) {
-				i = !0;
-				continue;
-			}
-			n++;
-		}
-	}
-	return i || r > 2 || r > 0 && (n + r) % 4 != 0 || n % 4 == 1 ? zC(e) : RC(n);
-}, VC = (e, t) => {
-	if (!e || typeof e != "string" || !e.startsWith("data:")) return 0;
-	let n = e.indexOf(",");
-	if (n < 0) return 0;
-	let r = e.slice(5, n), i = e.slice(n + 1);
-	if (/;base64/i.test(r)) return t(i);
-	let a = 0;
-	for (let e = 0, t = i.length; e < t; e++) {
-		let n = i.charCodeAt(e);
-		if (n === 37 && PC(i, e, t)) a += 1, e += 2;
-		else if (n < 128) a += 1;
-		else if (n < 2048) a += 2;
-		else if (n >= 55296 && n <= 56319 && e + 1 < t) {
-			let t = i.charCodeAt(e + 1);
-			t >= 56320 && t <= 57343 ? (a += 4, e++) : a += 3;
-		} else a += 3;
-	}
-	return a;
-};
-function HC(e) {
-	let t = typeof e == "string" ? e.indexOf("#") : -1;
-	return VC(t === -1 ? e : e.slice(0, t), BC);
-}
-//#endregion
-//#region node_modules/axios/lib/env/data.js
-var UC = "1.19.0", WC = 65536, { isFunction: GC } = Q, KC = (e) => encodeURIComponent(e).replace(/%([0-9A-F]{2})/gi, (e, t) => String.fromCharCode(parseInt(t, 16))), qC = (e) => {
-	if (!Q.isString(e)) return e;
-	try {
-		return decodeURIComponent(e);
-	} catch {
-		return e;
-	}
-}, JC = (e, ...t) => {
-	try {
-		return !!e(...t);
-	} catch {
-		return !1;
-	}
-}, YC = (e) => {
-	let t = e.indexOf("://"), n = e;
-	return t !== -1 && (n = n.slice(t + 3)), n.includes("@") || n.includes(":");
-}, XC = (e) => {
-	let t = Q.global !== void 0 && Q.global !== null ? Q.global : globalThis, { ReadableStream: n, TextEncoder: r } = t;
-	e = Q.merge.call({ skipUndefined: !0 }, {
-		Request: t.Request,
-		Response: t.Response
-	}, e);
-	let { fetch: i, Request: a, Response: o } = e, s = i ? GC(i) : typeof fetch == "function", c = GC(a), l = GC(o);
-	if (!s) return !1;
-	let u = s && GC(n), d = s && (typeof r == "function" ? ((e) => (t) => e.encode(t))(new r()) : async (e) => new Uint8Array(await new a(e).arrayBuffer())), f = c && u && JC(() => {
-		let e = !1, t = new a(HS.origin, {
-			body: new n(),
-			method: "POST",
-			get duplex() {
-				return e = !0, "half";
-			}
-		}), r = t.headers.has("Content-Type");
-		return t.body != null && t.body.cancel(), e && !r;
-	}), p = l && u && JC(() => Q.isReadableStream(new o("").body)), m = { stream: p && ((e) => e.body) };
-	s && [
-		"text",
-		"arrayBuffer",
-		"blob",
-		"formData",
-		"stream"
-	].forEach((e) => {
-		!m[e] && (m[e] = (t, n) => {
-			let r = t && t[e];
-			if (r) return r.call(t);
-			throw new $(`Response type '${e}' is not supported`, $.ERR_NOT_SUPPORT, n);
-		});
-	});
-	let h = async (e) => {
-		if (e == null) return 0;
-		if (Q.isBlob(e)) return e.size;
-		if (Q.isSpecCompliantForm(e)) return (await new a(HS.origin, {
-			method: "POST",
-			body: e
-		}).arrayBuffer()).byteLength;
-		if (Q.isArrayBufferView(e) || Q.isArrayBuffer(e)) return e.byteLength;
-		if (Q.isURLSearchParams(e) && (e += ""), Q.isString(e)) return (await d(e)).byteLength;
-	}, g = async (e, t) => Q.toFiniteNumber(e.getContentLength()) ?? h(t);
-	return async (e) => {
-		let { url: t, method: n, data: s, signal: l, cancelToken: d, timeout: _, onDownloadProgress: v, onUploadProgress: y, responseType: b, headers: x, withCredentials: S = "same-origin", fetchOptions: C, maxContentLength: w, maxBodyLength: T } = EC(e), E = Q.isNumber(w) && w > -1, D = Q.isNumber(T) && T > -1, O = (t) => Q.hasOwnProp(e, t) ? e[t] : void 0, k = i || fetch;
-		b = b ? (b + "").toLowerCase() : "text";
-		let A = OC([l, d && d.toAbortSignal()], _), j = null, M = A && A.unsubscribe && (() => {
-			A.unsubscribe();
-		}), N, P = null, ee = () => new $("Request body larger than maxBodyLength limit", $.ERR_BAD_REQUEST, e, j);
-		try {
-			let i, l = O("auth");
-			if (l && (i = {
-				username: Q.getSafeProp(l, "username") || "",
-				password: Q.getSafeProp(l, "password") || ""
-			}), YC(t)) {
-				let e = new URL(t, HS.origin);
-				!i && (e.username || e.password) && (i = {
-					username: qC(e.username),
-					password: qC(e.password)
-				}), (e.username || e.password) && (e.username = "", e.password = "", t = e.href);
-			}
-			if (i && (x.delete("authorization"), x.set("Authorization", "Basic " + btoa(KC((i.username || "") + ":" + (i.password || ""))))), E && typeof t == "string" && t.startsWith("data:") && HC(t) > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
-			if (D && n !== "get" && n !== "head") {
-				let e = await h(s);
-				if (typeof e == "number" && isFinite(e) && (N = e, e > T)) throw ee();
-			}
-			let d = D && (Q.isReadableStream(s) || Q.isStream(s)), _ = (e, t, n) => MC(e, WC, (e) => {
-				if (D && e > T) throw P = ee();
-				t && t(e);
-			}, n);
-			if (f && n !== "get" && n !== "head" && (y || d)) {
-				if (N ??= await g(x, s), N !== 0 || d) {
-					let e = new a(t, {
-						method: "POST",
-						body: s,
-						duplex: "half"
-					}), n;
-					if (Q.isFormData(s) && (n = e.headers.get("content-type")) && x.setContentType(n), e.body) {
-						let [t, n] = y && oC(N, aC(sC(y))) || [];
-						s = _(e.body, t, n);
-					}
-				}
-			} else if (d && !c && u && n !== "get" && n !== "head") s = _(s);
-			else if (d && c && !f && n !== "get" && n !== "head") throw new $("Stream request bodies are not supported by the current fetch implementation", $.ERR_NOT_SUPPORT, e, j);
-			Q.isString(S) || (S = S ? "include" : "omit");
-			let F = c && "credentials" in a.prototype;
-			if (Q.isFormData(s)) {
-				let e = x.getContentType();
-				e && /^multipart\/form-data/i.test(e) && !/boundary=/i.test(e) && x.delete("content-type");
-			}
-			x.set("User-Agent", "axios/" + UC, !1);
-			let I = {
-				...C,
-				signal: A,
-				method: n.toUpperCase(),
-				headers: rS(x.normalize()),
-				body: s,
-				duplex: "half",
-				credentials: F ? S : void 0
-			};
-			j = c && new a(t, I);
-			let L = await (c ? k(j, C) : k(t, I)), te = gS.from(L.headers);
-			if (E) {
-				let t = Q.toFiniteNumber(te.getContentLength());
-				if (t != null && t > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
-			}
-			let ne = p && (b === "stream" || b === "response");
-			if (p && L.body && (v || E || ne && M)) {
-				let t = {};
-				[
-					"status",
-					"statusText",
-					"headers"
-				].forEach((e) => {
-					t[e] = L[e];
-				});
-				let n = Q.toFiniteNumber(te.getContentLength()), [r, i] = v && oC(n, aC(sC(v), !0)) || [], a = 0;
-				L = new o(MC(L.body, WC, (t) => {
-					if (E && (a = t, a > w)) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
-					r && r(t);
-				}, () => {
-					i && i(), M && M();
-				}), t);
-			}
-			b ||= "text";
-			let re = await m[Q.findKey(m, b) || "text"](L, e);
-			if (E && !p && !ne) {
-				let t;
-				if (re != null && (typeof re.byteLength == "number" ? t = re.byteLength : typeof re.size == "number" ? t = re.size : typeof re == "string" && (t = typeof r == "function" ? new r().encode(re).byteLength : re.length)), typeof t == "number" && t > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
-			}
-			return !ne && M && M(), await new Promise((t, n) => {
-				tC(t, n, {
-					data: re,
-					headers: gS.from(L.headers),
-					status: L.status,
-					statusText: L.statusText,
-					config: e,
-					request: j
-				});
-			});
-		} catch (t) {
-			if (M && M(), A && A.aborted && A.reason instanceof $) {
-				let n = A.reason;
-				throw n.config = e, j && (n.request = j), t !== n && Object.defineProperty(n, "cause", {
-					__proto__: null,
-					value: t,
-					writable: !0,
-					enumerable: !1,
-					configurable: !0
-				}), n;
-			}
-			if (P) throw j && !P.request && (P.request = j), P;
-			if (t instanceof $) throw j && !t.request && (t.request = j), t;
-			if (t && t.name === "TypeError" && /Load failed|fetch/i.test(t.message)) {
-				let n = new $("Network Error", $.ERR_NETWORK, e, j, t && t.response);
-				throw Object.defineProperty(n, "cause", {
-					__proto__: null,
-					value: t.cause || t,
-					writable: !0,
-					enumerable: !1,
-					configurable: !0
-				}), n;
-			}
-			throw $.from(t, t && t.code, e, j, t && t.response);
-		}
-	};
-}, ZC = /* @__PURE__ */ new Map(), QC = (e) => {
-	let t = e && e.env || {}, { fetch: n, Request: r, Response: i } = t, a = [
-		r,
-		i,
-		n
-	], o = a.length, s, c, l = ZC;
-	for (; o--;) s = a[o], c = l.get(s), c === void 0 && l.set(s, c = o ? /* @__PURE__ */ new Map() : XC(t)), l = c;
-	return c;
-};
-QC();
-//#endregion
-//#region node_modules/axios/lib/adapters/adapters.js
-var $C = {
-	http: null,
-	xhr: DC,
-	fetch: { get: QC }
-};
-Q.forEach($C, (e, t) => {
-	if (e) {
-		try {
-			Object.defineProperty(e, "name", {
-				__proto__: null,
-				value: t
-			});
-		} catch {}
-		Object.defineProperty(e, "adapterName", {
-			__proto__: null,
-			value: t
-		});
-	}
-});
-var ew = (e) => `- ${e}`, tw = (e) => Q.isFunction(e) || e === null || e === !1;
-function nw(e, t) {
-	e = Q.isArray(e) ? e : [e];
-	let { length: n } = e, r, i, a = {};
-	for (let o = 0; o < n; o++) {
-		r = e[o];
-		let n;
-		if (i = r, !tw(r) && (i = $C[(n = String(r)).toLowerCase()], i === void 0)) throw new $(`Unknown adapter '${n}'`);
-		if (i && (Q.isFunction(i) || (i = i.get(t)))) break;
-		a[n || "#" + o] = i;
-	}
-	if (!i) {
-		let e = Object.entries(a).map(([e, t]) => `adapter ${e} ` + (t === !1 ? "is not supported by the environment" : "is not available in the build"));
-		throw new $("There is no suitable adapter to dispatch the request " + (n ? e.length > 1 ? "since :\n" + e.map(ew).join("\n") : " " + ew(e[0]) : "as no adapter specified"), $.ERR_NOT_SUPPORT);
-	}
-	return i;
-}
-var rw = {
-	getAdapter: nw,
-	adapters: $C
-};
-//#endregion
-//#region node_modules/axios/lib/core/dispatchRequest.js
-function iw(e) {
-	if (e.cancelToken && e.cancelToken.throwIfRequested(), e.signal && e.signal.aborted) throw new eC(null, e);
-}
-function aw(e) {
-	return iw(e), e.headers = gS.from(e.headers), e.data = QS.call(e, e.transformRequest), [
-		"post",
-		"put",
-		"patch"
-	].indexOf(e.method) !== -1 && e.headers.setContentType("application/x-www-form-urlencoded", !1), rw.getAdapter(e.adapter || ZS.adapter, e)(e).then(function(t) {
-		iw(e), e.response = t;
-		try {
-			t.data = QS.call(e, e.transformResponse, t);
-		} finally {
-			delete e.response;
-		}
-		return t.headers = gS.from(t.headers), t;
-	}, function(t) {
-		if (!$S(t) && (iw(e), t && t.response)) {
-			e.response = t.response;
-			try {
-				t.response.data = QS.call(e, e.transformResponse, t.response);
-			} finally {
-				delete e.response;
-			}
-			t.response.headers = gS.from(t.response.headers);
-		}
-		return Promise.reject(t);
-	});
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/validator.js
-var ow = {};
-[
-	"object",
-	"boolean",
-	"number",
-	"function",
-	"string",
-	"symbol"
-].forEach((e, t) => {
-	ow[e] = function(n) {
-		return typeof n === e || "a" + (t < 1 ? "n " : " ") + e;
-	};
-});
-var sw = {};
-ow.transitional = function(e, t, n) {
-	function r(e, t) {
-		return "[Axios v" + UC + "] Transitional option '" + e + "'" + t + (n ? ". " + n : "");
-	}
-	return (n, i, a) => {
-		if (e === !1) throw new $(r(i, " has been removed" + (t ? " in " + t : "")), $.ERR_DEPRECATED);
-		return t && !sw[i] && (sw[i] = !0, console.warn(r(i, " has been deprecated since v" + t + " and will be removed in the near future"))), !e || e(n, i, a);
-	};
-}, ow.spelling = function(e) {
-	return (t, n) => (console.warn(`${n} is likely a misspelling of ${e}`), !0);
-};
-function cw(e, t, n) {
-	if (typeof e != "object" || !e) throw new $("options must be an object", $.ERR_BAD_OPTION_VALUE);
-	let r = Object.keys(e), i = r.length;
-	for (; i-- > 0;) {
-		let a = r[i], o = Object.prototype.hasOwnProperty.call(t, a) ? t[a] : void 0;
-		if (o) {
-			let t = e[a], n = t === void 0 || o(t, a, e);
-			if (n !== !0) throw new $("option " + a + " must be " + n, $.ERR_BAD_OPTION_VALUE);
-			continue;
-		}
-		if (n !== !0) throw new $("Unknown option " + a, $.ERR_BAD_OPTION);
-	}
-}
-var lw = {
-	assertOptions: cw,
-	validators: ow
-}, uw = lw.validators, dw = class {
-	constructor(e) {
-		this.defaults = e || {}, this.interceptors = {
-			request: new NS(),
-			response: new NS()
-		};
-	}
-	async request(e, t) {
-		try {
-			return await this._request(e, t);
-		} catch (e) {
-			if (e instanceof Error) {
-				let t = {};
-				Error.captureStackTrace ? Error.captureStackTrace(t) : t = /* @__PURE__ */ Error();
-				let n = (() => {
-					if (!t.stack) return "";
-					let e = t.stack.indexOf("\n");
-					return e === -1 ? "" : t.stack.slice(e + 1);
-				})();
-				try {
-					if (!e.stack) e.stack = n;
-					else if (n) {
-						let t = n.indexOf("\n"), r = t === -1 ? -1 : n.indexOf("\n", t + 1), i = r === -1 ? "" : n.slice(r + 1);
-						String(e.stack).endsWith(i) || (e.stack += "\n" + n);
-					}
-				} catch {}
-			}
-			throw e;
-		}
-	}
-	_request(e, t) {
-		typeof e == "string" ? (t ||= {}, t.url = e) : t = e || {}, t = SC(this.defaults, t);
-		let { transitional: n, paramsSerializer: r, headers: i } = t;
-		n !== void 0 && lw.assertOptions(n, {
-			silentJSONParsing: uw.transitional(uw.boolean),
-			forcedJSONParsing: uw.transitional(uw.boolean),
-			clarifyTimeoutError: uw.transitional(uw.boolean),
-			legacyInterceptorReqResOrdering: uw.transitional(uw.boolean),
-			advertiseZstdAcceptEncoding: uw.transitional(uw.boolean),
-			validateStatusUndefinedResolves: uw.transitional(uw.boolean)
-		}, !1), r != null && (Q.isFunction(r) ? t.paramsSerializer = { serialize: r } : lw.assertOptions(r, {
-			encode: uw.function,
-			serialize: uw.function
-		}, !0)), t.allowAbsoluteUrls !== void 0 || (this.defaults.allowAbsoluteUrls === void 0 ? t.allowAbsoluteUrls = !0 : t.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls), lw.assertOptions(t, {
-			baseUrl: uw.spelling("baseURL"),
-			withXsrfToken: uw.spelling("withXSRFToken")
-		}, !0), t.method = (t.method || this.defaults.method || "get").toLowerCase();
-		let a = i && Q.merge(i.common, i[t.method]);
-		i && Q.forEach([
-			"delete",
-			"get",
-			"head",
-			"post",
-			"put",
-			"patch",
-			"query",
-			"common"
-		], (e) => {
-			delete i[e];
-		}), t.headers = gS.concat(a, i);
-		let o = [], s = !0;
-		this.interceptors.request.forEach(function(e) {
-			if (typeof e.runWhen == "function" && e.runWhen(t) === !1) return;
-			s &&= e.synchronous;
-			let n = t.transitional || PS;
-			n && n.legacyInterceptorReqResOrdering ? o.unshift(e.fulfilled, e.rejected) : o.push(e.fulfilled, e.rejected);
-		});
-		let c = [];
-		this.interceptors.response.forEach(function(e) {
-			c.push(e.fulfilled, e.rejected);
-		});
-		let l, u = 0, d;
-		if (!s) {
-			let e = [aw.bind(this), void 0];
-			for (e.unshift(...o), e.push(...c), d = e.length, l = Promise.resolve(t); u < d;) l = l.then(e[u++], e[u++]);
-			return l;
-		}
-		d = o.length;
-		let f = t;
-		for (; u < d;) {
-			let e = o[u++], t = o[u++];
-			try {
-				f = e ? e(f) : f;
-			} catch (e) {
-				if (!t) {
-					l = Promise.reject(e);
-					break;
-				}
-				try {
-					let n = t.call(this, e);
-					Q.isThenable(n) && (l = Promise.resolve(n).then(() => aw.call(this, f)));
-				} catch (e) {
-					l = Promise.reject(e);
-				}
-				break;
-			}
-		}
-		if (!l) try {
-			l = aw.call(this, f);
-		} catch (e) {
-			l = Promise.reject(e);
-		}
-		for (u = 0, d = c.length; u < d;) l = l.then(c[u++], c[u++]);
-		return l;
-	}
-	getUri(e) {
-		return e = SC(this.defaults, e), MS(yC(e.baseURL, e.url, e.allowAbsoluteUrls, e), e.params, e.paramsSerializer);
-	}
-};
-Q.forEach([
-	"delete",
-	"get",
-	"head",
-	"options"
-], function(e) {
-	dw.prototype[e] = function(t, n) {
-		return this.request(SC(n || {}, {
-			method: e,
-			url: t,
-			data: n && Q.hasOwnProp(n, "data") ? n.data : void 0
-		}));
-	};
-}), Q.forEach([
-	"post",
-	"put",
-	"patch",
-	"query"
-], function(e) {
-	function t(t) {
-		return function(n, r, i) {
-			return this.request(SC(i || {}, {
-				method: e,
-				headers: t ? { "Content-Type": "multipart/form-data" } : {},
-				url: n,
-				data: r
-			}));
-		};
-	}
-	dw.prototype[e] = t(), e !== "query" && (dw.prototype[e + "Form"] = t(!0));
-});
-//#endregion
-//#region node_modules/axios/lib/cancel/CancelToken.js
-var fw = class e {
-	constructor(e) {
-		if (typeof e != "function") throw TypeError("executor must be a function.");
-		let t;
-		this.promise = new Promise(function(e) {
-			t = e;
-		});
-		let n = this;
-		this.promise.then((e) => {
-			if (!n._listeners) return;
-			let t = n._listeners.length;
-			for (; t-- > 0;) n._listeners[t](e);
-			n._listeners = null;
-		}), this.promise.then = (e) => {
-			let t, r = new Promise((e) => {
-				n.subscribe(e), t = e;
-			}).then(e);
-			return r.cancel = function() {
-				n.unsubscribe(t);
-			}, r;
-		}, e(function(e, r, i) {
-			n.reason || (n.reason = new eC(e, r, i), t(n.reason));
-		});
-	}
-	throwIfRequested() {
-		if (this.reason) throw this.reason;
-	}
-	subscribe(e) {
-		if (this.reason) {
-			e(this.reason);
-			return;
-		}
-		this._listeners ? this._listeners.push(e) : this._listeners = [e];
-	}
-	unsubscribe(e) {
-		if (!this._listeners) return;
-		let t = this._listeners.indexOf(e);
-		t !== -1 && this._listeners.splice(t, 1);
-	}
-	toAbortSignal() {
-		let e = new AbortController(), t = (t) => {
-			e.abort(t);
-		};
-		return this.subscribe(t), e.signal.unsubscribe = () => this.unsubscribe(t), e.signal;
-	}
-	static source() {
-		let t;
-		return {
-			token: new e(function(e) {
-				t = e;
-			}),
-			cancel: t
-		};
-	}
-};
-//#endregion
-//#region node_modules/axios/lib/helpers/spread.js
-function pw(e) {
-	return function(t) {
-		return e.apply(null, t);
-	};
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/isAxiosError.js
-function mw(e) {
-	return Q.isObject(e) && e.isAxiosError === !0;
-}
-//#endregion
-//#region node_modules/axios/lib/helpers/HttpStatusCode.js
-var hw = {
-	Continue: 100,
-	SwitchingProtocols: 101,
-	Processing: 102,
-	EarlyHints: 103,
-	Ok: 200,
-	Created: 201,
-	Accepted: 202,
-	NonAuthoritativeInformation: 203,
-	NoContent: 204,
-	ResetContent: 205,
-	PartialContent: 206,
-	MultiStatus: 207,
-	AlreadyReported: 208,
-	ImUsed: 226,
-	MultipleChoices: 300,
-	MovedPermanently: 301,
-	Found: 302,
-	SeeOther: 303,
-	NotModified: 304,
-	UseProxy: 305,
-	Unused: 306,
-	TemporaryRedirect: 307,
-	PermanentRedirect: 308,
-	BadRequest: 400,
-	Unauthorized: 401,
-	PaymentRequired: 402,
-	Forbidden: 403,
-	NotFound: 404,
-	MethodNotAllowed: 405,
-	NotAcceptable: 406,
-	ProxyAuthenticationRequired: 407,
-	RequestTimeout: 408,
-	Conflict: 409,
-	Gone: 410,
-	LengthRequired: 411,
-	PreconditionFailed: 412,
-	PayloadTooLarge: 413,
-	UriTooLong: 414,
-	UnsupportedMediaType: 415,
-	RangeNotSatisfiable: 416,
-	ExpectationFailed: 417,
-	ImATeapot: 418,
-	MisdirectedRequest: 421,
-	UnprocessableEntity: 422,
-	Locked: 423,
-	FailedDependency: 424,
-	TooEarly: 425,
-	UpgradeRequired: 426,
-	PreconditionRequired: 428,
-	TooManyRequests: 429,
-	RequestHeaderFieldsTooLarge: 431,
-	UnavailableForLegalReasons: 451,
-	InternalServerError: 500,
-	NotImplemented: 501,
-	BadGateway: 502,
-	ServiceUnavailable: 503,
-	GatewayTimeout: 504,
-	HttpVersionNotSupported: 505,
-	VariantAlsoNegotiates: 506,
-	InsufficientStorage: 507,
-	LoopDetected: 508,
-	NotExtended: 510,
-	NetworkAuthenticationRequired: 511,
-	WebServerReturnsAnUnknownError: 520,
-	WebServerIsDown: 521,
-	ConnectionTimedOut: 522,
-	OriginIsUnreachable: 523,
-	TimeoutOccurred: 524,
-	SslHandshakeFailed: 525,
-	InvalidSslCertificate: 526
-};
-Object.entries(hw).forEach(([e, t]) => {
-	hw[t] = e;
-});
-//#endregion
-//#region node_modules/axios/lib/axios.js
-function gw(e) {
-	let t = new dw(e), n = Mb(dw.prototype.request, t);
-	return Q.extend(n, dw.prototype, t, { allOwnKeys: !0 }), Q.extend(n, t, null, { allOwnKeys: !0 }), n.create = function(t) {
-		return gw(SC(e, t));
-	}, n;
-}
-var _w = gw(ZS);
-_w.Axios = dw, _w.CanceledError = eC, _w.CancelToken = fw, _w.isCancel = $S, _w.VERSION = UC, _w.toFormData = DS, _w.AxiosError = $, _w.Cancel = _w.CanceledError, _w.all = function(e) {
-	return Promise.all(e);
-}, _w.spread = pw, _w.isAxiosError = mw, _w.mergeConfig = SC, _w.AxiosHeaders = gS, _w.formToJSON = (e) => JS(Q.isHTMLForm(e) ? new FormData(e) : e), _w.getAdapter = rw.getAdapter, _w.HttpStatusCode = hw, _w.default = _w;
-//#endregion
-//#region src/ApiBase.ts
-var vw = _w.create({
-	baseURL: "https://6a720f12f687776c13f0f73b.mockapi.io/api/v1",
-	headers: { "Content-Type": "application/json" }
-}), yw = {
-	getCategories: async () => {
-		let { data: e } = await vw.get("/categories");
-		return e;
-	},
-	getTrendingProducts: async () => {
-		let { data: e } = await vw.get("/products", { params: { isTrending: !0 } });
-		return e;
-	},
-	getAllProducts: async () => {
-		let { data: e } = await vw.get("/products");
-		return e;
-	},
-	getProductById: async (e) => {
-		let { data: t } = await vw.get(`/products/${e}`);
-		return t;
-	}
-}, bw = () => k_({
-	queryKey: ["categories"],
-	queryFn: yw.getCategories
-}), xw = () => k_({
-	queryKey: ["products", "trending"],
-	queryFn: yw.getTrendingProducts
-}), Sw = (e) => {
-	let t = e.toLowerCase();
-	return t.includes("living") ? "/living-room" : t.includes("bedroom") ? "/bedroom" : t.includes("kitchen") || t.includes("dining") ? "/kitchen" : t.includes("decor") || t.includes("light") || t.includes("office") ? "/decor" : "/search";
-}, Cw = ({ category: e }) => /* @__PURE__ */ (0, H.jsxs)(xd, {
-	component: ab,
-	to: Sw(e.name),
-	elevation: 0,
-	sx: {
-		textDecoration: "none",
-		bgcolor: "transparent",
-		"&:hover img": { transform: "scale(1.05)" }
-	},
-	children: [/* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			aspectRatio: "4/5",
-			overflow: "hidden",
-			borderRadius: 3,
-			bgcolor: "grey.100"
-		},
-		children: /* @__PURE__ */ (0, H.jsx)(Ld, {
-			component: "img",
-			image: e.imageUrl,
-			alt: e.name,
-			sx: {
-				width: "100%",
-				height: "100%",
-				objectFit: "cover",
-				transition: "transform 0.7s ease"
-			}
-		})
-	}), /* @__PURE__ */ (0, H.jsxs)(jd, {
-		sx: {
-			px: 0,
-			pt: 2
-		},
-		children: [/* @__PURE__ */ (0, H.jsx)(X, {
-			variant: "h3",
-			color: "primary",
-			sx: { fontSize: "1.25rem" },
-			children: e.name
-		}), /* @__PURE__ */ (0, H.jsx)(X, {
-			variant: "body2",
-			color: "text.secondary",
-			sx: { mt: .5 },
-			children: e.subtitle
-		})]
-	})]
-}), ww = () => {
-	let { data: e, isLoading: t, error: n } = bw();
-	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			py: 8,
-			textAlign: "center"
-		},
-		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Categories..." })
-	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			py: 8,
-			textAlign: "center"
-		},
-		children: /* @__PURE__ */ (0, H.jsx)(X, {
-			color: "error",
-			children: "Failed to load categories"
-		})
-	}) : /* @__PURE__ */ (0, H.jsx)(Z, {
-		component: "section",
-		sx: { py: 10 },
-		children: /* @__PURE__ */ (0, H.jsxs)(Qd, {
-			maxWidth: "xl",
-			children: [/* @__PURE__ */ (0, H.jsx)(X, {
-				variant: "h2",
-				color: "primary",
-				align: "center",
-				sx: { mb: 6 },
-				children: "Curated Spaces"
-			}), /* @__PURE__ */ (0, H.jsx)(Z, {
-				sx: {
-					display: "grid",
-					gridTemplateColumns: {
-						xs: "1fr",
-						sm: "repeat(2, 1fr)",
-						md: "repeat(4, 1fr)"
-					},
-					gap: 3
-				},
-				children: e?.slice(0, 4).map((e) => /* @__PURE__ */ (0, H.jsx)(Cw, { category: e }, e.id))
-			})]
-		})
-	});
-}, Tw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z" }), "Favorite"), Ew = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M11 9h2V6h3V4h-3V1h-2v3H8v2h3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2m10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2m-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25" }), "AddShoppingCart"), Dw = ({ product: e }) => {
-	let [t, n] = (0, v.useState)(!1);
-	return /* @__PURE__ */ (0, H.jsxs)(xd, {
-		component: ab,
-		to: `/product/${e.id}`,
-		elevation: 0,
-		sx: {
-			textDecoration: "none",
-			height: "100%",
-			display: "flex",
-			flexDirection: "column",
-			bgcolor: "background.paper",
-			borderRadius: 3,
-			overflow: "hidden",
-			transition: "box-shadow 0.3s",
-			"&:hover": { boxShadow: 3 },
-			"&:hover img": { transform: "scale(1.05)" }
-		},
-		children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
-			sx: {
-				position: "relative",
-				aspectRatio: "4/5",
-				overflow: "hidden",
-				bgcolor: "grey.100"
-			},
-			children: [/* @__PURE__ */ (0, H.jsx)(Ld, {
-				component: "img",
-				image: e.imageUrl,
-				alt: e.title,
-				sx: {
-					width: "100%",
-					height: "100%",
-					objectFit: "cover",
-					transition: "transform 0.5s"
-				}
-			}), /* @__PURE__ */ (0, H.jsx)(hu, {
-				onClick: (e) => {
-					e.preventDefault(), e.stopPropagation(), n(!t);
-				},
-				sx: {
-					position: "absolute",
-					top: 12,
-					right: 12,
-					bgcolor: "rgba(255,255,255,0.9)",
-					color: t ? "error.main" : "text.primary",
-					"&:hover": { bgcolor: "background.paper" }
-				},
-				size: "small",
-				children: t ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
-			})]
-		}), /* @__PURE__ */ (0, H.jsxs)(jd, {
-			sx: {
-				flexGrow: 1,
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "space-between"
-			},
-			children: [/* @__PURE__ */ (0, H.jsxs)(Z, { children: [/* @__PURE__ */ (0, H.jsx)(X, {
-				variant: "h3",
-				color: "primary",
-				sx: {
-					fontSize: "1.25rem",
-					fontWeight: 500
-				},
-				children: e.title
-			}), /* @__PURE__ */ (0, H.jsx)(X, {
-				variant: "body2",
-				color: "text.secondary",
-				sx: {
-					mt: .5,
-					mb: 2
-				},
-				children: e.subtitle
-			})] }), /* @__PURE__ */ (0, H.jsxs)(Z, {
-				sx: {
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
-					pt: 1,
-					borderTop: "1px solid",
-					borderColor: "divider"
-				},
-				children: [/* @__PURE__ */ (0, H.jsxs)(X, {
-					sx: {
-						fontWeight: 700,
-						fontSize: "1.1rem",
-						color: "primary.main"
-					},
-					children: ["$", e.price.toLocaleString()]
-				}), /* @__PURE__ */ (0, H.jsx)(hu, {
-					onClick: (t) => {
-						t.preventDefault(), t.stopPropagation(), console.log("Add to cart:", e.id);
-					},
-					sx: {
-						bgcolor: "primary.main",
-						color: "primary.contrastText",
-						"&:hover": { bgcolor: "secondary.main" }
-					},
-					size: "small",
-					children: /* @__PURE__ */ (0, H.jsx)(Ew, { fontSize: "small" })
-				})]
-			})]
-		})]
-	});
-}, Ow = () => {
-	let { data: e, isLoading: t, error: n } = xw();
-	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			py: 10,
-			textAlign: "center"
-		},
-		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Trending Products..." })
-	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
-		sx: {
-			py: 10,
-			textAlign: "center"
-		},
-		children: /* @__PURE__ */ (0, H.jsx)(X, {
-			color: "error",
-			children: "Failed to load products"
-		})
-	}) : /* @__PURE__ */ (0, H.jsx)(Z, {
-		component: "section",
-		sx: {
-			py: 8,
-			bgcolor: "grey.50"
-		},
-		children: /* @__PURE__ */ (0, H.jsxs)(Qd, {
-			maxWidth: "xl",
-			children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
-				sx: {
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "flex-end",
-					mb: 5
-				},
-				children: [/* @__PURE__ */ (0, H.jsxs)(Z, { children: [/* @__PURE__ */ (0, H.jsx)(X, {
-					variant: "h2",
-					color: "primary",
-					sx: { fontWeight: 600 },
-					children: "Trending Now"
-				}), /* @__PURE__ */ (0, H.jsx)(X, {
-					variant: "body2",
-					color: "text.secondary",
-					sx: { mt: .5 },
-					children: "Our most coveted pieces this season"
-				})] }), /* @__PURE__ */ (0, H.jsx)(_d, {
-					component: ab,
-					to: "/living-room",
-					endIcon: /* @__PURE__ */ (0, H.jsx)(Ab, {}),
-					sx: { color: "secondary.main" },
-					children: "View All"
-				})]
-			}), /* @__PURE__ */ (0, H.jsx)(Z, {
-				sx: {
-					display: "grid",
-					gridTemplateColumns: {
-						xs: "1fr",
-						sm: "repeat(2, 1fr)",
-						md: "repeat(3, 1fr)"
-					},
-					gap: 3
-				},
-				children: e?.map((e) => /* @__PURE__ */ (0, H.jsx)(Dw, { product: e }, e.id))
-			})]
-		})
-	});
-}, kw = () => /* @__PURE__ */ (0, H.jsx)(Z, {
+}, Ab = () => /* @__PURE__ */ (0, H.jsx)(Z, {
 	component: "footer",
 	sx: {
 		width: "100%",
@@ -26020,7 +23693,2341 @@ var vw = _w.create({
 			})]
 		})
 	})
-}), Aw = ({ shellMode: e = !1, hideChrome: t = !1 }) => /* @__PURE__ */ (0, H.jsxs)(Z, {
+}), jb = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" }), "ArrowForward"), Mb = () => /* @__PURE__ */ (0, H.jsxs)(Z, {
+	sx: {
+		position: "relative",
+		height: {
+			xs: "70vh",
+			md: "80vh"
+		},
+		minHeight: 560,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
+		sx: {
+			position: "absolute",
+			inset: 0,
+			zIndex: 0,
+			"& img": {
+				width: "100%",
+				height: "100%",
+				objectFit: "cover"
+			}
+		},
+		children: [/* @__PURE__ */ (0, H.jsx)("img", {
+			src: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1600&q=80",
+			alt: "Modern Living Room"
+		}), /* @__PURE__ */ (0, H.jsx)(Z, { sx: {
+			position: "absolute",
+			inset: 0,
+			background: "linear-gradient(to top, rgba(253,248,245,0.85), transparent)"
+		} })]
+	}), /* @__PURE__ */ (0, H.jsxs)(Qd, {
+		maxWidth: "md",
+		sx: {
+			position: "relative",
+			zIndex: 1,
+			textAlign: "center",
+			pt: 10
+		},
+		children: [
+			/* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "h1",
+				color: "primary",
+				sx: {
+					mb: 2,
+					fontSize: {
+						xs: "2.5rem",
+						md: "3.5rem"
+					}
+				},
+				children: "Modern Living Room Collections"
+			}),
+			/* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "body1",
+				color: "text.secondary",
+				sx: {
+					maxWidth: 560,
+					mx: "auto",
+					mb: 4
+				},
+				children: "Curated pieces designed to elevate your everyday living. Discover our new arrivals featuring sustainable materials and timeless craftsmanship."
+			}),
+			/* @__PURE__ */ (0, H.jsx)(_d, {
+				component: ab,
+				to: "/living-room",
+				variant: "contained",
+				size: "large",
+				endIcon: /* @__PURE__ */ (0, H.jsx)(jb, {}),
+				sx: {
+					px: 4,
+					py: 1.5
+				},
+				children: "Shop the Collection"
+			})
+		]
+	})]
+});
+//#endregion
+//#region node_modules/axios/lib/helpers/bind.js
+function Nb(e, t) {
+	return function() {
+		return e.apply(t, arguments);
+	};
+}
+//#endregion
+//#region node_modules/axios/lib/utils.js
+var { toString: Pb } = Object.prototype, { getPrototypeOf: Fb } = Object, { iterator: Ib, toStringTag: Lb } = Symbol, Rb = (({ hasOwnProperty: e }) => (t, n) => e.call(t, n))(Object.prototype), zb = (e, t) => {
+	let n = e, r = [];
+	for (; n != null && n !== Object.prototype;) {
+		if (r.indexOf(n) !== -1) return !1;
+		if (r.push(n), Rb(n, t)) return !0;
+		n = Fb(n);
+	}
+	return !1;
+}, Bb = (e, t) => e != null && zb(e, t) ? e[t] : void 0, Vb = ((e) => (t) => {
+	let n = Pb.call(t);
+	return e[n] || (e[n] = n.slice(8, -1).toLowerCase());
+})(Object.create(null)), Hb = (e) => (e = e.toLowerCase(), (t) => Vb(t) === e), Ub = (e) => (t) => typeof t === e, { isArray: Wb } = Array, Gb = Ub("undefined");
+function Kb(e) {
+	return e !== null && !Gb(e) && e.constructor !== null && !Gb(e.constructor) && Xb(e.constructor.isBuffer) && e.constructor.isBuffer(e);
+}
+var qb = Hb("ArrayBuffer");
+function Jb(e) {
+	let t;
+	return t = typeof ArrayBuffer < "u" && ArrayBuffer.isView ? ArrayBuffer.isView(e) : e && e.buffer && qb(e.buffer), t;
+}
+var Yb = Ub("string"), Xb = Ub("function"), Zb = Ub("number"), Qb = (e) => typeof e == "object" && !!e, $b = (e) => e === !0 || e === !1, ex = (e) => {
+	if (!Qb(e)) return !1;
+	let t = Fb(e);
+	return (t === null || t === Object.prototype || Fb(t) === null) && !zb(e, Lb) && !zb(e, Ib);
+}, tx = (e) => {
+	if (!Qb(e) || Kb(e)) return !1;
+	try {
+		return Object.keys(e).length === 0 && Object.getPrototypeOf(e) === Object.prototype;
+	} catch {
+		return !1;
+	}
+}, nx = Hb("Date"), rx = Hb("File"), ix = (e) => !!(e && e.uri !== void 0), ax = (e) => e && e.getParts !== void 0, ox = Hb("Blob"), sx = Hb("FileList"), cx = Hb("Set"), lx = (e) => Qb(e) && Xb(e.pipe);
+function ux() {
+	return typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : typeof global < "u" ? global : {};
+}
+var dx = ux(), fx = dx.FormData === void 0 ? void 0 : dx.FormData, px = (e) => {
+	if (!e) return !1;
+	if (fx && e instanceof fx) return !0;
+	let t = Fb(e);
+	if (!t || t === Object.prototype || !Xb(e.append)) return !1;
+	let n = Vb(e);
+	return n === "formdata" || n === "object" && Xb(e.toString) && e.toString() === "[object FormData]";
+}, mx = Hb("URLSearchParams"), [hx, gx, _x, vx] = [
+	"ReadableStream",
+	"Request",
+	"Response",
+	"Headers"
+].map(Hb), yx = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+function bx(e, t, { allOwnKeys: n = !1 } = {}) {
+	if (e == null) return;
+	let r, i;
+	if (typeof e != "object" && (e = [e]), Wb(e)) for (r = 0, i = e.length; r < i; r++) t.call(null, e[r], r, e);
+	else {
+		if (Kb(e)) return;
+		let i = n ? Object.getOwnPropertyNames(e) : Object.keys(e), a = i.length, o;
+		for (r = 0; r < a; r++) o = i[r], t.call(null, e[o], o, e);
+	}
+}
+function xx(e, t) {
+	if (Kb(e)) return null;
+	t = t.toLowerCase();
+	let n = Object.keys(e), r = n.length, i;
+	for (; r-- > 0;) if (i = n[r], t === i.toLowerCase()) return i;
+	return null;
+}
+var Sx = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : global, Cx = (e) => !Gb(e) && e !== Sx;
+function wx(...e) {
+	let { caseless: t, skipUndefined: n } = Cx(this) && this || {}, r = {}, i = (e, i) => {
+		if (i === "__proto__" || i === "constructor" || i === "prototype") return;
+		let a = t && typeof i == "string" && xx(r, i) || i, o = Rb(r, a) ? r[a] : void 0;
+		ex(o) && ex(e) ? r[a] = wx(o, e) : ex(e) ? r[a] = wx({}, e) : Wb(e) ? r[a] = e.slice() : (!n || !Gb(e)) && (r[a] = e);
+	};
+	for (let t = 0, n = e.length; t < n; t++) {
+		let n = e[t];
+		if (!n || Kb(n) || (bx(n, i), typeof n != "object" || Wb(n))) continue;
+		let r = Object.getOwnPropertySymbols(n);
+		for (let e = 0; e < r.length; e++) {
+			let t = r[e];
+			Ix.call(n, t) && i(n[t], t);
+		}
+	}
+	return r;
+}
+var Tx = (e, t, n, { allOwnKeys: r } = {}) => (bx(t, (t, r) => {
+	n && Xb(t) ? Object.defineProperty(e, r, {
+		__proto__: null,
+		value: Nb(t, n),
+		writable: !0,
+		enumerable: !0,
+		configurable: !0
+	}) : Object.defineProperty(e, r, {
+		__proto__: null,
+		value: t,
+		writable: !0,
+		enumerable: !0,
+		configurable: !0
+	});
+}, { allOwnKeys: r }), e), Ex = (e) => (e.charCodeAt(0) === 65279 && (e = e.slice(1)), e), Dx = (e, t, n, r) => {
+	e.prototype = Object.create(t.prototype, r), Object.defineProperty(e.prototype, "constructor", {
+		__proto__: null,
+		value: e,
+		writable: !0,
+		enumerable: !1,
+		configurable: !0
+	}), Object.defineProperty(e, "super", {
+		__proto__: null,
+		value: t.prototype
+	}), n && Object.assign(e.prototype, n);
+}, Ox = (e, t, n, r) => {
+	let i, a, o, s = {};
+	if (t ||= {}, e == null) return t;
+	do {
+		for (i = Object.getOwnPropertyNames(e), a = i.length; a-- > 0;) o = i[a], (!r || r(o, e, t)) && !s[o] && (t[o] = e[o], s[o] = !0);
+		e = n !== !1 && Fb(e);
+	} while (e && (!n || n(e, t)) && e !== Object.prototype);
+	return t;
+}, kx = (e, t, n) => {
+	e = String(e), (n === void 0 || n > e.length) && (n = e.length), n -= t.length;
+	let r = e.indexOf(t, n);
+	return r !== -1 && r === n;
+}, Ax = (e) => {
+	if (!e) return null;
+	if (Wb(e)) return e;
+	let t = e.length;
+	if (!Zb(t)) return null;
+	let n = Array(t);
+	for (; t-- > 0;) n[t] = e[t];
+	return n;
+}, jx = ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && Fb(Uint8Array)), Mx = (e, t) => {
+	let n = (e && e[Ib]).call(e), r;
+	for (; (r = n.next()) && !r.done;) {
+		let n = r.value;
+		t.call(e, n[0], n[1]);
+	}
+}, Nx = (e, t) => {
+	let n, r = [];
+	for (; (n = e.exec(t)) !== null;) r.push(n);
+	return r;
+}, Px = Hb("HTMLFormElement"), Fx = (e) => e.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function(e, t, n) {
+	return t.toUpperCase() + n;
+}), { propertyIsEnumerable: Ix } = Object.prototype, Lx = Hb("RegExp"), Rx = (e, t) => {
+	let n = Object.getOwnPropertyDescriptors(e), r = {};
+	bx(n, (n, i) => {
+		let a;
+		(a = t(n, i, e)) !== !1 && (r[i] = a || n);
+	}), Object.defineProperties(e, r);
+}, zx = (e) => {
+	Rx(e, (t, n) => {
+		if (Xb(e) && [
+			"arguments",
+			"caller",
+			"callee"
+		].includes(n)) return !1;
+		let r = e[n];
+		if (Xb(r)) {
+			if (t.enumerable = !1, "writable" in t) {
+				t.writable = !1;
+				return;
+			}
+			t.set ||= () => {
+				throw Error("Can not rewrite read-only method '" + n + "'");
+			};
+		}
+	});
+}, Bx = (e, t) => {
+	let n = {}, r = (e) => {
+		e.forEach((e) => {
+			n[e] = !0;
+		});
+	};
+	return Wb(e) ? r(e) : r(String(e).split(t)), n;
+}, Vx = () => {}, Hx = (e, t) => e != null && Number.isFinite(e = +e) ? e : t;
+function Ux(e) {
+	return !!(e && Xb(e.append) && e[Lb] === "FormData" && e[Ib]);
+}
+var Wx = (e) => {
+	let t = /* @__PURE__ */ new WeakSet(), n = (e) => {
+		if (Qb(e)) {
+			if (t.has(e)) return;
+			if (Kb(e)) return e;
+			if (!("toJSON" in e)) {
+				t.add(e);
+				let r;
+				if (cx(e)) {
+					r = [];
+					for (let t of e) {
+						let e = n(t);
+						!Gb(e) && r.push(e);
+					}
+				} else r = Wb(e) ? [] : {}, bx(e, (e, t) => {
+					let i = n(e);
+					!Gb(i) && (r[t] = i);
+				});
+				return t.delete(e), r;
+			}
+		}
+		return e;
+	};
+	return n(e);
+}, Gx = Hb("AsyncFunction"), Kx = (e) => e && (Qb(e) || Xb(e)) && Xb(e.then) && Xb(e.catch), qx = ((e, t) => e ? setImmediate : t ? ((e, t) => (Sx.addEventListener("message", ({ source: n, data: r }) => {
+	n === Sx && r === e && t.length && t.shift()();
+}, !1), (n) => {
+	t.push(n), Sx.postMessage(e, "*");
+}))(`axios@${Math.random()}`, []) : (e) => setTimeout(e))(typeof setImmediate == "function", Xb(Sx.postMessage)), Jx = typeof queueMicrotask < "u" ? queueMicrotask.bind(Sx) : typeof process < "u" && process.nextTick || qx, Yx = (e) => e != null && Xb(e[Ib]), Q = {
+	isArray: Wb,
+	isArrayBuffer: qb,
+	isBuffer: Kb,
+	isFormData: px,
+	isArrayBufferView: Jb,
+	isString: Yb,
+	isNumber: Zb,
+	isBoolean: $b,
+	isObject: Qb,
+	isPlainObject: ex,
+	isEmptyObject: tx,
+	isReadableStream: hx,
+	isRequest: gx,
+	isResponse: _x,
+	isHeaders: vx,
+	isUndefined: Gb,
+	isDate: nx,
+	isFile: rx,
+	isReactNativeBlob: ix,
+	isReactNative: ax,
+	isBlob: ox,
+	isRegExp: Lx,
+	isFunction: Xb,
+	isStream: lx,
+	isURLSearchParams: mx,
+	isTypedArray: jx,
+	isFileList: sx,
+	forEach: bx,
+	merge: wx,
+	extend: Tx,
+	trim: yx,
+	stripBOM: Ex,
+	inherits: Dx,
+	toFlatObject: Ox,
+	kindOf: Vb,
+	kindOfTest: Hb,
+	endsWith: kx,
+	toArray: Ax,
+	forEachEntry: Mx,
+	matchAll: Nx,
+	isHTMLForm: Px,
+	hasOwnProperty: Rb,
+	hasOwnProp: Rb,
+	hasOwnInPrototypeChain: zb,
+	getSafeProp: Bb,
+	reduceDescriptors: Rx,
+	freezeMethods: zx,
+	toObjectSet: Bx,
+	toCamelCase: Fx,
+	noop: Vx,
+	toFiniteNumber: Hx,
+	findKey: xx,
+	global: Sx,
+	isContextDefined: Cx,
+	isSpecCompliantForm: Ux,
+	toJSONObject: Wx,
+	isAsyncFn: Gx,
+	isThenable: Kx,
+	setImmediate: qx,
+	asap: Jx,
+	isIterable: Yx,
+	isSafeIterable: (e) => e != null && zb(e, Ib) && Yx(e)
+}, Xx = Q.toObjectSet([
+	"age",
+	"authorization",
+	"content-length",
+	"content-type",
+	"etag",
+	"expires",
+	"from",
+	"host",
+	"if-modified-since",
+	"if-unmodified-since",
+	"last-modified",
+	"location",
+	"max-forwards",
+	"proxy-authorization",
+	"referer",
+	"retry-after",
+	"user-agent"
+]), Zx = (e) => {
+	let t = {}, n, r, i;
+	return e && e.split("\n").forEach(function(e) {
+		i = e.indexOf(":"), n = e.substring(0, i).trim().toLowerCase(), r = e.substring(i + 1).trim();
+		let a = Q.hasOwnProp(t, n);
+		!n || a && Q.hasOwnProp(Xx, n) || (n === "set-cookie" ? a ? t[n].push(r) : t[n] = [r] : t[n] = a ? t[n] + ", " + r : r);
+	}), t;
+};
+//#endregion
+//#region node_modules/axios/lib/helpers/sanitizeHeaderValue.js
+function Qx(e) {
+	let t = 0, n = e.length;
+	for (; t < n;) {
+		let n = e.charCodeAt(t);
+		if (n !== 9 && n !== 32) break;
+		t += 1;
+	}
+	for (; n > t;) {
+		let t = e.charCodeAt(n - 1);
+		if (t !== 9 && t !== 32) break;
+		--n;
+	}
+	return t === 0 && n === e.length ? e : e.slice(t, n);
+}
+var $x = /* @__PURE__ */ RegExp("[\\u0000-\\u0008\\u000a-\\u001f\\u007f]+", "g"), eS = /* @__PURE__ */ RegExp("[^\\u0009\\u0020-\\u007e\\u0080-\\u00ff]+", "g");
+function tS(e, t) {
+	return Q.isArray(e) ? e.map((e) => tS(e, t)) : Qx(String(e).replace(t, ""));
+}
+var nS = (e) => tS(e, $x), rS = (e) => tS(e, eS);
+function iS(e) {
+	let t = Object.create(null);
+	return Q.forEach(e.toJSON(), (e, n) => {
+		t[n] = rS(e);
+	}), t;
+}
+//#endregion
+//#region node_modules/axios/lib/core/AxiosHeaders.js
+var aS = Symbol("internals");
+function oS(e) {
+	return e && String(e).trim().toLowerCase();
+}
+function sS(e) {
+	return e === !1 || e == null ? e : Q.isArray(e) ? e.map(sS) : nS(String(e));
+}
+function cS(e) {
+	let t = Object.create(null), n = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g, r;
+	for (; r = n.exec(e);) t[r[1]] = r[2];
+	return t;
+}
+var lS = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
+function uS(e) {
+	let t = 0, n = e.length;
+	for (; t < n;) {
+		let n = e.charCodeAt(t);
+		if (n !== 9 && n !== 32) break;
+		t += 1;
+	}
+	for (; n > t;) {
+		let t = e.charCodeAt(n - 1);
+		if (t !== 9 && t !== 32) break;
+		--n;
+	}
+	return t === 0 && n === e.length ? e : e.slice(t, n);
+}
+function dS(e) {
+	let t = e.length - 1;
+	if (t < 1 || e.charCodeAt(0) !== 34 || e.charCodeAt(t) !== 34) return e;
+	let n = "";
+	for (let r = 1; r < t; r++) {
+		let i = e.charCodeAt(r);
+		if (i === 34 || i === 92 && (r += 1, r >= t)) return e;
+		n += e[r];
+	}
+	return n;
+}
+function fS(e) {
+	let t = Object.create(null), n = String(e), r = 0, i = !1, a = !1;
+	function o(e) {
+		let i = uS(n.slice(r, e)), a = i.indexOf("=");
+		if (a < 1) return;
+		let o = uS(i.slice(0, a));
+		if (!lS.test(o)) return;
+		let s = o.toLowerCase();
+		if (s === "__proto__" || s === "constructor" || s === "prototype") return;
+		let c = uS(i.slice(a + 1));
+		t[s] = dS(c);
+	}
+	for (let e = 0; e < n.length; e++) {
+		let t = n.charCodeAt(e);
+		i ? a ? a = !1 : t === 92 ? a = !0 : t === 34 && (i = !1) : t === 34 ? i = !0 : (t === 44 || t === 59) && (o(e), r = e + 1);
+	}
+	return o(n.length), t;
+}
+var pS = (e) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(e.trim());
+function mS(e, t, n, r, i) {
+	if (Q.isFunction(r)) return r.call(this, t, n);
+	if (i && (t = n), Q.isString(t)) {
+		if (Q.isString(r)) return t.indexOf(r) !== -1;
+		if (Q.isRegExp(r)) return r.test(t);
+	}
+}
+function hS(e) {
+	return e.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (e, t, n) => t.toUpperCase() + n);
+}
+function gS(e, t) {
+	let n = Q.toCamelCase(" " + t);
+	[
+		"get",
+		"set",
+		"has"
+	].forEach((r) => {
+		Object.defineProperty(e, r + n, {
+			__proto__: null,
+			value: function(e, n, i) {
+				return this[r].call(this, t, e, n, i);
+			},
+			configurable: !0
+		});
+	});
+}
+var _S = class {
+	constructor(e) {
+		e && this.set(e);
+	}
+	set(e, t, n) {
+		let r = this;
+		function i(e, t, n) {
+			let i = oS(t);
+			if (!i) return;
+			let a = Q.findKey(r, i);
+			(!a || r[a] === void 0 || n === !0 || n === void 0 && r[a] !== !1) && (r[a || t] = sS(e));
+		}
+		let a = (e, t) => Q.forEach(e, (e, n) => i(e, n, t));
+		if (Q.isPlainObject(e) || e instanceof this.constructor) a(e, t);
+		else if (Q.isString(e) && (e = e.trim()) && !pS(e)) a(Zx(e), t);
+		else if (Q.isObject(e) && Q.isSafeIterable(e)) {
+			let n = Object.create(null), r, i;
+			for (let t of e) {
+				if (!Q.isArray(t)) throw TypeError("Object iterator must return a key-value pair");
+				i = t[0], Q.hasOwnProp(n, i) ? (r = n[i], n[i] = Q.isArray(r) ? [...r, t[1]] : [r, t[1]]) : n[i] = t[1];
+			}
+			a(n, t);
+		} else e != null && i(t, e, n);
+		return this;
+	}
+	get(e, t) {
+		if (e = oS(e), e) {
+			let n = Q.findKey(this, e);
+			if (n) {
+				let e = this[n];
+				if (!t) return e;
+				if (t === !0) return cS(e);
+				if (Q.isFunction(t)) return t.call(this, e, n);
+				if (Q.isRegExp(t)) return t.exec(e);
+				throw TypeError("parser must be boolean|regexp|function");
+			}
+		}
+	}
+	has(e, t) {
+		if (e = oS(e), e) {
+			let n = Q.findKey(this, e);
+			return !!(n && this[n] !== void 0 && (!t || mS(this, this[n], n, t)));
+		}
+		return !1;
+	}
+	delete(e, t) {
+		let n = this, r = !1;
+		function i(e) {
+			if (e = oS(e), e) {
+				let i = Q.findKey(n, e);
+				i && (!t || mS(n, n[i], i, t)) && (delete n[i], r = !0);
+			}
+		}
+		return Q.isArray(e) ? e.forEach(i) : i(e), r;
+	}
+	clear(e) {
+		let t = Object.keys(this), n = t.length, r = !1;
+		for (; n--;) {
+			let i = t[n];
+			(!e || mS(this, this[i], i, e, !0)) && (delete this[i], r = !0);
+		}
+		return r;
+	}
+	normalize(e) {
+		let t = this, n = {};
+		return Q.forEach(this, (r, i) => {
+			let a = Q.findKey(n, i);
+			if (a) {
+				t[a] = sS(r), delete t[i];
+				return;
+			}
+			let o = e ? hS(i) : String(i).trim();
+			o !== i && delete t[i], t[o] = sS(r), n[o] = !0;
+		}), this;
+	}
+	concat(...e) {
+		return this.constructor.concat(this, ...e);
+	}
+	toJSON(e) {
+		let t = Object.create(null);
+		return Q.forEach(this, (n, r) => {
+			n != null && n !== !1 && (t[r] = e && Q.isArray(n) ? n.join(", ") : n);
+		}), t;
+	}
+	[Symbol.iterator]() {
+		return Object.entries(this.toJSON())[Symbol.iterator]();
+	}
+	toString() {
+		return Object.entries(this.toJSON()).map(([e, t]) => e + ": " + t).join("\n");
+	}
+	getSetCookie() {
+		let e = this.get("set-cookie");
+		return Q.isArray(e) ? e : e == null || e === !1 ? [] : [e];
+	}
+	get [Symbol.toStringTag]() {
+		return "AxiosHeaders";
+	}
+	static from(e) {
+		return e instanceof this ? e : new this(e);
+	}
+	static parseParameters(e) {
+		return fS(e);
+	}
+	static concat(e, ...t) {
+		let n = new this(e);
+		return t.forEach((e) => n.set(e)), n;
+	}
+	static accessor(e) {
+		let t = (this[aS] = this[aS] = { accessors: {} }).accessors, n = this.prototype;
+		function r(e) {
+			let r = oS(e);
+			t[r] || (gS(n, e), t[r] = !0);
+		}
+		return Q.isArray(e) ? e.forEach(r) : r(e), this;
+	}
+};
+_S.accessor([
+	"Content-Type",
+	"Content-Length",
+	"Accept",
+	"Accept-Encoding",
+	"User-Agent",
+	"Authorization"
+]), Q.reduceDescriptors(_S.prototype, ({ value: e }, t) => {
+	let n = t[0].toUpperCase() + t.slice(1);
+	return {
+		get: () => e,
+		set(e) {
+			this[n] = e;
+		}
+	};
+}), Q.freezeMethods(_S);
+//#endregion
+//#region node_modules/axios/lib/core/AxiosError.js
+var vS = "[REDACTED ****]";
+function yS(e) {
+	if (Q.hasOwnProp(e, "toJSON")) return !0;
+	let t = Object.getPrototypeOf(e);
+	for (; t && t !== Object.prototype;) {
+		if (Q.hasOwnProp(t, "toJSON")) return !0;
+		t = Object.getPrototypeOf(t);
+	}
+	return !1;
+}
+function bS(e, t) {
+	let n = new Set(t.map((e) => String(e).toLowerCase())), r = [], i = (e) => {
+		if (typeof e != "object" || !e || Q.isBuffer(e)) return e;
+		if (r.indexOf(e) !== -1) return;
+		e instanceof _S && (e = e.toJSON()), r.push(e);
+		let t;
+		if (Q.isArray(e)) t = [], e.forEach((e, n) => {
+			let r = i(e);
+			Q.isUndefined(r) || (t[n] = r);
+		});
+		else {
+			if (!Q.isPlainObject(e) && yS(e)) return r.pop(), e;
+			t = Object.create(null);
+			for (let [r, a] of Object.entries(e)) {
+				let e = n.has(r.toLowerCase()) ? vS : i(a);
+				Q.isUndefined(e) || (t[r] = e);
+			}
+		}
+		return r.pop(), t;
+	};
+	return i(e);
+}
+function xS(e) {
+	try {
+		return String(e);
+	} catch {
+		return "";
+	}
+}
+function SS(e) {
+	return e.errors.map((e) => {
+		try {
+			return e && e.message ? xS(e.message) : xS(e);
+		} catch {
+			return "";
+		}
+	}).filter(Boolean).join("; ") || e.name || "AggregateError";
+}
+var $ = class e extends Error {
+	static from(t, n, r, i, a, o) {
+		let s = t.message;
+		!s && Q.isArray(t.errors) && t.errors.length && (s = SS(t));
+		let c = new e(s, n || t.code, r, i, a);
+		return Object.defineProperty(c, "cause", {
+			__proto__: null,
+			value: t,
+			writable: !0,
+			enumerable: !1,
+			configurable: !0
+		}), c.name = t.name, t.status != null && c.status == null && (c.status = t.status), o && Object.assign(c, o), c;
+	}
+	constructor(e, t, n, r, i) {
+		super(e), Object.defineProperty(this, "message", {
+			__proto__: null,
+			value: e,
+			enumerable: !0,
+			writable: !0,
+			configurable: !0
+		}), this.name = "AxiosError", this.isAxiosError = !0, t && (this.code = t), n && (this.config = n), r && (this.request = r), i && (this.response = i, this.status = i.status);
+	}
+	toJSON() {
+		let e = this.config, t = e && Q.hasOwnProp(e, "redact") ? e.redact : void 0, n = Q.isArray(t) && t.length > 0 ? bS(e, t) : Q.toJSONObject(e);
+		return {
+			message: this.message,
+			name: this.name,
+			description: this.description,
+			number: this.number,
+			fileName: this.fileName,
+			lineNumber: this.lineNumber,
+			columnNumber: this.columnNumber,
+			stack: this.stack,
+			config: n,
+			code: this.code,
+			status: this.status
+		};
+	}
+};
+$.ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE", $.ERR_BAD_OPTION = "ERR_BAD_OPTION", $.ECONNABORTED = "ECONNABORTED", $.ETIMEDOUT = "ETIMEDOUT", $.ECONNREFUSED = "ECONNREFUSED", $.ERR_NETWORK = "ERR_NETWORK", $.ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS", $.ERR_DEPRECATED = "ERR_DEPRECATED", $.ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE", $.ERR_BAD_REQUEST = "ERR_BAD_REQUEST", $.ERR_CANCELED = "ERR_CANCELED", $.ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT", $.ERR_INVALID_URL = "ERR_INVALID_URL", $.ERR_FORM_DATA_DEPTH_EXCEEDED = "ERR_FORM_DATA_DEPTH_EXCEEDED";
+function CS(e) {
+	return Q.isPlainObject(e) || Q.isArray(e);
+}
+function wS(e) {
+	return Q.endsWith(e, "[]") ? e.slice(0, -2) : e;
+}
+function TS(e, t, n) {
+	return e ? e.concat(t).map(function(e, t) {
+		return e = wS(e), !n && t ? "[" + e + "]" : e;
+	}).join(n ? "." : "") : t;
+}
+function ES(e) {
+	return Q.isArray(e) && !e.some(CS);
+}
+var DS = Q.toFlatObject(Q, {}, null, function(e) {
+	return /^is[A-Z]/.test(e);
+});
+function OS(e, t, n) {
+	if (!Q.isObject(e)) throw TypeError("target must be an object");
+	t ||= new FormData(), n = Q.toFlatObject(n, {
+		metaTokens: !0,
+		dots: !1,
+		indexes: !1
+	}, !1, function(e, t) {
+		return !Q.isUndefined(t[e]);
+	});
+	let r = n.metaTokens, i = n.visitor || m, a = n.dots, o = n.indexes, s = n.Blob || typeof Blob < "u" && Blob, c = n.maxDepth === void 0 ? 100 : n.maxDepth, l = s && Q.isSpecCompliantForm(t), u = [];
+	if (!Q.isFunction(i)) throw TypeError("visitor must be a function");
+	function d(e) {
+		if (e === null) return "";
+		if (Q.isDate(e)) return e.toISOString();
+		if (Q.isBoolean(e)) return e.toString();
+		if (!l && Q.isBlob(e)) throw new $("Blob is not supported. Use a Buffer instead.");
+		if (Q.isArrayBuffer(e) || Q.isTypedArray(e)) {
+			if (l && typeof s == "function") return new s([e]);
+			throw new $("Blob is not supported. Use a Buffer instead.", $.ERR_NOT_SUPPORT);
+		}
+		return e;
+	}
+	function f(e) {
+		if (e > c) throw new $("Object is too deeply nested (" + e + " levels). Max depth: " + c, $.ERR_FORM_DATA_DEPTH_EXCEEDED);
+	}
+	function p(e, t) {
+		if (c === Infinity) return JSON.stringify(e);
+		let n = [];
+		return JSON.stringify(e, function(e, r) {
+			if (!Q.isObject(r)) return r;
+			for (; n.length && n[n.length - 1] !== this;) n.pop();
+			return n.push(r), f(t + n.length - 1), r;
+		});
+	}
+	function m(e, n, i) {
+		let s = e;
+		if (Q.isReactNative(t) && Q.isReactNativeBlob(e)) return t.append(TS(i, n, a), d(e)), !1;
+		if (e && !i && typeof e == "object") {
+			if (Q.endsWith(n, "{}")) n = r ? n : n.slice(0, -2), e = p(e, 1);
+			else if (Q.isArray(e) && ES(e) || (Q.isFileList(e) || Q.endsWith(n, "[]")) && (s = Q.toArray(e))) return n = wS(n), s.forEach(function(e, r) {
+				!(Q.isUndefined(e) || e === null) && t.append(o === !0 ? TS([n], r, a) : o === null ? n : n + "[]", d(e));
+			}), !1;
+		}
+		return CS(e) ? !0 : (t.append(TS(i, n, a), d(e)), !1);
+	}
+	let h = Object.assign(DS, {
+		defaultVisitor: m,
+		convertValue: d,
+		isVisitable: CS
+	});
+	function g(e, n, r = 0) {
+		if (!Q.isUndefined(e)) {
+			if (f(r), u.indexOf(e) !== -1) throw Error("Circular reference detected in " + n.join("."));
+			u.push(e), Q.forEach(e, function(e, a) {
+				(!(Q.isUndefined(e) || e === null) && i.call(t, e, Q.isString(a) ? a.trim() : a, n, h)) === !0 && g(e, n ? n.concat(a) : [a], r + 1);
+			}), u.pop();
+		}
+	}
+	if (!Q.isObject(e)) throw TypeError("data must be an object");
+	return g(e), t;
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/AxiosURLSearchParams.js
+function kS(e) {
+	let t = {
+		"!": "%21",
+		"'": "%27",
+		"(": "%28",
+		")": "%29",
+		"~": "%7E",
+		"%20": "+"
+	};
+	return encodeURIComponent(e).replace(/[!'()~]|%20/g, function(e) {
+		return t[e];
+	});
+}
+function AS(e, t) {
+	this._pairs = [], e && OS(e, this, t);
+}
+var jS = AS.prototype;
+jS.append = function(e, t) {
+	this._pairs.push([e, t]);
+}, jS.toString = function(e) {
+	let t = e ? (t) => e.call(this, t, kS) : kS;
+	return this._pairs.map(function(e) {
+		return t(e[0]) + "=" + t(e[1]);
+	}, "").join("&");
+};
+//#endregion
+//#region node_modules/axios/lib/helpers/buildURL.js
+function MS(e) {
+	return encodeURIComponent(e).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+");
+}
+function NS(e, t, n) {
+	if (!t) return e;
+	e ||= "";
+	let r = Q.isFunction(n) ? { serialize: n } : n, i = Q.getSafeProp(r, "encode") || MS, a = Q.getSafeProp(r, "serialize"), o;
+	if (o = a ? a(t, r) : Q.isURLSearchParams(t) ? t.toString() : new AS(t, r).toString(i), o) {
+		let t = e.indexOf("#");
+		t !== -1 && (e = e.slice(0, t)), e += (e.indexOf("?") === -1 ? "?" : "&") + o;
+	}
+	return e;
+}
+//#endregion
+//#region node_modules/axios/lib/core/InterceptorManager.js
+var PS = class {
+	constructor() {
+		this.handlers = [];
+	}
+	use(e, t, n) {
+		return this.handlers.push({
+			fulfilled: e,
+			rejected: t,
+			synchronous: n ? n.synchronous : !1,
+			runWhen: n ? n.runWhen : null
+		}), this.handlers.length - 1;
+	}
+	eject(e) {
+		this.handlers[e] && (this.handlers[e] = null);
+	}
+	clear() {
+		this.handlers &&= [];
+	}
+	forEach(e) {
+		Q.forEach(this.handlers, function(t) {
+			t !== null && e(t);
+		});
+	}
+}, FS = {
+	silentJSONParsing: !0,
+	forcedJSONParsing: !0,
+	clarifyTimeoutError: !1,
+	legacyInterceptorReqResOrdering: !0,
+	advertiseZstdAcceptEncoding: !1,
+	validateStatusUndefinedResolves: !0
+}, IS = {
+	isBrowser: !0,
+	classes: {
+		URLSearchParams: typeof URLSearchParams < "u" ? URLSearchParams : AS,
+		FormData: typeof FormData < "u" ? FormData : null,
+		Blob: typeof Blob < "u" ? Blob : null
+	},
+	protocols: [
+		"http",
+		"https",
+		"file",
+		"blob",
+		"url",
+		"data"
+	]
+}, LS = /* @__PURE__ */ s({
+	hasBrowserEnv: () => RS,
+	hasStandardBrowserEnv: () => BS,
+	hasStandardBrowserWebWorkerEnv: () => VS,
+	navigator: () => zS,
+	origin: () => HS
+}), RS = typeof window < "u" && typeof document < "u", zS = typeof navigator == "object" && navigator || void 0, BS = RS && (!zS || [
+	"ReactNative",
+	"NativeScript",
+	"NS"
+].indexOf(zS.product) < 0), VS = typeof WorkerGlobalScope < "u" && self instanceof WorkerGlobalScope && typeof self.importScripts == "function", HS = RS && window.location.href || "http://localhost", US = {
+	...LS,
+	...IS
+};
+//#endregion
+//#region node_modules/axios/lib/helpers/toURLEncodedForm.js
+function WS(e, t) {
+	return OS(e, new US.classes.URLSearchParams(), {
+		visitor: function(e, t, n, r) {
+			return US.isNode && Q.isBuffer(e) ? (this.append(t, e.toString("base64")), !1) : r.defaultVisitor.apply(this, arguments);
+		},
+		...t
+	});
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/formDataToJSON.js
+var GS = 100;
+function KS(e) {
+	if (e > GS) throw new $("FormData field is too deeply nested (" + e + " levels). Max depth: " + GS, $.ERR_FORM_DATA_DEPTH_EXCEEDED);
+}
+function qS(e) {
+	let t = [], n = /[^.[\]]+|\[([^.[\]]*)]/g, r;
+	for (; (r = n.exec(e)) !== null;) KS(t.length), t.push(r[0] === "[]" ? "" : r[1] || r[0]);
+	return t;
+}
+function JS(e) {
+	let t = {}, n = Object.keys(e), r, i = n.length, a;
+	for (r = 0; r < i; r++) a = n[r], t[a] = e[a];
+	return t;
+}
+function YS(e) {
+	function t(e, n, r, i) {
+		KS(i);
+		let a = e[i++];
+		if (a === "__proto__") return !0;
+		let o = Number.isFinite(+a), s = i >= e.length;
+		return a = !a && Q.isArray(r) ? r.length : a, s ? (Q.hasOwnProp(r, a) ? r[a] = Q.isArray(r[a]) ? r[a].concat(n) : [r[a], n] : r[a] = n, !o) : ((!Q.hasOwnProp(r, a) || !Q.isObject(r[a])) && (r[a] = []), t(e, n, r[a], i) && Q.isArray(r[a]) && (r[a] = JS(r[a])), !o);
+	}
+	if (Q.isFormData(e) && Q.isFunction(e.entries)) {
+		let n = {};
+		return Q.forEachEntry(e, (e, r) => {
+			t(qS(e), r, n, 0);
+		}), n;
+	}
+	return null;
+}
+//#endregion
+//#region node_modules/axios/lib/defaults/index.js
+var XS = (e, t) => e != null && Q.hasOwnProp(e, t) ? e[t] : void 0;
+function ZS(e, t, n) {
+	if (Q.isString(e)) try {
+		return (t || JSON.parse)(e), Q.trim(e);
+	} catch (e) {
+		if (e.name !== "SyntaxError") throw e;
+	}
+	return (n || JSON.stringify)(e);
+}
+var QS = {
+	transitional: FS,
+	adapter: [
+		"xhr",
+		"http",
+		"fetch"
+	],
+	transformRequest: [function(e, t) {
+		let n = t.getContentType() || "", r = n.indexOf("application/json") > -1, i = Q.isObject(e);
+		if (i && Q.isHTMLForm(e) && (e = new FormData(e)), Q.isFormData(e)) return r ? JSON.stringify(YS(e)) : e;
+		if (Q.isArrayBuffer(e) || Q.isBuffer(e) || Q.isStream(e) || Q.isFile(e) || Q.isBlob(e) || Q.isReadableStream(e)) return e;
+		if (Q.isArrayBufferView(e)) return e.buffer;
+		if (Q.isURLSearchParams(e)) return t.setContentType("application/x-www-form-urlencoded;charset=utf-8", !1), e.toString();
+		let a;
+		if (i) {
+			let t = XS(this, "formSerializer");
+			if (n.indexOf("application/x-www-form-urlencoded") > -1) return WS(e, t).toString();
+			if ((a = Q.isFileList(e)) || n.indexOf("multipart/form-data") > -1) {
+				let n = XS(this, "env"), r = n && n.FormData;
+				return OS(a ? { "files[]": e } : e, r && new r(), t);
+			}
+		}
+		return i || r ? (t.setContentType("application/json", !1), ZS(e)) : e;
+	}],
+	transformResponse: [function(e) {
+		let t = XS(this, "transitional") || QS.transitional, n = t && t.forcedJSONParsing, r = XS(this, "responseType"), i = r === "json";
+		if (Q.isResponse(e) || Q.isReadableStream(e)) return e;
+		if (e && Q.isString(e) && (n && !r || i)) {
+			let n = !(t && t.silentJSONParsing) && i;
+			try {
+				return JSON.parse(e, XS(this, "parseReviver"));
+			} catch (e) {
+				if (n) throw e.name === "SyntaxError" ? $.from(e, $.ERR_BAD_RESPONSE, this, null, XS(this, "response")) : e;
+			}
+		}
+		return e;
+	}],
+	timeout: 0,
+	xsrfCookieName: "XSRF-TOKEN",
+	xsrfHeaderName: "X-XSRF-TOKEN",
+	maxContentLength: -1,
+	maxBodyLength: -1,
+	env: {
+		FormData: US.classes.FormData,
+		Blob: US.classes.Blob
+	},
+	validateStatus: function(e) {
+		return e >= 200 && e < 300;
+	},
+	headers: { common: {
+		Accept: "application/json, text/plain, */*",
+		"Content-Type": void 0
+	} }
+};
+Q.forEach([
+	"delete",
+	"get",
+	"head",
+	"post",
+	"put",
+	"patch",
+	"query"
+], (e) => {
+	QS.headers[e] = {};
+});
+//#endregion
+//#region node_modules/axios/lib/core/transformData.js
+function $S(e, t) {
+	let n = this || QS, r = t || n, i = _S.from(r.headers), a = r.data;
+	return Q.forEach(e, function(e) {
+		a = e.call(n, a, i.normalize(), t ? t.status : void 0);
+	}), i.normalize(), a;
+}
+//#endregion
+//#region node_modules/axios/lib/cancel/isCancel.js
+function eC(e) {
+	return !!(e && e.__CANCEL__);
+}
+//#endregion
+//#region node_modules/axios/lib/cancel/CanceledError.js
+var tC = class extends $ {
+	constructor(e, t, n) {
+		super(e ?? "canceled", $.ERR_CANCELED, t, n), this.name = "CanceledError", this.__CANCEL__ = !0;
+	}
+};
+//#endregion
+//#region node_modules/axios/lib/core/settle.js
+function nC(e, t, n) {
+	let r = n.config.validateStatus;
+	!n.status || !r || r(n.status) ? e(n) : t(new $("Request failed with status code " + n.status, n.status >= 400 && n.status < 500 ? $.ERR_BAD_REQUEST : $.ERR_BAD_RESPONSE, n.config, n.request, n));
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/parseProtocol.js
+function rC(e) {
+	let t = /^([-+\w]{1,25}):(?:\/\/)?/.exec(e);
+	return t && t[1] || "";
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/speedometer.js
+function iC(e, t) {
+	e ||= 10;
+	let n = Array(e), r = Array(e), i = 0, a = 0, o;
+	return t = t === void 0 ? 1e3 : t, function(s) {
+		let c = Date.now(), l = r[a];
+		o ||= c, n[i] = s, r[i] = c;
+		let u = a, d = 0;
+		for (; u !== i;) d += n[u++], u %= e;
+		if (i = (i + 1) % e, i === a && (a = (a + 1) % e), c - o < t) return;
+		let f = l && c - l;
+		return f ? Math.round(d * 1e3 / f) : void 0;
+	};
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/throttle.js
+function aC(e, t) {
+	let n = 0, r = 1e3 / t, i, a, o = (t, r = Date.now()) => {
+		n = r, i = null, a &&= (clearTimeout(a), null), e(...t);
+	};
+	return [(...e) => {
+		let t = Date.now(), s = t - n;
+		s >= r ? o(e, t) : (i = e, a ||= setTimeout(() => {
+			a = null, o(i);
+		}, r - s));
+	}, () => i && o(i)];
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/progressEventReducer.js
+var oC = (e, t, n = 3) => {
+	let r = 0, i = iC(50, 250);
+	return aC((n) => {
+		if (!n || typeof n.loaded != "number") return;
+		let a = n.loaded, o = n.lengthComputable ? n.total : void 0, s = Math.max(0, o == null ? a : Math.min(a, o)), c = Math.max(0, s - r), l = i(c);
+		r = Math.max(r, s), e({
+			loaded: s,
+			total: o,
+			progress: o ? s / o : void 0,
+			bytes: c,
+			rate: l || void 0,
+			estimated: l && o ? (o - s) / l : void 0,
+			event: n,
+			lengthComputable: o != null,
+			[t ? "download" : "upload"]: !0
+		});
+	}, n);
+}, sC = (e, t) => {
+	let n = e != null;
+	return [(r) => t[0]({
+		lengthComputable: n,
+		total: e,
+		loaded: r
+	}), t[1]];
+}, cC = (e, t = Q.asap) => (...n) => t(() => e(...n)), lC = US.hasStandardBrowserEnv ? ((e, t) => (n) => (n = new URL(n, US.origin), e.protocol === n.protocol && e.host === n.host && (t || e.port === n.port)))(new URL(US.origin), US.navigator && /(msie|trident)/i.test(US.navigator.userAgent)) : () => !0, uC = US.hasStandardBrowserEnv ? {
+	write(e, t, n, r, i, a, o) {
+		if (typeof document > "u") return;
+		let s = [`${e}=${encodeURIComponent(t)}`];
+		Q.isNumber(n) && s.push(`expires=${new Date(n).toUTCString()}`), Q.isString(r) && s.push(`path=${r}`), Q.isString(i) && s.push(`domain=${i}`), a === !0 && s.push("secure"), Q.isString(o) && s.push(`SameSite=${o}`), document.cookie = s.join("; ");
+	},
+	read(e) {
+		if (typeof document > "u") return null;
+		let t = document.cookie.split(";");
+		for (let n = 0; n < t.length; n++) {
+			let r = t[n].replace(/^\s+/, ""), i = r.indexOf("=");
+			if (i !== -1 && r.slice(0, i) === e) try {
+				return decodeURIComponent(r.slice(i + 1));
+			} catch {
+				return r.slice(i + 1);
+			}
+		}
+		return null;
+	},
+	remove(e) {
+		this.write(e, "", Date.now() - 864e5, "/");
+	}
+} : {
+	write() {},
+	read() {
+		return null;
+	},
+	remove() {}
+};
+//#endregion
+//#region node_modules/axios/lib/helpers/isAbsoluteURL.js
+function dC(e) {
+	return typeof e == "string" && /^([a-z][a-z\d+\-.]*:)?\/\//i.test(e);
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/combineURLs.js
+function fC(e, t) {
+	if (!t) return e;
+	let n = e.length;
+	for (; n > 0 && e.charCodeAt(n - 1) === 47;) n--;
+	return e.slice(0, n) + "/" + t.replace(/^\/+/, "");
+}
+//#endregion
+//#region node_modules/axios/lib/core/buildFullPath.js
+var pC = /^https?:(?!\/\/)/i, mC = /[\t\n\r]/g;
+function hC(e) {
+	let t = 0;
+	for (; t < e.length && e.charCodeAt(t) <= 32;) t++;
+	return e.slice(t);
+}
+function gC(e) {
+	return hC(e).replace(mC, "");
+}
+function _C(e) {
+	return e && e.replace(/(^|&)([^=&]*=)?[^&]+/g, (e, t, n = "") => `${t}${n}${vS}`);
+}
+function vC(e) {
+	let t = e.replace(/^(https?:\/{0,2})[^/?#]*@/i, `$1${vS}@`), n = t.indexOf("#"), r = (n === -1 ? t : t.slice(0, n)).replace(/([?&][^=&#]*=)[^&#]*/g, `$1${vS}`);
+	return n === -1 ? r : `${r}#${_C(t.slice(n + 1))}`;
+}
+function yC(e, t) {
+	if (typeof e == "string") {
+		let n = gC(e);
+		if (pC.test(n)) throw new $(`Invalid URL ${JSON.stringify(vC(n))}: missing "//" after protocol`, $.ERR_INVALID_URL, t);
+	}
+}
+function bC(e, t, n, r) {
+	yC(t, r);
+	let i = !dC(t);
+	return e && (i || n === !1) ? (yC(e, r), fC(e, t)) : t;
+}
+//#endregion
+//#region node_modules/axios/lib/core/mergeConfig.js
+var xC = (e) => e instanceof _S ? { ...e } : e, SC = (e) => Object.getOwnPropertySymbols && Object.getOwnPropertyDescriptor ? Object.keys(e).concat(Object.getOwnPropertySymbols(e).filter((t) => Object.getOwnPropertyDescriptor(e, t).enumerable)) : Object.keys(e);
+function CC(e, t) {
+	e ||= {}, t ||= {};
+	let n = Object.create(null);
+	Object.defineProperty(n, "hasOwnProperty", {
+		__proto__: null,
+		value: Object.prototype.hasOwnProperty,
+		enumerable: !1,
+		writable: !0,
+		configurable: !0
+	});
+	function r(e, t, n, r) {
+		return Q.isPlainObject(e) && Q.isPlainObject(t) ? Q.merge.call({ caseless: r }, e, t) : Q.isPlainObject(t) ? Q.merge({}, t) : Q.isArray(t) ? t.slice() : t;
+	}
+	function i(e, t, n, i) {
+		if (!Q.isUndefined(t)) return r(e, t, n, i);
+		if (!Q.isUndefined(e)) return r(void 0, e, n, i);
+	}
+	function a(e, t) {
+		if (!Q.isUndefined(t)) return r(void 0, t);
+	}
+	function o(e, t) {
+		if (!Q.isUndefined(t)) return r(void 0, t);
+		if (!Q.isUndefined(e)) return r(void 0, e);
+	}
+	function s(n) {
+		let r = Q.hasOwnProp(t, "transitional") ? t.transitional : void 0;
+		if (!Q.isUndefined(r)) if (Q.isPlainObject(r)) {
+			if (Q.hasOwnProp(r, n)) return r[n];
+		} else return;
+		let i = Q.hasOwnProp(e, "transitional") ? e.transitional : void 0;
+		if (Q.isPlainObject(i) && Q.hasOwnProp(i, n)) return i[n];
+	}
+	function c(n, i, a) {
+		if (Q.hasOwnProp(t, a)) return r(n, i);
+		if (Q.hasOwnProp(e, a)) return r(void 0, n);
+	}
+	let l = {
+		url: a,
+		method: a,
+		data: a,
+		baseURL: o,
+		transformRequest: o,
+		transformResponse: o,
+		paramsSerializer: o,
+		timeout: o,
+		timeoutMessage: o,
+		withCredentials: o,
+		withXSRFToken: o,
+		adapter: o,
+		responseType: o,
+		xsrfCookieName: o,
+		xsrfHeaderName: o,
+		onUploadProgress: o,
+		onDownloadProgress: o,
+		decompress: o,
+		maxContentLength: o,
+		maxBodyLength: o,
+		beforeRedirect: o,
+		transport: o,
+		httpAgent: o,
+		httpsAgent: o,
+		cancelToken: o,
+		socketPath: o,
+		allowedSocketPaths: o,
+		responseEncoding: o,
+		validateStatus: c,
+		headers: (e, t, n) => i(xC(e), xC(t), n, !0)
+	};
+	return Q.forEach(SC({
+		...e,
+		...t
+	}), function(r) {
+		if (r === "__proto__" || r === "constructor" || r === "prototype") return;
+		let a = Q.hasOwnProp(l, r) ? l[r] : i, o = a(Q.hasOwnProp(e, r) ? e[r] : void 0, Q.hasOwnProp(t, r) ? t[r] : void 0, r);
+		Q.isUndefined(o) && a !== c || (n[r] = o);
+	}), Q.hasOwnProp(t, "validateStatus") && Q.isUndefined(t.validateStatus) && s("validateStatusUndefinedResolves") === !1 && (Q.hasOwnProp(e, "validateStatus") ? n.validateStatus = r(void 0, e.validateStatus) : delete n.validateStatus), n;
+}
+//#endregion
+//#region node_modules/axios/lib/core/setFormDataHeaders.js
+var wC = ["content-type", "content-length"];
+function TC(e, t, n) {
+	if (n !== "content-only") {
+		e.set(t);
+		return;
+	}
+	Object.entries(t || {}).forEach(([t, n]) => {
+		wC.includes(t.toLowerCase()) && e.set(t, n);
+	});
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/resolveConfig.js
+var EC = (e) => encodeURIComponent(e).replace(/%([0-9A-F]{2})/gi, (e, t) => String.fromCharCode(parseInt(t, 16)));
+function DC(e) {
+	let t = CC({}, e), n = (e) => Q.hasOwnProp(t, e) ? t[e] : void 0, r = n("data"), i = n("withXSRFToken"), a = n("xsrfHeaderName"), o = n("xsrfCookieName"), s = n("headers"), c = n("auth"), l = n("baseURL"), u = n("allowAbsoluteUrls"), d = n("url");
+	if (t.headers = s = _S.from(s), t.url = NS(bC(l, d, u, t), n("params"), n("paramsSerializer")), c) {
+		let t = Q.getSafeProp(c, "username") || "", n = Q.getSafeProp(c, "password") || "";
+		try {
+			s.set("Authorization", "Basic " + btoa(t + ":" + (n ? EC(n) : "")));
+		} catch (t) {
+			throw $.from(t, $.ERR_BAD_OPTION_VALUE, e);
+		}
+	}
+	if (Q.isFormData(r) && (US.hasStandardBrowserEnv || US.hasStandardBrowserWebWorkerEnv || Q.isReactNative(r) ? s.setContentType(void 0) : Q.isFunction(r.getHeaders) && TC(s, r.getHeaders(), n("formDataHeaderPolicy"))), US.hasStandardBrowserEnv && (Q.isFunction(i) && (i = i(t)), i === !0 || i == null && lC(t.url))) {
+		let e = a && o && uC.read(o);
+		e && s.set(a, e);
+	}
+	return t;
+}
+var OC = typeof XMLHttpRequest < "u" && function(e) {
+	return new Promise(function(t, n) {
+		let r = DC(e), i = r.data, a = _S.from(r.headers).normalize(), { responseType: o, onUploadProgress: s, onDownloadProgress: c } = r, l, u, d, f, p;
+		function m() {
+			f && f(), p && p(), r.cancelToken && r.cancelToken.unsubscribe(l), r.signal && r.signal.removeEventListener("abort", l);
+		}
+		let h = new XMLHttpRequest();
+		h.open(r.method.toUpperCase(), r.url, !0), h.timeout = r.timeout;
+		function g() {
+			if (!h) return;
+			let r = _S.from("getAllResponseHeaders" in h && h.getAllResponseHeaders());
+			nC(function(e) {
+				t(e), m();
+			}, function(e) {
+				n(e), m();
+			}, {
+				data: !o || o === "text" || o === "json" ? h.responseText : h.response,
+				status: h.status,
+				statusText: h.statusText,
+				headers: r,
+				config: e,
+				request: h
+			}), h = null;
+		}
+		"onloadend" in h ? h.onloadend = g : h.onreadystatechange = function() {
+			!h || h.readyState !== 4 || h.status === 0 && !(h.responseURL && h.responseURL.startsWith("file:")) || setTimeout(g);
+		}, h.onabort = function() {
+			h &&= (n(new $("Request aborted", $.ECONNABORTED, e, h)), m(), null);
+		}, h.onerror = function(t) {
+			let r = new $(t && t.message ? t.message : "Network Error", $.ERR_NETWORK, e, h);
+			r.event = t || null, n(r), m(), h = null;
+		}, h.ontimeout = function() {
+			let t = r.timeout ? "timeout of " + r.timeout + "ms exceeded" : "timeout exceeded", i = r.transitional || FS;
+			r.timeoutErrorMessage && (t = r.timeoutErrorMessage), n(new $(t, i.clarifyTimeoutError ? $.ETIMEDOUT : $.ECONNABORTED, e, h)), m(), h = null;
+		}, i === void 0 && a.setContentType(null), "setRequestHeader" in h && Q.forEach(iS(a), function(e, t) {
+			h.setRequestHeader(t, e);
+		}), Q.isUndefined(r.withCredentials) || (h.withCredentials = !!r.withCredentials), o && o !== "json" && (h.responseType = r.responseType), c && ([d, p] = oC(c, !0), h.addEventListener("progress", d)), s && h.upload && ([u, f] = oC(s), h.upload.addEventListener("progress", u), h.upload.addEventListener("loadend", f)), (r.cancelToken || r.signal) && (l = (t) => {
+			h &&= (n(!t || t.type ? new tC(null, e, h) : t), h.abort(), m(), null);
+		}, r.cancelToken && r.cancelToken.subscribe(l), r.signal && (r.signal.aborted ? l() : r.signal.addEventListener("abort", l)));
+		let _ = rC(r.url);
+		if (_ && !US.protocols.includes(_)) {
+			n(new $("Unsupported protocol " + _ + ":", $.ERR_BAD_REQUEST, e)), m();
+			return;
+		}
+		h.send(i || null);
+	});
+}, kC = (e, t) => {
+	if (e = e ? e.filter(Boolean) : [], !t && !e.length) return;
+	let n = new AbortController(), r = !1, i = function(e) {
+		if (!r) {
+			r = !0, o();
+			let t = e instanceof Error ? e : this.reason;
+			n.abort(t instanceof $ ? t : new tC(t instanceof Error ? t.message : t));
+		}
+	}, a = t && setTimeout(() => {
+		a = null, i(new $(`timeout of ${t}ms exceeded`, $.ETIMEDOUT));
+	}, t), o = () => {
+		e &&= (a && clearTimeout(a), a = null, e.forEach((e) => {
+			e.unsubscribe ? e.unsubscribe(i) : e.removeEventListener("abort", i);
+		}), null);
+	};
+	e.forEach((e) => {
+		if (!r) {
+			if (e.aborted) {
+				i.call(e);
+				return;
+			}
+			e.addEventListener("abort", i, { once: !0 });
+		}
+	});
+	let { signal: s } = n;
+	return s.unsubscribe = () => Q.asap(o), s;
+}, AC = function* (e, t) {
+	let n = e.byteLength;
+	if (!t || n < t) {
+		yield e;
+		return;
+	}
+	let r = 0, i;
+	for (; r < n;) i = r + t, yield e.slice(r, i), r = i;
+}, jC = async function* (e, t) {
+	for await (let n of MC(e)) yield* AC(n, t);
+}, MC = async function* (e) {
+	if (e[Symbol.asyncIterator]) {
+		yield* e;
+		return;
+	}
+	let t = e.getReader();
+	try {
+		for (;;) {
+			let { done: e, value: n } = await t.read();
+			if (e) break;
+			yield n;
+		}
+	} finally {
+		await t.cancel();
+	}
+}, NC = (e, t, n, r) => {
+	let i = jC(e, t), a = 0, o, s = (e) => {
+		o || (o = !0, r && r(e));
+	};
+	return new ReadableStream({
+		async pull(e) {
+			try {
+				let { done: t, value: r } = await i.next();
+				if (t) {
+					s(), e.close();
+					return;
+				}
+				let o = r.byteLength;
+				n && n(a += o), e.enqueue(new Uint8Array(r));
+			} catch (e) {
+				throw s(e), e;
+			}
+		},
+		cancel(e) {
+			return s(e), i.return();
+		}
+	}, { highWaterMark: 2 });
+}, PC = (e) => e >= 48 && e <= 57 || e >= 65 && e <= 70 || e >= 97 && e <= 102, FC = (e, t, n) => t + 2 < n && PC(e.charCodeAt(t + 1)) && PC(e.charCodeAt(t + 2)), IC = (e) => e <= 57 ? e - 48 : (e & 223) - 55, LC = (e) => e >= 65 && e <= 90 || e >= 97 && e <= 122 || e >= 48 && e <= 57 || e === 43 || e === 47 || e === 45 || e === 95, RC = (e) => e === 9 || e === 10 || e === 12 || e === 13 || e === 32, zC = (e) => {
+	let t = Math.floor(e / 4), n = e % 4;
+	return t * 3 + (n === 2 ? 1 : n === 3 ? 2 : 0);
+}, BC = (e) => {
+	let t = e.length, n = 0;
+	return t > 0 && e.charCodeAt(t - 1) === 61 && (n++, t > 1 && e.charCodeAt(t - 2) === 61 && n++), Math.floor((t - n) * 3 / 4);
+}, VC = (e) => {
+	let t = e.length, n = 0, r = 0, i = !1;
+	for (let a = 0; a < t; a++) {
+		let o = e.charCodeAt(a);
+		if (o === 37 && FC(e, a, t) && (o = IC(e.charCodeAt(a + 1)) * 16 + IC(e.charCodeAt(a + 2)), a += 2), !RC(o)) {
+			if (o === 61) {
+				r++;
+				continue;
+			}
+			if (!LC(o) || r > 0) {
+				i = !0;
+				continue;
+			}
+			n++;
+		}
+	}
+	return i || r > 2 || r > 0 && (n + r) % 4 != 0 || n % 4 == 1 ? BC(e) : zC(n);
+}, HC = (e, t) => {
+	if (!e || typeof e != "string" || !e.startsWith("data:")) return 0;
+	let n = e.indexOf(",");
+	if (n < 0) return 0;
+	let r = e.slice(5, n), i = e.slice(n + 1);
+	if (/;base64/i.test(r)) return t(i);
+	let a = 0;
+	for (let e = 0, t = i.length; e < t; e++) {
+		let n = i.charCodeAt(e);
+		if (n === 37 && FC(i, e, t)) a += 1, e += 2;
+		else if (n < 128) a += 1;
+		else if (n < 2048) a += 2;
+		else if (n >= 55296 && n <= 56319 && e + 1 < t) {
+			let t = i.charCodeAt(e + 1);
+			t >= 56320 && t <= 57343 ? (a += 4, e++) : a += 3;
+		} else a += 3;
+	}
+	return a;
+};
+function UC(e) {
+	let t = typeof e == "string" ? e.indexOf("#") : -1;
+	return HC(t === -1 ? e : e.slice(0, t), VC);
+}
+//#endregion
+//#region node_modules/axios/lib/env/data.js
+var WC = "1.19.0", GC = 65536, { isFunction: KC } = Q, qC = (e) => encodeURIComponent(e).replace(/%([0-9A-F]{2})/gi, (e, t) => String.fromCharCode(parseInt(t, 16))), JC = (e) => {
+	if (!Q.isString(e)) return e;
+	try {
+		return decodeURIComponent(e);
+	} catch {
+		return e;
+	}
+}, YC = (e, ...t) => {
+	try {
+		return !!e(...t);
+	} catch {
+		return !1;
+	}
+}, XC = (e) => {
+	let t = e.indexOf("://"), n = e;
+	return t !== -1 && (n = n.slice(t + 3)), n.includes("@") || n.includes(":");
+}, ZC = (e) => {
+	let t = Q.global !== void 0 && Q.global !== null ? Q.global : globalThis, { ReadableStream: n, TextEncoder: r } = t;
+	e = Q.merge.call({ skipUndefined: !0 }, {
+		Request: t.Request,
+		Response: t.Response
+	}, e);
+	let { fetch: i, Request: a, Response: o } = e, s = i ? KC(i) : typeof fetch == "function", c = KC(a), l = KC(o);
+	if (!s) return !1;
+	let u = s && KC(n), d = s && (typeof r == "function" ? ((e) => (t) => e.encode(t))(new r()) : async (e) => new Uint8Array(await new a(e).arrayBuffer())), f = c && u && YC(() => {
+		let e = !1, t = new a(US.origin, {
+			body: new n(),
+			method: "POST",
+			get duplex() {
+				return e = !0, "half";
+			}
+		}), r = t.headers.has("Content-Type");
+		return t.body != null && t.body.cancel(), e && !r;
+	}), p = l && u && YC(() => Q.isReadableStream(new o("").body)), m = { stream: p && ((e) => e.body) };
+	s && [
+		"text",
+		"arrayBuffer",
+		"blob",
+		"formData",
+		"stream"
+	].forEach((e) => {
+		!m[e] && (m[e] = (t, n) => {
+			let r = t && t[e];
+			if (r) return r.call(t);
+			throw new $(`Response type '${e}' is not supported`, $.ERR_NOT_SUPPORT, n);
+		});
+	});
+	let h = async (e) => {
+		if (e == null) return 0;
+		if (Q.isBlob(e)) return e.size;
+		if (Q.isSpecCompliantForm(e)) return (await new a(US.origin, {
+			method: "POST",
+			body: e
+		}).arrayBuffer()).byteLength;
+		if (Q.isArrayBufferView(e) || Q.isArrayBuffer(e)) return e.byteLength;
+		if (Q.isURLSearchParams(e) && (e += ""), Q.isString(e)) return (await d(e)).byteLength;
+	}, g = async (e, t) => Q.toFiniteNumber(e.getContentLength()) ?? h(t);
+	return async (e) => {
+		let { url: t, method: n, data: s, signal: l, cancelToken: d, timeout: _, onDownloadProgress: v, onUploadProgress: y, responseType: b, headers: x, withCredentials: S = "same-origin", fetchOptions: C, maxContentLength: w, maxBodyLength: T } = DC(e), E = Q.isNumber(w) && w > -1, D = Q.isNumber(T) && T > -1, O = (t) => Q.hasOwnProp(e, t) ? e[t] : void 0, k = i || fetch;
+		b = b ? (b + "").toLowerCase() : "text";
+		let A = kC([l, d && d.toAbortSignal()], _), j = null, M = A && A.unsubscribe && (() => {
+			A.unsubscribe();
+		}), N, P = null, ee = () => new $("Request body larger than maxBodyLength limit", $.ERR_BAD_REQUEST, e, j);
+		try {
+			let i, l = O("auth");
+			if (l && (i = {
+				username: Q.getSafeProp(l, "username") || "",
+				password: Q.getSafeProp(l, "password") || ""
+			}), XC(t)) {
+				let e = new URL(t, US.origin);
+				!i && (e.username || e.password) && (i = {
+					username: JC(e.username),
+					password: JC(e.password)
+				}), (e.username || e.password) && (e.username = "", e.password = "", t = e.href);
+			}
+			if (i && (x.delete("authorization"), x.set("Authorization", "Basic " + btoa(qC((i.username || "") + ":" + (i.password || ""))))), E && typeof t == "string" && t.startsWith("data:") && UC(t) > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
+			if (D && n !== "get" && n !== "head") {
+				let e = await h(s);
+				if (typeof e == "number" && isFinite(e) && (N = e, e > T)) throw ee();
+			}
+			let d = D && (Q.isReadableStream(s) || Q.isStream(s)), _ = (e, t, n) => NC(e, GC, (e) => {
+				if (D && e > T) throw P = ee();
+				t && t(e);
+			}, n);
+			if (f && n !== "get" && n !== "head" && (y || d)) {
+				if (N ??= await g(x, s), N !== 0 || d) {
+					let e = new a(t, {
+						method: "POST",
+						body: s,
+						duplex: "half"
+					}), n;
+					if (Q.isFormData(s) && (n = e.headers.get("content-type")) && x.setContentType(n), e.body) {
+						let [t, n] = y && sC(N, oC(cC(y))) || [];
+						s = _(e.body, t, n);
+					}
+				}
+			} else if (d && !c && u && n !== "get" && n !== "head") s = _(s);
+			else if (d && c && !f && n !== "get" && n !== "head") throw new $("Stream request bodies are not supported by the current fetch implementation", $.ERR_NOT_SUPPORT, e, j);
+			Q.isString(S) || (S = S ? "include" : "omit");
+			let F = c && "credentials" in a.prototype;
+			if (Q.isFormData(s)) {
+				let e = x.getContentType();
+				e && /^multipart\/form-data/i.test(e) && !/boundary=/i.test(e) && x.delete("content-type");
+			}
+			x.set("User-Agent", "axios/" + WC, !1);
+			let I = {
+				...C,
+				signal: A,
+				method: n.toUpperCase(),
+				headers: iS(x.normalize()),
+				body: s,
+				duplex: "half",
+				credentials: F ? S : void 0
+			};
+			j = c && new a(t, I);
+			let L = await (c ? k(j, C) : k(t, I)), te = _S.from(L.headers);
+			if (E) {
+				let t = Q.toFiniteNumber(te.getContentLength());
+				if (t != null && t > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
+			}
+			let ne = p && (b === "stream" || b === "response");
+			if (p && L.body && (v || E || ne && M)) {
+				let t = {};
+				[
+					"status",
+					"statusText",
+					"headers"
+				].forEach((e) => {
+					t[e] = L[e];
+				});
+				let n = Q.toFiniteNumber(te.getContentLength()), [r, i] = v && sC(n, oC(cC(v), !0)) || [], a = 0;
+				L = new o(NC(L.body, GC, (t) => {
+					if (E && (a = t, a > w)) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
+					r && r(t);
+				}, () => {
+					i && i(), M && M();
+				}), t);
+			}
+			b ||= "text";
+			let re = await m[Q.findKey(m, b) || "text"](L, e);
+			if (E && !p && !ne) {
+				let t;
+				if (re != null && (typeof re.byteLength == "number" ? t = re.byteLength : typeof re.size == "number" ? t = re.size : typeof re == "string" && (t = typeof r == "function" ? new r().encode(re).byteLength : re.length)), typeof t == "number" && t > w) throw new $("maxContentLength size of " + w + " exceeded", $.ERR_BAD_RESPONSE, e, j);
+			}
+			return !ne && M && M(), await new Promise((t, n) => {
+				nC(t, n, {
+					data: re,
+					headers: _S.from(L.headers),
+					status: L.status,
+					statusText: L.statusText,
+					config: e,
+					request: j
+				});
+			});
+		} catch (t) {
+			if (M && M(), A && A.aborted && A.reason instanceof $) {
+				let n = A.reason;
+				throw n.config = e, j && (n.request = j), t !== n && Object.defineProperty(n, "cause", {
+					__proto__: null,
+					value: t,
+					writable: !0,
+					enumerable: !1,
+					configurable: !0
+				}), n;
+			}
+			if (P) throw j && !P.request && (P.request = j), P;
+			if (t instanceof $) throw j && !t.request && (t.request = j), t;
+			if (t && t.name === "TypeError" && /Load failed|fetch/i.test(t.message)) {
+				let n = new $("Network Error", $.ERR_NETWORK, e, j, t && t.response);
+				throw Object.defineProperty(n, "cause", {
+					__proto__: null,
+					value: t.cause || t,
+					writable: !0,
+					enumerable: !1,
+					configurable: !0
+				}), n;
+			}
+			throw $.from(t, t && t.code, e, j, t && t.response);
+		}
+	};
+}, QC = /* @__PURE__ */ new Map(), $C = (e) => {
+	let t = e && e.env || {}, { fetch: n, Request: r, Response: i } = t, a = [
+		r,
+		i,
+		n
+	], o = a.length, s, c, l = QC;
+	for (; o--;) s = a[o], c = l.get(s), c === void 0 && l.set(s, c = o ? /* @__PURE__ */ new Map() : ZC(t)), l = c;
+	return c;
+};
+$C();
+//#endregion
+//#region node_modules/axios/lib/adapters/adapters.js
+var ew = {
+	http: null,
+	xhr: OC,
+	fetch: { get: $C }
+};
+Q.forEach(ew, (e, t) => {
+	if (e) {
+		try {
+			Object.defineProperty(e, "name", {
+				__proto__: null,
+				value: t
+			});
+		} catch {}
+		Object.defineProperty(e, "adapterName", {
+			__proto__: null,
+			value: t
+		});
+	}
+});
+var tw = (e) => `- ${e}`, nw = (e) => Q.isFunction(e) || e === null || e === !1;
+function rw(e, t) {
+	e = Q.isArray(e) ? e : [e];
+	let { length: n } = e, r, i, a = {};
+	for (let o = 0; o < n; o++) {
+		r = e[o];
+		let n;
+		if (i = r, !nw(r) && (i = ew[(n = String(r)).toLowerCase()], i === void 0)) throw new $(`Unknown adapter '${n}'`);
+		if (i && (Q.isFunction(i) || (i = i.get(t)))) break;
+		a[n || "#" + o] = i;
+	}
+	if (!i) {
+		let e = Object.entries(a).map(([e, t]) => `adapter ${e} ` + (t === !1 ? "is not supported by the environment" : "is not available in the build"));
+		throw new $("There is no suitable adapter to dispatch the request " + (n ? e.length > 1 ? "since :\n" + e.map(tw).join("\n") : " " + tw(e[0]) : "as no adapter specified"), $.ERR_NOT_SUPPORT);
+	}
+	return i;
+}
+var iw = {
+	getAdapter: rw,
+	adapters: ew
+};
+//#endregion
+//#region node_modules/axios/lib/core/dispatchRequest.js
+function aw(e) {
+	if (e.cancelToken && e.cancelToken.throwIfRequested(), e.signal && e.signal.aborted) throw new tC(null, e);
+}
+function ow(e) {
+	return aw(e), e.headers = _S.from(e.headers), e.data = $S.call(e, e.transformRequest), [
+		"post",
+		"put",
+		"patch"
+	].indexOf(e.method) !== -1 && e.headers.setContentType("application/x-www-form-urlencoded", !1), iw.getAdapter(e.adapter || QS.adapter, e)(e).then(function(t) {
+		aw(e), e.response = t;
+		try {
+			t.data = $S.call(e, e.transformResponse, t);
+		} finally {
+			delete e.response;
+		}
+		return t.headers = _S.from(t.headers), t;
+	}, function(t) {
+		if (!eC(t) && (aw(e), t && t.response)) {
+			e.response = t.response;
+			try {
+				t.response.data = $S.call(e, e.transformResponse, t.response);
+			} finally {
+				delete e.response;
+			}
+			t.response.headers = _S.from(t.response.headers);
+		}
+		return Promise.reject(t);
+	});
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/validator.js
+var sw = {};
+[
+	"object",
+	"boolean",
+	"number",
+	"function",
+	"string",
+	"symbol"
+].forEach((e, t) => {
+	sw[e] = function(n) {
+		return typeof n === e || "a" + (t < 1 ? "n " : " ") + e;
+	};
+});
+var cw = {};
+sw.transitional = function(e, t, n) {
+	function r(e, t) {
+		return "[Axios v" + WC + "] Transitional option '" + e + "'" + t + (n ? ". " + n : "");
+	}
+	return (n, i, a) => {
+		if (e === !1) throw new $(r(i, " has been removed" + (t ? " in " + t : "")), $.ERR_DEPRECATED);
+		return t && !cw[i] && (cw[i] = !0, console.warn(r(i, " has been deprecated since v" + t + " and will be removed in the near future"))), !e || e(n, i, a);
+	};
+}, sw.spelling = function(e) {
+	return (t, n) => (console.warn(`${n} is likely a misspelling of ${e}`), !0);
+};
+function lw(e, t, n) {
+	if (typeof e != "object" || !e) throw new $("options must be an object", $.ERR_BAD_OPTION_VALUE);
+	let r = Object.keys(e), i = r.length;
+	for (; i-- > 0;) {
+		let a = r[i], o = Object.prototype.hasOwnProperty.call(t, a) ? t[a] : void 0;
+		if (o) {
+			let t = e[a], n = t === void 0 || o(t, a, e);
+			if (n !== !0) throw new $("option " + a + " must be " + n, $.ERR_BAD_OPTION_VALUE);
+			continue;
+		}
+		if (n !== !0) throw new $("Unknown option " + a, $.ERR_BAD_OPTION);
+	}
+}
+var uw = {
+	assertOptions: lw,
+	validators: sw
+}, dw = uw.validators, fw = class {
+	constructor(e) {
+		this.defaults = e || {}, this.interceptors = {
+			request: new PS(),
+			response: new PS()
+		};
+	}
+	async request(e, t) {
+		try {
+			return await this._request(e, t);
+		} catch (e) {
+			if (e instanceof Error) {
+				let t = {};
+				Error.captureStackTrace ? Error.captureStackTrace(t) : t = /* @__PURE__ */ Error();
+				let n = (() => {
+					if (!t.stack) return "";
+					let e = t.stack.indexOf("\n");
+					return e === -1 ? "" : t.stack.slice(e + 1);
+				})();
+				try {
+					if (!e.stack) e.stack = n;
+					else if (n) {
+						let t = n.indexOf("\n"), r = t === -1 ? -1 : n.indexOf("\n", t + 1), i = r === -1 ? "" : n.slice(r + 1);
+						String(e.stack).endsWith(i) || (e.stack += "\n" + n);
+					}
+				} catch {}
+			}
+			throw e;
+		}
+	}
+	_request(e, t) {
+		typeof e == "string" ? (t ||= {}, t.url = e) : t = e || {}, t = CC(this.defaults, t);
+		let { transitional: n, paramsSerializer: r, headers: i } = t;
+		n !== void 0 && uw.assertOptions(n, {
+			silentJSONParsing: dw.transitional(dw.boolean),
+			forcedJSONParsing: dw.transitional(dw.boolean),
+			clarifyTimeoutError: dw.transitional(dw.boolean),
+			legacyInterceptorReqResOrdering: dw.transitional(dw.boolean),
+			advertiseZstdAcceptEncoding: dw.transitional(dw.boolean),
+			validateStatusUndefinedResolves: dw.transitional(dw.boolean)
+		}, !1), r != null && (Q.isFunction(r) ? t.paramsSerializer = { serialize: r } : uw.assertOptions(r, {
+			encode: dw.function,
+			serialize: dw.function
+		}, !0)), t.allowAbsoluteUrls !== void 0 || (this.defaults.allowAbsoluteUrls === void 0 ? t.allowAbsoluteUrls = !0 : t.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls), uw.assertOptions(t, {
+			baseUrl: dw.spelling("baseURL"),
+			withXsrfToken: dw.spelling("withXSRFToken")
+		}, !0), t.method = (t.method || this.defaults.method || "get").toLowerCase();
+		let a = i && Q.merge(i.common, i[t.method]);
+		i && Q.forEach([
+			"delete",
+			"get",
+			"head",
+			"post",
+			"put",
+			"patch",
+			"query",
+			"common"
+		], (e) => {
+			delete i[e];
+		}), t.headers = _S.concat(a, i);
+		let o = [], s = !0;
+		this.interceptors.request.forEach(function(e) {
+			if (typeof e.runWhen == "function" && e.runWhen(t) === !1) return;
+			s &&= e.synchronous;
+			let n = t.transitional || FS;
+			n && n.legacyInterceptorReqResOrdering ? o.unshift(e.fulfilled, e.rejected) : o.push(e.fulfilled, e.rejected);
+		});
+		let c = [];
+		this.interceptors.response.forEach(function(e) {
+			c.push(e.fulfilled, e.rejected);
+		});
+		let l, u = 0, d;
+		if (!s) {
+			let e = [ow.bind(this), void 0];
+			for (e.unshift(...o), e.push(...c), d = e.length, l = Promise.resolve(t); u < d;) l = l.then(e[u++], e[u++]);
+			return l;
+		}
+		d = o.length;
+		let f = t;
+		for (; u < d;) {
+			let e = o[u++], t = o[u++];
+			try {
+				f = e ? e(f) : f;
+			} catch (e) {
+				if (!t) {
+					l = Promise.reject(e);
+					break;
+				}
+				try {
+					let n = t.call(this, e);
+					Q.isThenable(n) && (l = Promise.resolve(n).then(() => ow.call(this, f)));
+				} catch (e) {
+					l = Promise.reject(e);
+				}
+				break;
+			}
+		}
+		if (!l) try {
+			l = ow.call(this, f);
+		} catch (e) {
+			l = Promise.reject(e);
+		}
+		for (u = 0, d = c.length; u < d;) l = l.then(c[u++], c[u++]);
+		return l;
+	}
+	getUri(e) {
+		return e = CC(this.defaults, e), NS(bC(e.baseURL, e.url, e.allowAbsoluteUrls, e), e.params, e.paramsSerializer);
+	}
+};
+Q.forEach([
+	"delete",
+	"get",
+	"head",
+	"options"
+], function(e) {
+	fw.prototype[e] = function(t, n) {
+		return this.request(CC(n || {}, {
+			method: e,
+			url: t,
+			data: n && Q.hasOwnProp(n, "data") ? n.data : void 0
+		}));
+	};
+}), Q.forEach([
+	"post",
+	"put",
+	"patch",
+	"query"
+], function(e) {
+	function t(t) {
+		return function(n, r, i) {
+			return this.request(CC(i || {}, {
+				method: e,
+				headers: t ? { "Content-Type": "multipart/form-data" } : {},
+				url: n,
+				data: r
+			}));
+		};
+	}
+	fw.prototype[e] = t(), e !== "query" && (fw.prototype[e + "Form"] = t(!0));
+});
+//#endregion
+//#region node_modules/axios/lib/cancel/CancelToken.js
+var pw = class e {
+	constructor(e) {
+		if (typeof e != "function") throw TypeError("executor must be a function.");
+		let t;
+		this.promise = new Promise(function(e) {
+			t = e;
+		});
+		let n = this;
+		this.promise.then((e) => {
+			if (!n._listeners) return;
+			let t = n._listeners.length;
+			for (; t-- > 0;) n._listeners[t](e);
+			n._listeners = null;
+		}), this.promise.then = (e) => {
+			let t, r = new Promise((e) => {
+				n.subscribe(e), t = e;
+			}).then(e);
+			return r.cancel = function() {
+				n.unsubscribe(t);
+			}, r;
+		}, e(function(e, r, i) {
+			n.reason || (n.reason = new tC(e, r, i), t(n.reason));
+		});
+	}
+	throwIfRequested() {
+		if (this.reason) throw this.reason;
+	}
+	subscribe(e) {
+		if (this.reason) {
+			e(this.reason);
+			return;
+		}
+		this._listeners ? this._listeners.push(e) : this._listeners = [e];
+	}
+	unsubscribe(e) {
+		if (!this._listeners) return;
+		let t = this._listeners.indexOf(e);
+		t !== -1 && this._listeners.splice(t, 1);
+	}
+	toAbortSignal() {
+		let e = new AbortController(), t = (t) => {
+			e.abort(t);
+		};
+		return this.subscribe(t), e.signal.unsubscribe = () => this.unsubscribe(t), e.signal;
+	}
+	static source() {
+		let t;
+		return {
+			token: new e(function(e) {
+				t = e;
+			}),
+			cancel: t
+		};
+	}
+};
+//#endregion
+//#region node_modules/axios/lib/helpers/spread.js
+function mw(e) {
+	return function(t) {
+		return e.apply(null, t);
+	};
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/isAxiosError.js
+function hw(e) {
+	return Q.isObject(e) && e.isAxiosError === !0;
+}
+//#endregion
+//#region node_modules/axios/lib/helpers/HttpStatusCode.js
+var gw = {
+	Continue: 100,
+	SwitchingProtocols: 101,
+	Processing: 102,
+	EarlyHints: 103,
+	Ok: 200,
+	Created: 201,
+	Accepted: 202,
+	NonAuthoritativeInformation: 203,
+	NoContent: 204,
+	ResetContent: 205,
+	PartialContent: 206,
+	MultiStatus: 207,
+	AlreadyReported: 208,
+	ImUsed: 226,
+	MultipleChoices: 300,
+	MovedPermanently: 301,
+	Found: 302,
+	SeeOther: 303,
+	NotModified: 304,
+	UseProxy: 305,
+	Unused: 306,
+	TemporaryRedirect: 307,
+	PermanentRedirect: 308,
+	BadRequest: 400,
+	Unauthorized: 401,
+	PaymentRequired: 402,
+	Forbidden: 403,
+	NotFound: 404,
+	MethodNotAllowed: 405,
+	NotAcceptable: 406,
+	ProxyAuthenticationRequired: 407,
+	RequestTimeout: 408,
+	Conflict: 409,
+	Gone: 410,
+	LengthRequired: 411,
+	PreconditionFailed: 412,
+	PayloadTooLarge: 413,
+	UriTooLong: 414,
+	UnsupportedMediaType: 415,
+	RangeNotSatisfiable: 416,
+	ExpectationFailed: 417,
+	ImATeapot: 418,
+	MisdirectedRequest: 421,
+	UnprocessableEntity: 422,
+	Locked: 423,
+	FailedDependency: 424,
+	TooEarly: 425,
+	UpgradeRequired: 426,
+	PreconditionRequired: 428,
+	TooManyRequests: 429,
+	RequestHeaderFieldsTooLarge: 431,
+	UnavailableForLegalReasons: 451,
+	InternalServerError: 500,
+	NotImplemented: 501,
+	BadGateway: 502,
+	ServiceUnavailable: 503,
+	GatewayTimeout: 504,
+	HttpVersionNotSupported: 505,
+	VariantAlsoNegotiates: 506,
+	InsufficientStorage: 507,
+	LoopDetected: 508,
+	NotExtended: 510,
+	NetworkAuthenticationRequired: 511,
+	WebServerReturnsAnUnknownError: 520,
+	WebServerIsDown: 521,
+	ConnectionTimedOut: 522,
+	OriginIsUnreachable: 523,
+	TimeoutOccurred: 524,
+	SslHandshakeFailed: 525,
+	InvalidSslCertificate: 526
+};
+Object.entries(gw).forEach(([e, t]) => {
+	gw[t] = e;
+});
+//#endregion
+//#region node_modules/axios/lib/axios.js
+function _w(e) {
+	let t = new fw(e), n = Nb(fw.prototype.request, t);
+	return Q.extend(n, fw.prototype, t, { allOwnKeys: !0 }), Q.extend(n, t, null, { allOwnKeys: !0 }), n.create = function(t) {
+		return _w(CC(e, t));
+	}, n;
+}
+var vw = _w(QS);
+vw.Axios = fw, vw.CanceledError = tC, vw.CancelToken = pw, vw.isCancel = eC, vw.VERSION = WC, vw.toFormData = OS, vw.AxiosError = $, vw.Cancel = vw.CanceledError, vw.all = function(e) {
+	return Promise.all(e);
+}, vw.spread = mw, vw.isAxiosError = hw, vw.mergeConfig = CC, vw.AxiosHeaders = _S, vw.formToJSON = (e) => YS(Q.isHTMLForm(e) ? new FormData(e) : e), vw.getAdapter = iw.getAdapter, vw.HttpStatusCode = gw, vw.default = vw;
+//#endregion
+//#region src/ApiBase.ts
+var yw = vw.create({
+	baseURL: "https://6a720f12f687776c13f0f73b.mockapi.io/api/v1",
+	headers: { "Content-Type": "application/json" }
+}), bw = {
+	getCategories: async () => {
+		let { data: e } = await yw.get("/categories");
+		return e;
+	},
+	getTrendingProducts: async () => {
+		let { data: e } = await yw.get("/products", { params: { isTrending: !0 } });
+		return e;
+	},
+	getAllProducts: async () => {
+		let { data: e } = await yw.get("/products");
+		return e;
+	},
+	getProductById: async (e) => {
+		let { data: t } = await yw.get(`/products/${e}`);
+		return t;
+	}
+}, xw = () => k_({
+	queryKey: ["categories"],
+	queryFn: bw.getCategories
+}), Sw = () => k_({
+	queryKey: ["products", "trending"],
+	queryFn: bw.getTrendingProducts
+}), Cw = (e) => {
+	let t = e.toLowerCase();
+	return t.includes("living") ? "/living-room" : t.includes("bedroom") ? "/bedroom" : t.includes("kitchen") || t.includes("dining") ? "/kitchen" : t.includes("decor") || t.includes("light") || t.includes("office") ? "/decor" : "/search";
+}, ww = ({ category: e }) => /* @__PURE__ */ (0, H.jsxs)(xd, {
+	component: ab,
+	to: Cw(e.name),
+	elevation: 0,
+	sx: {
+		textDecoration: "none",
+		bgcolor: "transparent",
+		"&:hover img": { transform: "scale(1.05)" }
+	},
+	children: [/* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: {
+			aspectRatio: "4/5",
+			overflow: "hidden",
+			borderRadius: 3,
+			bgcolor: "grey.100"
+		},
+		children: /* @__PURE__ */ (0, H.jsx)(Ld, {
+			component: "img",
+			image: e.imageUrl,
+			alt: e.name,
+			sx: {
+				width: "100%",
+				height: "100%",
+				objectFit: "cover",
+				transition: "transform 0.7s ease"
+			}
+		})
+	}), /* @__PURE__ */ (0, H.jsxs)(jd, {
+		sx: {
+			px: 0,
+			pt: 2
+		},
+		children: [/* @__PURE__ */ (0, H.jsx)(X, {
+			variant: "h3",
+			color: "primary",
+			sx: { fontSize: "1.25rem" },
+			children: e.name
+		}), /* @__PURE__ */ (0, H.jsx)(X, {
+			variant: "body2",
+			color: "text.secondary",
+			sx: { mt: .5 },
+			children: e.subtitle
+		})]
+	})]
+}), Tw = () => {
+	let { data: e, isLoading: t, error: n } = xw();
+	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: {
+			py: 8,
+			textAlign: "center"
+		},
+		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Categories..." })
+	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: {
+			py: 8,
+			textAlign: "center"
+		},
+		children: /* @__PURE__ */ (0, H.jsx)(X, {
+			color: "error",
+			children: "Failed to load categories"
+		})
+	}) : /* @__PURE__ */ (0, H.jsx)(Z, {
+		component: "section",
+		sx: { py: 10 },
+		children: /* @__PURE__ */ (0, H.jsxs)(Qd, {
+			maxWidth: "xl",
+			children: [/* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "h2",
+				color: "primary",
+				align: "center",
+				sx: { mb: 6 },
+				children: "Curated Spaces"
+			}), /* @__PURE__ */ (0, H.jsx)(Z, {
+				sx: {
+					display: "grid",
+					gridTemplateColumns: {
+						xs: "1fr",
+						sm: "repeat(2, 1fr)",
+						md: "repeat(4, 1fr)"
+					},
+					gap: 3
+				},
+				children: e?.slice(0, 4).map((e) => /* @__PURE__ */ (0, H.jsx)(ww, { category: e }, e.id))
+			})]
+		})
+	});
+}, Ew = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z" }), "Favorite"), Dw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M11 9h2V6h3V4h-3V1h-2v3H8v2h3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2m10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2m-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25" }), "AddShoppingCart"), Ow = ({ product: e }) => {
+	let [t, n] = (0, v.useState)(!1);
+	return /* @__PURE__ */ (0, H.jsxs)(xd, {
+		component: ab,
+		to: `/product/${e.id}`,
+		elevation: 0,
+		sx: {
+			textDecoration: "none",
+			height: "100%",
+			display: "flex",
+			flexDirection: "column",
+			bgcolor: "background.paper",
+			borderRadius: 3,
+			overflow: "hidden",
+			transition: "box-shadow 0.3s",
+			"&:hover": { boxShadow: 3 },
+			"&:hover img": { transform: "scale(1.05)" }
+		},
+		children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
+			sx: {
+				position: "relative",
+				aspectRatio: "4/5",
+				overflow: "hidden",
+				bgcolor: "grey.100"
+			},
+			children: [/* @__PURE__ */ (0, H.jsx)(Ld, {
+				component: "img",
+				image: e.imageUrl,
+				alt: e.title,
+				sx: {
+					width: "100%",
+					height: "100%",
+					objectFit: "cover",
+					transition: "transform 0.5s"
+				}
+			}), /* @__PURE__ */ (0, H.jsx)(hu, {
+				onClick: (e) => {
+					e.preventDefault(), e.stopPropagation(), n(!t);
+				},
+				sx: {
+					position: "absolute",
+					top: 12,
+					right: 12,
+					bgcolor: "rgba(255,255,255,0.9)",
+					color: t ? "error.main" : "text.primary",
+					"&:hover": { bgcolor: "background.paper" }
+				},
+				size: "small",
+				children: t ? /* @__PURE__ */ (0, H.jsx)(Ew, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
+			})]
+		}), /* @__PURE__ */ (0, H.jsxs)(jd, {
+			sx: {
+				flexGrow: 1,
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "space-between"
+			},
+			children: [/* @__PURE__ */ (0, H.jsxs)(Z, { children: [/* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "h3",
+				color: "primary",
+				sx: {
+					fontSize: "1.25rem",
+					fontWeight: 500
+				},
+				children: e.title
+			}), /* @__PURE__ */ (0, H.jsx)(X, {
+				variant: "body2",
+				color: "text.secondary",
+				sx: {
+					mt: .5,
+					mb: 2
+				},
+				children: e.subtitle
+			})] }), /* @__PURE__ */ (0, H.jsxs)(Z, {
+				sx: {
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+					pt: 1,
+					borderTop: "1px solid",
+					borderColor: "divider"
+				},
+				children: [/* @__PURE__ */ (0, H.jsxs)(X, {
+					sx: {
+						fontWeight: 700,
+						fontSize: "1.1rem",
+						color: "primary.main"
+					},
+					children: ["$", e.price.toLocaleString()]
+				}), /* @__PURE__ */ (0, H.jsx)(hu, {
+					onClick: (t) => {
+						t.preventDefault(), t.stopPropagation(), console.log("Add to cart:", e.id);
+					},
+					sx: {
+						bgcolor: "primary.main",
+						color: "primary.contrastText",
+						"&:hover": { bgcolor: "secondary.main" }
+					},
+					size: "small",
+					children: /* @__PURE__ */ (0, H.jsx)(Dw, { fontSize: "small" })
+				})]
+			})]
+		})]
+	});
+}, kw = () => {
+	let { data: e, isLoading: t, error: n } = Sw();
+	return t ? /* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: {
+			py: 10,
+			textAlign: "center"
+		},
+		children: /* @__PURE__ */ (0, H.jsx)(X, { children: "Loading Trending Products..." })
+	}) : n ? /* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: {
+			py: 10,
+			textAlign: "center"
+		},
+		children: /* @__PURE__ */ (0, H.jsx)(X, {
+			color: "error",
+			children: "Failed to load products"
+		})
+	}) : /* @__PURE__ */ (0, H.jsx)(Z, {
+		component: "section",
+		sx: {
+			py: 8,
+			bgcolor: "grey.50"
+		},
+		children: /* @__PURE__ */ (0, H.jsxs)(Qd, {
+			maxWidth: "xl",
+			children: [/* @__PURE__ */ (0, H.jsxs)(Z, {
+				sx: {
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "flex-end",
+					mb: 5
+				},
+				children: [/* @__PURE__ */ (0, H.jsxs)(Z, { children: [/* @__PURE__ */ (0, H.jsx)(X, {
+					variant: "h2",
+					color: "primary",
+					sx: { fontWeight: 600 },
+					children: "Trending Now"
+				}), /* @__PURE__ */ (0, H.jsx)(X, {
+					variant: "body2",
+					color: "text.secondary",
+					sx: { mt: .5 },
+					children: "Our most coveted pieces this season"
+				})] }), /* @__PURE__ */ (0, H.jsx)(_d, {
+					component: ab,
+					to: "/living-room",
+					endIcon: /* @__PURE__ */ (0, H.jsx)(jb, {}),
+					sx: { color: "secondary.main" },
+					children: "View All"
+				})]
+			}), /* @__PURE__ */ (0, H.jsx)(Z, {
+				sx: {
+					display: "grid",
+					gridTemplateColumns: {
+						xs: "1fr",
+						sm: "repeat(2, 1fr)",
+						md: "repeat(3, 1fr)"
+					},
+					gap: 3
+				},
+				children: e?.map((e) => /* @__PURE__ */ (0, H.jsx)(Ow, { product: e }, e.id))
+			})]
+		})
+	});
+}, Aw = ({ shellMode: e = !1, hideChrome: t = !1 }) => /* @__PURE__ */ (0, H.jsxs)(Z, {
 	sx: {
 		bgcolor: "background.default",
 		color: "text.primary",
@@ -26034,16 +26041,16 @@ var vw = _w.create({
 			component: "main",
 			sx: { flexGrow: 1 },
 			children: [
-				/* @__PURE__ */ (0, H.jsx)(jb, {}),
-				/* @__PURE__ */ (0, H.jsx)(ww, {}),
-				/* @__PURE__ */ (0, H.jsx)(Ow, {})
+				/* @__PURE__ */ (0, H.jsx)(Mb, {}),
+				/* @__PURE__ */ (0, H.jsx)(Tw, {}),
+				/* @__PURE__ */ (0, H.jsx)(kw, {})
 			]
 		}),
-		!t && /* @__PURE__ */ (0, H.jsx)(kw, {})
+		!t && /* @__PURE__ */ (0, H.jsx)(Ab, {})
 	]
 }), jw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" }), "NavigateNext"), Mw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92" }), "Share"), Nw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" }), "Add"), Pw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M19 13H5v-2h14z" }), "Remove"), Fw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z" }), "ShoppingBagOutlined"), Iw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5zm-.5 1.5 1.96 2.5H17V9.5zM6 18c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1m2.22-3c-.55-.61-1.33-1-2.22-1s-1.67.39-2.22 1H3V6h12v9zM18 18c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1" }), "LocalShippingOutlined"), Lw = Ac([/*#__PURE__*/ (0, H.jsx)("path", { d: "M23 11.99 20.56 9.2l.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 11.99l2.44 2.79-.34 3.7 3.61.82 1.89 3.2 3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69zm-3.95 1.48-.56.65.08.85.18 1.95-1.9.43-.84.19-.44.74-.99 1.68-1.78-.77-.8-.34-.79.34-1.78.77-.99-1.67-.44-.74-.84-.19-1.9-.43.18-1.96.08-.85-.56-.65L3.67 12l1.29-1.48.56-.65-.09-.86-.18-1.94 1.9-.43.84-.19.44-.74.99-1.68 1.78.77.8.34.79-.34 1.78-.77.99 1.68.44.74.84.19 1.9.43-.18 1.95-.08.85.56.65 1.29 1.47z" }, "0"), /*#__PURE__*/ (0, H.jsx)("path", { d: "m10.09 13.75-2.32-2.33-1.48 1.49 3.8 3.81 7.34-7.36-1.48-1.49z" }, "1")], "VerifiedOutlined"), Rw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" }), "Check"), zw = (e) => k_({
 	queryKey: ["product", e],
-	queryFn: () => yw.getProductById(e),
+	queryFn: () => bw.getProductById(e),
 	enabled: !!e
 }), Bw = ({ rating: e, reviewsCount: t }) => /* @__PURE__ */ (0, H.jsxs)(Z, {
 	sx: {
@@ -26106,7 +26113,7 @@ var vw = _w.create({
 				},
 				children: /* @__PURE__ */ (0, H.jsx)(lu, { sx: { color: "primary.main" } })
 			}),
-			!n && /* @__PURE__ */ (0, H.jsx)(kw, {})
+			!n && /* @__PURE__ */ (0, H.jsx)(Ab, {})
 		]
 	}) : o || !i ? /* @__PURE__ */ (0, H.jsxs)(Z, {
 		sx: {
@@ -26137,7 +26144,7 @@ var vw = _w.create({
 					children: "Back to Home"
 				})]
 			}),
-			!n && /* @__PURE__ */ (0, H.jsx)(kw, {})
+			!n && /* @__PURE__ */ (0, H.jsx)(Ab, {})
 		]
 	}) : /* @__PURE__ */ (0, H.jsxs)(Z, {
 		sx: {
@@ -26479,7 +26486,7 @@ var vw = _w.create({
 					})]
 				})]
 			}),
-			!n && /* @__PURE__ */ (0, H.jsx)(kw, {}),
+			!n && /* @__PURE__ */ (0, H.jsx)(Ab, {}),
 			/* @__PURE__ */ (0, H.jsxs)(Z, {
 				sx: {
 					display: {
@@ -26742,7 +26749,7 @@ var vw = _w.create({
 							color: n ? "error.main" : "text.primary"
 						},
 						size: "small",
-						children: n ? /* @__PURE__ */ (0, H.jsx)(Tw, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
+						children: n ? /* @__PURE__ */ (0, H.jsx)(Ew, { fontSize: "small" }) : /* @__PURE__ */ (0, H.jsx)(yb, { fontSize: "small" })
 					}),
 					(e.isBestseller || e.isTrending) && /* @__PURE__ */ (0, H.jsx)(Ru, {
 						label: e.isBestseller ? "Bestseller" : "Trending",
@@ -26797,7 +26804,7 @@ var vw = _w.create({
 		})
 	});
 }, Ww = async (e) => {
-	let { data: t } = await vw.get("/products"), n = Sb[e].categories;
+	let { data: t } = await yw.get("/products"), n = Sb[e].categories;
 	return t.filter((e) => n.includes(e.category));
 }, Gw = (e) => k_({
 	queryKey: [
@@ -26971,12 +26978,12 @@ var vw = _w.create({
 					})]
 				})
 			}),
-			!n && /* @__PURE__ */ (0, H.jsx)(kw, {})
+			!n && /* @__PURE__ */ (0, H.jsx)(Ab, {})
 		]
 	});
 }, qw = Ac(/*#__PURE__*/ (0, H.jsx)("path", { d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" }), "Close"), Jw = () => k_({
 	queryKey: ["products", "all"],
-	queryFn: yw.getAllProducts
+	queryFn: bw.getAllProducts
 }), Yw = (e, t) => e.filter((e) => {
 	if (t.query) {
 		let n = t.query.toLowerCase();
@@ -27229,46 +27236,63 @@ var vw = _w.create({
 					})]
 				})
 			}),
-			!t && /* @__PURE__ */ (0, H.jsx)(kw, {})
+			!t && /* @__PURE__ */ (0, H.jsx)(Ab, {})
 		]
 	});
-}, Zw = ({ route: e, productId: t, routing: n, hideChrome: r }) => {
-	let i = n === "none";
-	return /* @__PURE__ */ (0, H.jsx)(H.Fragment, { children: (() => {
-		switch (e) {
-			case "list": return /* @__PURE__ */ (0, H.jsx)(Kw, {
-				forcedRoomKey: "living-room",
-				shellMode: i,
-				hideChrome: r
-			});
-			case "detail": return /* @__PURE__ */ (0, H.jsx)(Vw, {
-				forcedProductId: t,
-				shellMode: i,
-				hideChrome: r
-			});
-			case "search": return /* @__PURE__ */ (0, H.jsx)(Xw, {
-				shellMode: i,
-				hideChrome: r
-			});
-			default: return /* @__PURE__ */ (0, H.jsx)(Aw, {
-				shellMode: i,
-				hideChrome: r
-			});
-		}
-	})() });
-}, Qw = new f_({ defaultOptions: { queries: {
+}, Zw = /* @__PURE__ */ new Set([
+	"living-room",
+	"bedroom",
+	"kitchen",
+	"decor",
+	"list"
+]), Qw = ({ route: e, productId: t, routing: n, hideChrome: r }) => {
+	let i = n === "none", a = e === "detail" ? /* @__PURE__ */ (0, H.jsx)(Vw, {
+		forcedProductId: t,
+		shellMode: i,
+		hideChrome: r
+	}) : e === "search" ? /* @__PURE__ */ (0, H.jsx)(Xw, {
+		shellMode: i,
+		hideChrome: r
+	}) : Zw.has(e) ? /* @__PURE__ */ (0, H.jsx)(Kw, {
+		forcedRoomKey: e === "list" ? "living-room" : e,
+		shellMode: i,
+		hideChrome: r
+	}) : /* @__PURE__ */ (0, H.jsx)(Aw, {
+		shellMode: i,
+		hideChrome: r
+	});
+	return r ? /* @__PURE__ */ (0, H.jsx)(Z, {
+		sx: { minHeight: "100%" },
+		children: a
+	}) : /* @__PURE__ */ (0, H.jsxs)(Z, {
+		sx: {
+			minHeight: "100vh",
+			display: "flex",
+			flexDirection: "column"
+		},
+		children: [
+			/* @__PURE__ */ (0, H.jsx)(kb, { shellMode: i }),
+			/* @__PURE__ */ (0, H.jsx)(Z, {
+				component: "main",
+				sx: { flexGrow: 1 },
+				children: a
+			}),
+			/* @__PURE__ */ (0, H.jsx)(Ab, {})
+		]
+	});
+}, $w = new f_({ defaultOptions: { queries: {
 	refetchOnWindowFocus: !1,
 	retry: 1
 } } });
-function $w(e) {
+function eT(e) {
 	let t = e.route ?? "home", n = e.productId ?? "", r = t === "detail" && n ? `/product/${n}` : t === "list" ? "/products" : t === "search" ? "/search" : "/";
 	return /* @__PURE__ */ (0, H.jsx)(h_, {
-		client: Qw,
+		client: $w,
 		children: /* @__PURE__ */ (0, H.jsxs)(wc, {
 			theme: _b,
 			children: [/* @__PURE__ */ (0, H.jsx)(sf, {}), /* @__PURE__ */ (0, H.jsx)(yy, {
 				initialEntries: [r],
-				children: /* @__PURE__ */ (0, H.jsx)(Zw, {
+				children: /* @__PURE__ */ (0, H.jsx)(Qw, {
 					route: t,
 					productId: n,
 					routing: e.routing ?? "hash",
@@ -27278,11 +27302,11 @@ function $w(e) {
 		})
 	});
 }
-var eT = ee($w, { props: {
+var tT = ee(eT, { props: {
 	route: "string",
 	productId: "string",
 	routing: "string",
 	hideChrome: "boolean"
 } });
-customElements.define("luxe-catalog", eT);
+customElements.define("luxe-catalog", tT);
 //#endregion

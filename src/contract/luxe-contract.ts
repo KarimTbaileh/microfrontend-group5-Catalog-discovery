@@ -37,7 +37,15 @@ export function addToCart(detail: CartAddDetail) {
 }
 
 export function navigateShell(
-    to: 'catalog' | 'product' | 'orders',
+    to:
+        | 'catalog'
+        | 'product'
+        | 'orders'
+        | 'living-room'
+        | 'bedroom'
+        | 'kitchen'
+        | 'decor'
+        | 'search',
     productId?: string
 ) {
     window.dispatchEvent(
