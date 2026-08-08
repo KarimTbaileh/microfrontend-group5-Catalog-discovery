@@ -71,7 +71,6 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
                 )}
             </Box>
 
-            {/* Category */}
             <Box sx={{ mb: 4 }}>
                 <Typography
                     variant="body2"
@@ -108,7 +107,6 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
                 </FormGroup>
             </Box>
 
-            {/* Price */}
             <Box sx={{ mb: 4 }}>
                 <Typography
                     variant="body2"
@@ -137,7 +135,6 @@ export const SidebarFilters: React.FC<SidebarFiltersProps> = ({
                 </Stack>
             </Box>
 
-            {/* Material */}
             <Box sx={{ mb: 4 }}>
                 <Typography
                     variant="body2"

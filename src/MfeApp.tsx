@@ -11,10 +11,6 @@ export type MfeProps = {
     hideChrome: boolean;
 };
 
-/**
- * Shell-driven app (no BrowserRouter when routing="none").
- * route: home | list | detail | search
- */
 export const MfeApp: React.FC<MfeProps> = ({
                                                route,
                                                productId,
@@ -26,8 +22,6 @@ export const MfeApp: React.FC<MfeProps> = ({
     const content = (() => {
         switch (route) {
             case 'list':
-                // Shell maps /products → list. Reuse RoomPage living-room as default list,
-                // or replace with a dedicated AllProducts page later.
                 return <RoomPage forcedRoomKey="living-room" shellMode={shellMode} hideChrome={hideChrome} />;
             case 'detail':
                 return <ProductDetailPage forcedProductId={productId} shellMode={shellMode} hideChrome={hideChrome} />;
@@ -39,6 +33,5 @@ export const MfeApp: React.FC<MfeProps> = ({
         }
     })();
 
-    // Each page manages its own chrome via shellMode/hideChrome props.
     return <>{content}</>;
 };

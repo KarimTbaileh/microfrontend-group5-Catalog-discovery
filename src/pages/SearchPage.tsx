@@ -90,7 +90,6 @@ export const SearchPage: React.FC<Props> = ({ shellMode = false, hideChrome = fa
                     </Box>
 
                     <Box sx={{ flexGrow: 1 }}>
-                        {/* Search Bar */}
                         <Box
                             component="form"
                             onSubmit={handleSearchSubmit}
@@ -124,7 +123,6 @@ export const SearchPage: React.FC<Props> = ({ shellMode = false, hideChrome = fa
                             />
                         </Box>
 
-                        {/* Active Filters */}
                         {hasActiveFilters && (
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center', mb: 3 }}>
                                 <Typography variant="caption" color="text.secondary" sx={{ mr: 1 }}>
@@ -185,7 +183,6 @@ export const SearchPage: React.FC<Props> = ({ shellMode = false, hideChrome = fa
                             </Box>
                         )}
 
-                        {/* Results Header */}
                         <Box sx={{ mb: 3 }}>
                             <Typography variant="h2" sx={{ fontSize: { xs: '1.75rem', md: '2rem' } }}>
                                 Search Results
