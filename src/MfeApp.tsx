@@ -1,7 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { RoomPage } from './pages/RoomPage';
@@ -23,6 +21,7 @@ export const MfeApp: React.FC<MfeProps> = ({
                                                hideChrome,
                                            }) => {
     const shellMode = routing === 'none';
+    const hide = hideChrome || shellMode;
 
     const content = (() => {
         if (route === 'detail') {
@@ -30,13 +29,13 @@ export const MfeApp: React.FC<MfeProps> = ({
                 <ProductDetailPage
                     forcedProductId={productId}
                     shellMode={shellMode}
-                    hideChrome={hideChrome}
+                    hideChrome={hide}
                 />
             );
         }
 
         if (route === 'search') {
-            return <SearchPage shellMode={shellMode} hideChrome={hideChrome} />;
+            return <SearchPage shellMode={shellMode} hideChrome={hide} />;
         }
 
         if (ROOM_ROUTES.has(route)) {
@@ -45,26 +44,13 @@ export const MfeApp: React.FC<MfeProps> = ({
                 <RoomPage
                     forcedRoomKey={roomKey}
                     shellMode={shellMode}
-                    hideChrome={hideChrome}
+                    hideChrome={hide}
                 />
             );
         }
 
-        // home (default)
-        return <HomePage shellMode={shellMode} hideChrome={hideChrome} />;
+        return <HomePage shellMode={shellMode} hideChrome={hide} />;
     })();
 
-    if (hideChrome) {
-        return <Box sx={{ minHeight: '100%' }}>{content}</Box>;
-    }
-
-    return (
-        <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Header shellMode={shellMode} />
-            <Box component="main" sx={{ flexGrow: 1 }}>
-                {content}
-            </Box>
-            <Footer />
-        </Box>
-    );
+    return <Box sx={{ minHeight: '100%' }}>{content}</Box>;
 };

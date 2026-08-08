@@ -24,7 +24,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { useProduct } from '../hooks/useProduct';
 import { RatingStars } from '../components/RatingStars';
-import { addToCart, buildCartPayload, navigateShell } from '../contract/luxe-contract';
+import { addToCart, buildCartPayload } from '../contract/luxe-contract';
 
 type Props = {
     forcedProductId?: string;
@@ -59,7 +59,26 @@ export const ProductDetailPage: React.FC<Props> = ({
     const goHome = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('catalog');
+            window.dispatchEvent(
+                new CustomEvent('luxe:navigate', {
+                    detail: { path: '/' },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
+        }
+    };
+
+    const goList = (e: React.MouseEvent) => {
+        if (shellMode) {
+            e.preventDefault();
+            window.dispatchEvent(
+                new CustomEvent('luxe:navigate', {
+                    detail: { path: '/products' },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
         }
     };
 
@@ -129,6 +148,7 @@ export const ProductDetailPage: React.FC<Props> = ({
                         to="/living-room"
                         variant="caption"
                         color="text.secondary"
+                        onClick={goList}
                         sx={{ textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
                     >
                         {product.category}

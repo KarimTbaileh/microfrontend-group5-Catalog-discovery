@@ -15,7 +15,6 @@ import { SidebarFilters, type FilterState } from '../components/SidebarFilters';
 import { CatalogProductCard } from '../components/CatalogProductCard';
 import { useRoomProducts } from '../hooks/useRoomProducts';
 import { ROOMS, type RoomKey } from '../constants/rooms';
-import { navigateShell } from '../contract/luxe-contract';
 
 type Props = {
     forcedRoomKey?: string;
@@ -60,7 +59,13 @@ export const RoomPage: React.FC<Props> = ({
     const goHome = (e: React.MouseEvent) => {
         if (shellMode) {
             e.preventDefault();
-            navigateShell('catalog');
+            window.dispatchEvent(
+                new CustomEvent('luxe:navigate', {
+                    detail: { path: '/' },
+                    bubbles: true,
+                    composed: true,
+                })
+            );
         }
     };
 
