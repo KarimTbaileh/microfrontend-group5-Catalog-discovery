@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useParams,  } from 'react-router-dom';
+import {Link, useParams,} from 'react-router-dom';
 import {
     Box,
     Container,
@@ -92,23 +92,25 @@ export const RoomPage: React.FC<Props> = ({
                     <Box sx={{ flexGrow: 1 }}>
                         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ mb: 2 }}>
                             <Typography
-                                component="button"
+                                component={Link}
+                                to="/"
                                 onClick={goHome}
-                                variant="caption"
                                 sx={{
+                                    fontSize: '0.875rem',
                                     color: 'text.secondary',
-                                    background: 'none',
-                                    border: 'none',
-                                    padding: 0,
-                                    cursor: 'pointer',
-                                    fontFamily: 'inherit',
-                                    fontSize: 'inherit',
+                                    textDecoration: 'none',
                                     '&:hover': { color: 'primary.main' },
                                 }}
                             >
                                 Home
                             </Typography>
-                            <Typography variant="caption" sx={{ color: 'text.primary', fontWeight: 500 }}>
+                            <Typography
+                                sx={{
+                                    fontSize: '0.875rem',
+                                    color: 'text.primary',
+                                    fontWeight: 500,
+                                }}
+                            >
                                 {room.label}
                             </Typography>
                         </Breadcrumbs>

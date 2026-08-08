@@ -134,17 +134,13 @@ export const ProductDetailPage: React.FC<Props> = ({
             <Container maxWidth="xl" sx={{ flexGrow: 1, py: { xs: 4, md: 6 } }}>
                 <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ mb: 3 }}>
                     <Typography
-                        component="button"
+                        component={Link}
+                        to="/"
                         onClick={goHome}
-                        variant="caption"
                         sx={{
+                            fontSize: '0.875rem',
                             color: 'text.secondary',
-                            background: 'none',
-                            border: 'none',
-                            padding: 0,
-                            cursor: 'pointer',
-                            fontFamily: 'inherit',
-                            fontSize: 'inherit',
+                            textDecoration: 'none',
                             '&:hover': { color: 'primary.main' },
                         }}
                     >
@@ -152,17 +148,13 @@ export const ProductDetailPage: React.FC<Props> = ({
                     </Typography>
 
                     <Typography
-                        component="button"
+                        component={Link}
+                        to="/living-room"
                         onClick={goList}
-                        variant="caption"
                         sx={{
+                            fontSize: '0.875rem',
                             color: 'text.secondary',
-                            background: 'none',
-                            border: 'none',
-                            padding: 0,
-                            cursor: 'pointer',
-                            fontFamily: 'inherit',
-                            fontSize: 'inherit',
+                            textDecoration: 'none',
                             '&:hover': { color: 'primary.main' },
                         }}
                     >
@@ -170,8 +162,11 @@ export const ProductDetailPage: React.FC<Props> = ({
                     </Typography>
 
                     <Typography
-                        variant="caption"
-                        sx={{ color: 'primary.main', fontWeight: 500 }}
+                        sx={{
+                            fontSize: '0.875rem',
+                            color: 'text.primary',
+                            fontWeight: 500,
+                        }}
                     >
                         {product.title}
                     </Typography>
