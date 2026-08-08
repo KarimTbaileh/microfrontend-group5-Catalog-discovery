@@ -46,11 +46,20 @@ export type ShellDest =
     | 'decor'
     | 'search';
 
-// هذه هي الدالة التي كان يشتكي منها الـ Build
 export function navigateShell(to: ShellDest, productId?: string) {
     window.dispatchEvent(
         new CustomEvent(LUXE_EVENTS.NAVIGATE, {
             detail: { to, productId },
+            bubbles: true,
+            composed: true,
+        })
+    );
+}
+
+export function navigateShellPath(path: string) {
+    window.dispatchEvent(
+        new CustomEvent(LUXE_EVENTS.NAVIGATE, {
+            detail: { path },
             bubbles: true,
             composed: true,
         })
